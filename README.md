@@ -1,6 +1,5 @@
 # Hi, I'm ShrootBuck
-
-### A FullStack developer from Tucson, Arizona
+# Fullstack Software Development
 
 
 - 🔭 I'm currently working on [ShrootCloud](https://shroot.cloud).
