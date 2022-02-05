@@ -6,8 +6,8 @@
 - 📫 Reach me on Discord at **ShrootBuck#0001** (ID **644700222609555496**). I do commissions, and I'm also looking to collaborate!
 
 ![shrootbuck](https://github-readme-stats.vercel.app/api?username=shrootbuck&show_icons=true&locale=en)  
-[![Discord Presence](https://lanyard-profile-readme.vercel.app/api/911381778621677609
-                            )](https://discord.com/users/911381778621677609)
+[![Discord Presence](https://lanyard-profile-readme.vercel.app/api/644700222609555496
+                            )](https://discord.com/users/644700222609555496)
 
 [![Donate with Bitcoin](https://en.cryptobadges.io/badge/micro/bc1qfpkj68e6phjr2nqu5vsxlltu9qvw4mvkmz9mtw)](https://en.cryptobadges.io/donate/bc1qfpkj68e6phjr2nqu5vsxlltu9qvw4mvkmz9mtw)  
 [![Donate with Ethereum](https://en.cryptobadges.io/badge/micro/0x40B0db6873e6291f4962B2D63C25b8877797BF47)](https://en.cryptobadges.io/donate/0x40B0db6873e6291f4962B2D63C25b8877797BF47)  
