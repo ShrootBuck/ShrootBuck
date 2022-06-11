@@ -1,6 +1,4 @@
 # Hi, I'm ShrootBuck
-# Fullstack Software Development
-
 
 - 🔭 I'm currently working on [ShrootCloud](https://shroot.cloud).
 
