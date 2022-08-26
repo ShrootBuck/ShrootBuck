@@ -1,8 +1,10 @@
 # Hi, I'm ShrootBuck
 
-- 🔭 I'm currently working on [ShrootCloud](https://shroot.cloud).
+- I'm currently working on [ShrootCloud](https://shroot.cloud).
 
-![ShrootBuck](https://github-readme-stats.vercel.app/api?username=shrootbuck&show_icons=true&locale=en)  
+# Open Source
+ - [Undiscord](https://github.com/ShrootBuck/Undiscord)  
+ - [ExternalRobloxDatastore](https://github.com/ShrootBuck/ExternalRobloxDatastore)
 
 # Discord
 
