@@ -1,10 +1,11 @@
 # Hi, I'm ShrootBuck
 
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Carter+One&size=25&duration=2000&pause=1000&color=FF0000&center=true&vCenter=true&width=500&height=100&lines=ShrootBuck)](https://git.io/typing-svg)
+
 - I'm currently working on [ShrootCloud](https://shroot.cloud).
 
 # Open Source
  - [Undiscord](https://github.com/ShrootBuck/Undiscord)  
- - [ExternalRobloxDatastore](https://github.com/ShrootBuck/ExternalRobloxDatastore)
 
 # Discord
 
