@@ -1,6 +1,6 @@
 # Hi, I'm ShrootBuck
 
-I do commissions. DM me on Discord if you're interested in hiring me.
+I do commissions. DM me on Discord if you're interested in hiring me. I use the following languages/tools:
 
 [![My Skills](https://skillicons.dev/icons?i=py,cs,html,css,js,lua,dart,flutter,react,materialui,tensorflow,kubernetes,discordbots,gcp,mongodb)](https://skillicons.dev)
 
