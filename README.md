@@ -2,7 +2,7 @@
 
 I do commissions. My Discord is below if you're interested in hiring me. I use the following languages/tools:
 
-[![My Skills](https://skillicons.dev/icons?i=py,cs,html,css,js,lua,dart,flutter,react,materialui,tensorflow,kubernetes,discordbots,gcp,mongodb)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=py,cs,html,css,js,ts,lua,dart,flutter,angular,tensorflow,kubernetes,discordbots,gcp,mongodb)](https://skillicons.dev)
 
 # Open Source
  - [Undiscord](https://github.com/ShrootBuck/Undiscord)  
