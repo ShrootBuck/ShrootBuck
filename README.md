@@ -1,11 +1,12 @@
 # Hi, I'm ShrootBuck
 
-I do commissions. My Discord is below if you're interested in hiring me. I use the following languages/tools:
+I do commissions. My Discord is below if you're interested in hiring me. Below are the languages, tools, and frameworks that I use.
 
-[![My Skills](https://skillicons.dev/icons?i=py,cs,html,css,js,ts,lua,dart,flutter,angular,tensorflow,kubernetes,discordbots,gcp,mongodb)](https://skillicons.dev)
+## Languages
+[![Languages](https://skillicons.dev/icons?i=cs,dart,html,css,js,ts,lua,py,php)](https://skillicons.dev)
 
-# Open Source
- - [Undiscord (coming soon)](https://github.com/ShrootBuck/undiscord)  
+## Other Tools
+[![Frameworks](https://skillicons.dev/icons?i=angular,django,tensorflow,dotnet,flutter,postgres,gcp,vscode)](https://skillicons.dev)
 
 # Discord
 
