@@ -1,6 +1,6 @@
 # Hi, I'm ShrootBuck
 
-I work on Machine Learning projects using Tensorflow. I'm also learning game development in Unity.
+I work on Machine Learning projects using Tensorflow.
 
 I do commissions. My Discord is below if you're interested in hiring me. Below are the languages, tools, and frameworks that I use.
 
