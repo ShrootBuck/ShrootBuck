@@ -5,10 +5,10 @@ I work on Machine Learning projects using Tensorflow.
 I do commissions. My Discord is below if you're interested in hiring me. Below are the languages and frameworks that I use.
 
 ## Languages
-[![Languages](https://skillicons.dev/icons?i=dart,html,css,js,ts,py)](https://skillicons.dev)
+[![Languages](https://skillicons.dev/icons?i=py,html,css,js,ts,dart)](https://skillicons.dev)
 
 ## Other Tools
-[![Frameworks](https://skillicons.dev/icons?i=angular,tensorflow,flutter)](https://skillicons.dev)
+[![Frameworks](https://skillicons.dev/icons?i=tensorflow,angular,flutter)](https://skillicons.dev)
 
 # Discord
 
