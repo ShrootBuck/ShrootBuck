@@ -10,5 +10,5 @@ I do commissions. My Discord is below if you're interested in hiring me. Below a
 
 # Discord
 
-[![Discord Presence](https://lanyard.cnrad.dev/api/1095142958208131172
-                            )](https://discord.com/users/1095142958208131172)
+[![Discord Presence](https://lanyard.cnrad.dev/api/1104218586039455774
+                            )](https://discord.com/users/1104218586039455774)
