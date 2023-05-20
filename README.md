@@ -4,7 +4,7 @@ I work on Machine Learning projects using Tensorflow.
 
 I do commissions. My Discord is below if you're interested in hiring me. Below are the languages and frameworks that I use.
 
-## Skills
+# Skills
 
 [![Skills](https://skillicons.dev/icons?i=py,html,css,js,ts,cs,tensorflow,angular)](https://skillicons.dev)
 
