@@ -6,7 +6,7 @@ I do commissions. My Discord is below if you're interested in hiring me. Below a
 
 # Skills
 
-[![Skills](https://skillicons.dev/icons?i=py,html,css,js,ts,tensorflow,angular,nest)](https://skillicons.dev)
+[![Skills](https://skillicons.dev/icons?i=py,html,css,js,ts,cpp,tensorflow,angular,nest)](https://skillicons.dev)
 
 # Discord
 
