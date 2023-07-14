@@ -1,8 +1,6 @@
 # Hi, I'm ShrootBuck
 
-I work on Machine Learning projects using Tensorflow.
-
-I do commissions. My Discord is below if you're interested in hiring me. Below are the languages and frameworks that I use.
+I mainly work on Machine Learning models, but I do other stuff here and there.
 
 # Skills
 
