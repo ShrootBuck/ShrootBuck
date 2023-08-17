@@ -1,6 +1,6 @@
 # Hi, I'm ShrootBuck
 
-I mainly work on Machine Learning models, but I do other stuff here and there.
+I mainly do machine learning, but I do other stuff sometimes too.
 
 # Skills
 
