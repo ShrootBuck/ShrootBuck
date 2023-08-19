@@ -1,6 +1,6 @@
 # Hi, I'm ShrootBuck
 
-I mainly do machine learning, but I do other stuff sometimes too.
+I mainly do ML with self-driving cars, but I do other stuff sometimes too.
 
 # Skills
 
