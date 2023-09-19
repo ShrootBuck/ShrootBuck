@@ -4,7 +4,7 @@ I mainly do ML with self-driving cars, but I do other stuff sometimes too.
 
 # Skills
 
-[![Skills](https://skillicons.dev/icons?i=py,html,css,js,ts,cpp,tensorflow,angular,nest)](https://skillicons.dev)
+[![Skills](https://skillicons.dev/icons?i=py,html,css,ts,tensorflow,angular,nest)](https://skillicons.dev)
 
 # Discord
 
