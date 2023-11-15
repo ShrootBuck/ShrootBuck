@@ -5,13 +5,8 @@
 
 - 📫 You can reach me at **zaydkrunz@gmail.com**
 
-### Blog posts
-<!-- BLOG-POST-LIST:START -->
-<!-- BLOG-POST-LIST:END -->
-
 <h3 align="left">Connect with me:</h3>
 <p align="left">
-<a href="/http://feeds.foxnews.com/foxnews/politics" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/rss.svg" alt="http://feeds.foxnews.com/foxnews/politics" height="30" width="40" /></a>
 </p>
 
 <h3 align="left">Languages and Tools:</h3>
