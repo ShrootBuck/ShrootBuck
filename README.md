@@ -3,6 +3,8 @@
 
 <p align="center">
   - 🔭 I’m currently working on [shrootbot](https://github.com/ShrootBuck/shrootbot)
+</p>
+<p align="center">
   - 📫 You can reach me on Twitter [@ShrootBuck](https://twitter.com/ShrootBuck)
 </p>
 
