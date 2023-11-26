@@ -6,5 +6,5 @@
 </p>
 
 <p align="center">
-<img src="https://github-readme-stats.vercel.app/api/top-langs?username=shrootbuck&show_icons=true&layout=compact&theme=dark" alt="shrootbuck" />
+<img src="https://github-readme-stats.vercel.app/api/top-langs?username=shrootbuck&show_icons=true&layout=compact&theme=dark" />
 </p>
