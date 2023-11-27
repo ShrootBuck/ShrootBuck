@@ -1,10 +1,12 @@
-<mat-toolbar color="primary">
-  <span>ShrootBuck</span>
+<mat-toolbar>
+  <a mat-button href="/">ShrootBuck</a>
   <span style="flex: 1 1 auto"></span>
-  <button mat-icon-button>
+  <a mat-icon-button href="https://twitter.com/shrootbuck" target="_blank">
     <mat-icon svgIcon="x"></mat-icon>
-  </button>
-  <button mat-icon-button>
+  </a>
+  <a mat-icon-button href="https://github.com/shrootbuck" target="_blank">
     <mat-icon svgIcon="github"></mat-icon>
-  </button>
+  </a>
 </mat-toolbar>
+
+<router-outlet></router-outlet>
