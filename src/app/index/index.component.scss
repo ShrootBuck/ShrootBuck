@@ -1,0 +1,9 @@
+#stats {
+  display: none;
+}
+
+@media (min-width: 600px) {
+  #stats {
+    display: block;
+  }
+}

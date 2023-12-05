@@ -1,0 +1,14 @@
+#desktopMenu {
+  display: none;
+}
+
+@media (min-width: 600px) {
+  #desktopMenu,
+  #mobileMenu {
+    display: block;
+  }
+
+  #mobileMenu {
+    display: none;
+  }
+}
