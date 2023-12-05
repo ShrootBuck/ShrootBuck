@@ -1,9 +1,5 @@
 #stats {
-  display: none;
-}
-
-@media (min-width: 600px) {
-  #stats {
-    display: block;
-  }
+  margin: auto;
+  max-width: 90%;
+  display: block;
 }
