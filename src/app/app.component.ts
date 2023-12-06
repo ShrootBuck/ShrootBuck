@@ -7,6 +7,7 @@ import { MatIconRegistry, MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 type MenuItem = {
   name: string;
@@ -25,6 +26,7 @@ type MenuItem = {
     MatButtonModule,
     MatMenuModule,
     HttpClientModule,
+    MatSnackBarModule,
   ],
   providers: [MatIconRegistry],
   templateUrl: './app.component.html',
@@ -38,7 +40,11 @@ export class AppComponent {
     { name: 'Projects', link: 'projects', icon: 'folder' },
   ];
 
-  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+  constructor(
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer,
+    private _snackBar: MatSnackBar
+  ) {
     // X
     iconRegistry.addSvgIcon(
       'x',
@@ -50,5 +56,10 @@ export class AppComponent {
       'github',
       sanitizer.bypassSecurityTrustResourceUrl('assets/github.svg')
     );
+
+    // WIP Notification
+    this._snackBar.open('This website is a work in progress!', undefined, {
+      duration: 3000,
+    });
   }
 }
