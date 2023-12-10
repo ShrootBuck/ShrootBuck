@@ -15,6 +15,11 @@ type MenuItem = {
   icon?: string;
 };
 
+type SocialIcon = {
+  name: string;
+  link: string;
+};
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -34,10 +39,16 @@ type MenuItem = {
 })
 export class AppComponent {
   title = 'ShrootBuck';
+
   menu: MenuItem[] = [
     { name: 'Home', link: '', icon: 'home' },
     { name: 'Blog', link: 'https://blog.shrootbuck.com', icon: 'article' },
     { name: 'Projects', link: 'projects', icon: 'folder' },
+  ];
+
+  socialMenu: SocialIcon[] = [
+    { name: 'x', link: 'https://twitter.com/shrootbuck' },
+    { name: 'github', link: 'https://github.com/shrootbuck' },
   ];
 
   constructor(
@@ -46,16 +57,14 @@ export class AppComponent {
     private _snackBar: MatSnackBar
   ) {
     // X
-    iconRegistry.addSvgIcon(
-      'x',
-      sanitizer.bypassSecurityTrustResourceUrl('assets/x.svg')
-    );
-
-    // GitHub
-    iconRegistry.addSvgIcon(
-      'github',
-      sanitizer.bypassSecurityTrustResourceUrl('assets/github.svg')
-    );
+    this.socialMenu.forEach((socialIcon) => {
+      iconRegistry.addSvgIcon(
+        socialIcon.name,
+        sanitizer.bypassSecurityTrustResourceUrl(
+          `assets/${socialIcon.name}.svg`
+        )
+      );
+    });
 
     // WIP Notification
     this._snackBar.open('This website is a work in progress!', undefined, {

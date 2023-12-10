@@ -20,12 +20,17 @@
     </mat-menu>
   </div>
 
+  <!-- Span to push any content after to the far right -->
   <span style="flex: 1 1 auto"></span>
-  <a mat-icon-button href="https://twitter.com/shrootbuck" target="_blank">
-    <mat-icon svgIcon="x"></mat-icon>
-  </a>
-  <a mat-icon-button href="https://github.com/shrootbuck" target="_blank">
-    <mat-icon svgIcon="github"></mat-icon>
+
+  <!-- Social icons -->
+  <a
+    *ngFor="let socialIcon of socialMenu"
+    mat-icon-button
+    [href]="socialIcon.link"
+    target="_blank"
+  >
+    <mat-icon [svgIcon]="socialIcon.name"></mat-icon>
   </a>
 </mat-toolbar>
 
