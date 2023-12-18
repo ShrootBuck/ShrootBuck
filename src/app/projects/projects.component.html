@@ -1,2 +1,28 @@
 <h1>Projects</h1>
-<h2>Here's a list of all of my projects</h2>
+<h2>Here are all the projects that I contribute to</h2>
+
+><mat-card
+  *ngFor="let project of projects"
+  style="
+    margin: auto;
+    max-width: 90%;
+    margin-bottom: 10px;
+    background-color: rgb(50, 50, 50);
+  "
+>
+  <mat-card-header style="color: white; padding-bottom: 10px">
+    <mat-card-title-group>
+      <mat-card-title>{{ project.name }}</mat-card-title>
+      <mat-card-subtitle>{{ project.slogan }}</mat-card-subtitle>
+      <img
+        *ngIf="project.imageUrl"
+        mat-card-sm-image
+        style="border-radius: 10px"
+        [src]="project.imageUrl"
+      />
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-content style="color: white">{{
+    project.description
+  }}</mat-card-content>
+</mat-card>

@@ -8,6 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCardModule } from '@angular/material/card';
+import { MatRippleModule } from '@angular/material/core';
 
 type MenuItem = {
   name: string;
@@ -32,6 +34,8 @@ type SocialIcon = {
     MatMenuModule,
     HttpClientModule,
     MatSnackBarModule,
+    MatCardModule,
+    MatRippleModule,
   ],
   providers: [MatIconRegistry],
   templateUrl: './app.component.html',
@@ -44,6 +48,7 @@ export class AppComponent {
     { name: 'Home', link: '', icon: 'home' },
     { name: 'Blog', link: 'https://blog.shrootbuck.com', icon: 'article' },
     { name: 'Projects', link: 'projects', icon: 'folder' },
+    { name: 'Contact', link: 'contact', icon: 'email' },
   ];
 
   socialMenu: SocialIcon[] = [
