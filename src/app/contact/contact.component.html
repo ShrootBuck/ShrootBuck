@@ -1,0 +1,53 @@
+<h1>Contact</h1>
+<h2>Shoot me a message</h2>
+
+<form action="submitContact" method="get" style="text-align: center">
+  <!-- Email -->
+  <mat-form-field style="width: 325px">
+    <mat-label>Email</mat-label>
+    <input
+      type="email"
+      name="email"
+      matInput
+      [formControl]="emailFormControl"
+      [errorStateMatcher]="matcher"
+      placeholder="you@example.com"
+    />
+
+    @if (emailFormControl.hasError('maxlength')) {
+    <mat-error>Email is too long</mat-error>
+    } @if (emailFormControl.hasError('email')) {
+    <mat-error>Please enter a valid email address</mat-error>
+    } @if (emailFormControl.hasError('required')) {
+    <mat-error>Email is required</mat-error>
+    }
+  </mat-form-field>
+
+  <br />
+
+  <!-- Message -->
+  <mat-form-field style="width: 325px">
+    <mat-label>Message</mat-label>
+    <textarea
+      id="messageTextArea"
+      name="message"
+      matInput
+      rows="5"
+      [formControl]="messageFormControl"
+      [errorStateMatcher]="matcher"
+      placeholder="Hello!"
+      [(ngModel)]="currentMessage"
+    ></textarea>
+
+    @if (messageFormControl.hasError('maxlength')) {
+    <mat-error
+      >You are {{ getMessageLength() - 2000 }} characters over the
+      limit</mat-error
+    >
+    } @if (messageFormControl.hasError('minlength')) {
+    <mat-error
+      >You need {{ 100 - getMessageLength() }} more characters</mat-error
+    >
+    }
+  </mat-form-field>
+</form>

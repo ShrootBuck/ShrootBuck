@@ -1,4 +1,4 @@
-import { Component, importProvidersFrom } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -10,6 +10,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatRippleModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 type MenuItem = {
   name: string;
@@ -34,8 +36,6 @@ type SocialIcon = {
     MatMenuModule,
     HttpClientModule,
     MatSnackBarModule,
-    MatCardModule,
-    MatRippleModule,
   ],
   providers: [MatIconRegistry],
   templateUrl: './app.component.html',
