@@ -1,3 +1,5 @@
+import { Button } from "@nextui-org/react";
+
 export default async function Home() {
-  return <div>hi</div>;
+  return <Button>hello</Button>;
 }
