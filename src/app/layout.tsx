@@ -4,6 +4,7 @@ import { GeistSans } from "geist/font/sans";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import { NextUIProvider } from "@nextui-org/react";
+import CustomNavbar from "./navbar";
 
 export const metadata = {
   title: "Zayd Krunz's Website",
@@ -19,11 +20,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${GeistSans.variable} text-foreground bg-background dark`}
+      className={`${GeistSans.variable} bg-background text-foreground dark`}
     >
       <body>
         <TRPCReactProvider>
-          <NextUIProvider>{children}</NextUIProvider>
+          <NextUIProvider>
+            <CustomNavbar />
+
+            {children}
+          </NextUIProvider>
         </TRPCReactProvider>
       </body>
     </html>
