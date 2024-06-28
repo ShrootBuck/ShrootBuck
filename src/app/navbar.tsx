@@ -23,6 +23,14 @@ export default function CustomNavbar() {
 
   const menuItems: MenuItem[] = [
     {
+      label: "About Me",
+      href: "about",
+    },
+    {
+      label: "Projects",
+      href: "projects",
+    },
+    {
       label: "Contact",
       href: "contact",
     },
@@ -43,10 +51,10 @@ export default function CustomNavbar() {
       </NavbarBrand>
       <NavbarContent className="hidden gap-4 sm:flex" justify="center">
         {menuItems.map((item) => (
-          <NavbarItem key={item.href} isActive={layoutSegment === item.href}>
+          <NavbarItem key={item.href}>
             <Link
               color={layoutSegment === item.href ? "primary" : "foreground"}
-              href={`/dashboard/${item.href}`}
+              href={`/${item.href}`}
             >
               {item.label}
             </Link>
