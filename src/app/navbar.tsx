@@ -50,15 +50,18 @@ export default function CustomNavbar() {
         </Link>
       </NavbarBrand>
       <NavbarContent className="hidden gap-4 sm:flex" justify="center">
-        {menuItems.map((item) => (
-          <NavbarItem key={item.href}>
-            <Link
-              color={layoutSegment === item.href ? "primary" : "foreground"}
-              href={`/${item.href}`}
-            >
-              {item.label}
-            </Link>
-          </NavbarItem>
+        {menuItems.map((item, index) => (
+          <>
+            <NavbarItem key={item.href}>
+              <Link
+                color={layoutSegment === item.href ? "primary" : "foreground"}
+                href={`/${item.href}`}
+              >
+                {item.label}
+              </Link>
+            </NavbarItem>
+            {index === menuItems.length - 1 ? null : "|"}
+          </>
         ))}
       </NavbarContent>
       <NavbarMenu>
