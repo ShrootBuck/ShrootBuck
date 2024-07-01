@@ -31,6 +31,10 @@ export default function CustomNavbar() {
       href: "projects",
     },
     {
+      label: "Blog",
+      href: "https://blog.zaydkrunz.com",
+    },
+    {
       label: "Contact",
       href: "contact",
     },
@@ -55,7 +59,7 @@ export default function CustomNavbar() {
             <NavbarItem key={item.href}>
               <Link
                 color={layoutSegment === item.href ? "primary" : "foreground"}
-                href={`/${item.href}`}
+                href={`${item.href}`}
               >
                 {item.label}
               </Link>
