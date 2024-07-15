@@ -64,7 +64,7 @@ export default function CustomNavbar() {
                 {item.label}
               </Link>
             </NavbarItem>
-            {index === menuItems.length - 1 ? null : "|"}
+            {index === menuItems.length - 1 ? null : <span>|</span>}
           </>
         ))}
       </NavbarContent>
