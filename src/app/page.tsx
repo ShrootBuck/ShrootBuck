@@ -1,5 +1,3 @@
-import { redirect } from "next/navigation";
-
 export default async function Home() {
-  redirect("https://github.com/ShrootBuck");
+  return <h1>Hi! From Inter V4.</h1>;
 }
