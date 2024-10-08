@@ -32,12 +32,12 @@ export const TextHoverEffect = ({
       ref={svgRef}
       width="100%"
       height="100%"
-      viewBox="0 0 300 100"
+      viewBox="0 0 300 25"
       xmlns="http://www.w3.org/2000/svg"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onMouseMove={(e) => setCursor({ x: e.clientX, y: e.clientY })}
-      className="select-none"
+      className="hidden select-none lg:block"
     >
       <defs>
         <linearGradient
@@ -64,14 +64,6 @@ export const TextHoverEffect = ({
           r="20%"
           animate={maskPosition}
           transition={{ duration: duration ?? 0, ease: "easeOut" }}
-
-          // example for a smoother animation below
-
-          //   transition={{
-          //     type: "spring",
-          //     stiffness: 300,
-          //     damping: 50,
-          //   }}
         >
           <stop offset="0%" stopColor="white" />
           <stop offset="100%" stopColor="black" />
@@ -86,22 +78,25 @@ export const TextHoverEffect = ({
           />
         </mask>
       </defs>
+
+      {/* The following text elements are adjusted to reduce padding */}
       <text
         x="50%"
-        y="50%"
+        y="50%" // Positioned in the middle
+        dy=".3em" // Adjusted vertical alignment
         textAnchor="middle"
-        dominantBaseline="middle"
         strokeWidth="0.3"
         className="fill-transparent stroke-neutral-200 font-[helvetica] text-lg font-bold dark:stroke-neutral-800"
         style={{ opacity: hovered ? 0.7 : 0 }}
       >
         {text}
       </text>
+
       <motion.text
         x="50%"
         y="50%"
+        dy=".3em"
         textAnchor="middle"
-        dominantBaseline="middle"
         strokeWidth="0.3"
         className="fill-transparent stroke-neutral-200 font-[helvetica] text-lg font-bold dark:stroke-neutral-800"
         initial={{ strokeDashoffset: 1000, strokeDasharray: 1000 }}
@@ -116,11 +111,12 @@ export const TextHoverEffect = ({
       >
         {text}
       </motion.text>
+
       <text
         x="50%"
         y="50%"
+        dy=".3em"
         textAnchor="middle"
-        dominantBaseline="middle"
         stroke="url(#textGradient)"
         strokeWidth="0.3"
         mask="url(#textMask)"
