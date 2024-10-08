@@ -1,3 +1,7 @@
 export default async function Home() {
-  return <h1>Hi! From Inter V4.</h1>;
+  return (
+    <>
+      <p>Hi From InterV4</p>
+    </>
+  );
 }
