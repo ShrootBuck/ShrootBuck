@@ -1,5 +1,8 @@
 import { type Config } from "tailwindcss";
 
+// @ts-expect-error This is how Tailwind CSS is imported
+import flattenColorPalette from "tailwindcss/lib/util/flattenColorPalette";
+
 export default {
   darkMode: ["class"],
   content: ["./src/**/*.tsx"],
@@ -54,5 +57,19 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), addVariablesForColors],
 } satisfies Config;
+
+function addVariablesForColors({ addBase, theme }: unknown) {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+  const allColors = flattenColorPalette(theme("colors"));
+  const newVars = Object.fromEntries(
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val]),
+  );
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  addBase({
+    ":root": newVars,
+  });
+}
