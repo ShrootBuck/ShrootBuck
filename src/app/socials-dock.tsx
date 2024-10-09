@@ -26,7 +26,7 @@ export function SocialsDock() {
     },
   ];
   return (
-    <div className="flex h-[35rem] w-full items-center justify-center">
+    <div className="flex w-full items-center justify-center">
       <FloatingDock items={links} />
     </div>
   );
