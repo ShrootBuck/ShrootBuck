@@ -60,7 +60,9 @@ export default {
   plugins: [require("tailwindcss-animate"), addVariablesForColors],
 } satisfies Config;
 
-function addVariablesForColors({ addBase, theme }: unknown) {
+// TypeScript should be illegal
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function addVariablesForColors({ addBase, theme }: any) {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
   const allColors = flattenColorPalette(theme("colors"));
   const newVars = Object.fromEntries(
