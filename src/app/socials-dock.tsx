@@ -20,6 +20,18 @@ export function SocialsDock() {
       href: "https://github.com/ShrootBuck",
     },
     {
+      title: "Apple Music",
+      icon: (
+        <Image
+          src="/applemusic.svg"
+          width={100}
+          height={100}
+          alt="Apple Music"
+        />
+      ),
+      href: "/music",
+    },
+    {
       title: "Blog",
       icon: <Image src="/ghost.svg" width={100} height={100} alt="Ghost" />,
       href: "https://tenbyte.org",

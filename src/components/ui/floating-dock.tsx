@@ -67,8 +67,8 @@ const FloatingDockMobile = ({
                 transition={{ delay: (items.length - 1 - idx) * 0.05 }}
               >
                 <a
-                  href={item.href}  
-                  target="_next_referrer"
+                  href={item.href}
+                  target={item.title === "Apple Music" ? "" : "_blank"}
                   key={item.title}
                   className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-50 dark:bg-neutral-900"
                 >
@@ -171,7 +171,7 @@ function IconContainer({
   const [hovered, setHovered] = useState(false);
 
   return (
-    <a href={href} target="_blank">
+    <a href={href} target={title === "Apple Music" ? "" : "_blank"}>
       <motion.div
         ref={ref}
         style={{ width, height }}
