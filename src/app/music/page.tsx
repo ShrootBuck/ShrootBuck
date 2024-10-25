@@ -1,7 +1,10 @@
 export default function MusicPage() {
   return (
     <>
-      <h1 className="p-10 text-center text-3xl sm:text-5xl">My Playlist</h1>
+      <h1 className="pt-10 text-center text-3xl sm:text-5xl">My Playlist</h1>
+      <h2 className="pb-5 pt-5 text-center text-xl">
+        It takes a second to load; just chill for a bit.
+      </h2>
       <iframe
         allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
         style={{
