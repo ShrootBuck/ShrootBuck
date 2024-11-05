@@ -14,9 +14,7 @@ export default function Home() {
         Hi 👋, I&apos;m <span className="lg:hidden">Zayd Krunz</span>
         <TextHoverEffect text="Zayd Krunz" />
       </h1>
-      <h2 className="text-center text-xl">
-        A Software Engineer from Tucson, AZ
-      </h2>
+      <h2 className="text-center text-xl">A programmer from Tucson, AZ</h2>
 
       <div className="flex flex-col items-center justify-center p-10 md:flex-row">
         <div className="flex flex-col items-center md:flex-row">
