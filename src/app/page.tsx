@@ -2,19 +2,28 @@
 "use client";
 
 import { TextHoverEffect } from "~/components/ui/text-hover-effect";
-import { NavBar } from "./navigation-menu";
 import { SocialsDock } from "./socials-dock";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <>
-      {/* <NavBar /> */}
-
       <h1 className="pt-10 text-center text-3xl sm:text-5xl">
         Hi 👋, I&apos;m <span className="lg:hidden">Zayd Krunz</span>
         <TextHoverEffect text="Zayd Krunz" />
       </h1>
       <h2 className="text-center text-xl">A programmer from Tucson, AZ</h2>
+
+      <div className="flex justify-center">
+        <ul>
+          <li className="list-disc text-blue-600 hover:text-blue-500">
+            <Link href="/things">Stuff I Use</Link>
+          </li>
+          {/* <li className="list-disc text-blue-600 hover:text-blue-500">
+            <Link href="/resume">Resume</Link>
+          </li> */}
+        </ul>
+      </div>
 
       <div className="flex flex-col items-center justify-center p-10 md:flex-row">
         <div className="flex flex-col items-center md:flex-row">
