@@ -22,9 +22,7 @@ export default function RootLayout({
       <body>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           {children}
-          <Script src="https://unpkg.com/website-carbon-badges@1.1.3/b.min.js" />
         </ThemeProvider>
-        <div id="wcb" className="carbonbadge wcb-d pt-24"></div>
       </body>
     </html>
   );
