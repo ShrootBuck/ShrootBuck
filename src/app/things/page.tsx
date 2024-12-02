@@ -44,11 +44,11 @@ const myStuffs: Stuffs[] = [
   },
 ];
 
-// Sort innerstuffs by name length in descending order
-const sortedStuffs = myStuffs.map((section) => ({
+// Sort innerstuffs alphabetically by name
+const sortedAlphabeticallyStuffs = myStuffs.map((section) => ({
   ...section,
-  innerstuffs: [...section.innerstuffs].sort(
-    (a, b) => b.name.length - a.name.length,
+  innerstuffs: [...section.innerstuffs].sort((a, b) =>
+    a.name.localeCompare(b.name),
   ),
 }));
 
@@ -64,7 +64,7 @@ export default function MyThings() {
           The stuff I use for both software development and just day-to-day life
         </h2>
 
-        {sortedStuffs.map((section, index) => (
+        {sortedAlphabeticallyStuffs.map((section, index) => (
           <div key={index} className="mb-8">
             <div className="justify-center">
               <h2 className="mb-4 text-center text-2xl font-semibold">
