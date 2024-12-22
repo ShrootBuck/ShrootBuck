@@ -12,15 +12,11 @@ type Stuffs = {
 
 const myStuffs: Stuffs[] = [
   {
-    header: "Peripherals",
+    header: "Tech & Peripherals",
     innerstuffs: [
       {
         name: "MacBook Pro 13-inch, M2, 2022",
         url: "https://www.apple.com/macbook-pro",
-      },
-      {
-        name: "Finalmouse UltralightX Competition",
-        url: "https://finalmouse.com/products/ulx-competition-overview",
       },
     ],
   },
@@ -37,9 +33,13 @@ const myStuffs: Stuffs[] = [
   {
     header: "Productivity",
     innerstuffs: [
-      { name: "The Proton Suite", url: "https://proton.me" },
+      { name: "Proton Suite", url: "https://proton.me" },
       { name: "AFFiNE", url: "https://affine.pro" },
-      { name: "Zen", url: "https://zen-browser.app" },
+      { name: "Zen Browser", url: "https://zen-browser.app" },
+      {
+        name: "Freeform",
+        url: "https://support.apple.com/guide/freeform",
+      },
     ],
   },
 ];

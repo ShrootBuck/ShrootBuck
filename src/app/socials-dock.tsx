@@ -5,14 +5,14 @@ import Image from "next/image";
 export function SocialsDock() {
   const links = [
     {
-      title: "X",
-      icon: <Image src="/x.svg" width={100} height={100} alt="X" />,
-      href: "https://x.com/ShrootBuck",
+      title: "Email",
+      icon: <Image src="/email.svg" width={100} height={100} alt="Email" />,
+      href: "mailto:contact@zaydkrunz.com",
     },
     {
-      title: "Discord",
-      icon: <Image src="/discord.svg" width={100} height={100} alt="Discord" />,
-      href: "https://discord.gg/X5FdNNJk",
+      title: "Twitter",
+      icon: <Image src="/x.svg" width={100} height={100} alt="X" />,
+      href: "https://x.com/ShrootBuck",
     },
     {
       title: "Github",
