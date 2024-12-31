@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
   const secret = formData.get("secret");
 
   if ((secret as string) !== env.SECRET) {
-    return new NextResponse(`${secret as string} - ${process.env.SECRET}`, {
+    return new NextResponse(`${secret as string} - ${env.SECRET}`, {
       status: 401,
     });
   }
