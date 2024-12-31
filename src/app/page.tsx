@@ -1,12 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
-"use client";
+import { prisma } from "~/lib/utils";
 
 import { TextHoverEffect } from "~/components/ui/text-hover-effect";
 import { SocialsDock } from "./socials-dock";
 import Link from "next/link";
-import LocationComponent from "./location";
 
-export default function Home() {
+export default async function Home() {
+  const currentLocation = await prisma.location.findFirst({
+    where: { id: "0" },
+  });
+
   return (
     <>
       <h1 className="pt-10 text-center text-3xl sm:text-5xl">
@@ -15,7 +18,9 @@ export default function Home() {
       </h1>
       <h2 className="text-center text-xl">A programmer from Tucson, AZ</h2>
 
-      <LocationComponent />
+      <h3 className="text-center text-lg">
+        Currently: {currentLocation?.location}
+      </h3>
 
       <div className="flex justify-center">
         <ul>
