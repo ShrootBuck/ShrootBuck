@@ -1,4 +1,4 @@
-import { type NextRequest, NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { env } from "~/env";
 import { prisma } from "~/lib/utils";
 
@@ -10,9 +10,9 @@ export async function POST(request: NextRequest) {
   const region = formData.get("region");
   const secret = formData.get("secret");
 
-  // if (secret !== env.SECRET) {
-  //   return new NextResponse("Unauthorized", { status: 401 });
-  // }
+  if (secret !== env.SECRET) {
+    return new NextResponse("Unauthorized", { status: 401 });
+  }
 
   const formattedLocation = `${city as string}, ${state as string}, ${region as string}`;
 
