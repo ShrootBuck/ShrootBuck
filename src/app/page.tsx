@@ -4,6 +4,7 @@
 import { TextHoverEffect } from "~/components/ui/text-hover-effect";
 import { SocialsDock } from "./socials-dock";
 import Link from "next/link";
+import LocationComponent from "./location";
 
 export default function Home() {
   return (
@@ -14,7 +15,7 @@ export default function Home() {
       </h1>
       <h2 className="text-center text-xl">A programmer from Tucson, AZ</h2>
 
-      <h3 className="text-center text-lg">Currently: Tucson AZ</h3>
+      <LocationComponent />
 
       <div className="flex justify-center">
         <ul>
