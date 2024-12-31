@@ -4,6 +4,7 @@ import { unstable_cache } from "next/cache";
 import { TextHoverEffect } from "~/components/ui/text-hover-effect";
 import { SocialsDock } from "./socials-dock";
 import Link from "next/link";
+import { CircleHelp, LucideMapPin } from "lucide-react";
 import { prisma } from "~/lib/utils";
 
 const getLocation = unstable_cache(
@@ -27,23 +28,37 @@ export default async function Home() {
       </h1>
       <h2 className="text-center text-xl">A programmer from Tucson, AZ</h2>
 
-      <h3 className="text-center text-lg">
-        Currently: {currentLocation?.location}
+      <h3 className="pt-12 text-center text-lg">
+        <span className="inline-flex items-center gap-2">
+          <LucideMapPin className="text-blue-600" />
+          <span className="font-semibold">Current Location: </span>{" "}
+          <span>{currentLocation?.location}</span>
+        </span>
       </h3>
 
+      <p className="text-center">
+        <Link className="text-blue-600 hover:text-blue-500" href="/location">
+          How does this work?
+        </Link>
+      </p>
+
+      <h3 className="pt-12 text-center text-lg">Other Cool Stuff</h3>
       <div className="flex justify-center">
         <ul>
-          <li className="list-disc text-blue-600 hover:text-blue-500">
-            <Link target="_blank" href="https://warden.zaydkrunz.com">
+          <li className="list-disc">
+            <Link
+              className="text-blue-600 hover:text-blue-500"
+              target="_blank"
+              href="https://warden.zaydkrunz.com"
+            >
               Warden Anti-Cheat
             </Link>
           </li>
-          <li className="list-disc text-blue-600 hover:text-blue-500">
-            <Link href="/things">Stuff I Use</Link>
+          <li className="list-disc">
+            <Link className="text-blue-600 hover:text-blue-500" href="/things">
+              Stuff I Use
+            </Link>
           </li>
-          {/* <li className="list-disc text-blue-600 hover:text-blue-500">
-            <Link href="/resume">Resume</Link>
-          </li> */}
         </ul>
       </div>
 

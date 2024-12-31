@@ -24,10 +24,10 @@ const myStuffs: Stuffs[] = [
     header: "Software Development",
     innerstuffs: [
       { name: "Visual Studio Code", url: "https://code.visualstudio.com" },
-      { name: "WebStorm", url: "https://www.jetbrains.com/webstorm" },
       { name: "Beekeeper Studio", url: "https://www.beekeeperstudio.io" },
       { name: "Insomnia", url: "https://insomnia.rest" },
       { name: "Plane", url: "https://plane.so" },
+      { name: "Ghostty", url: "https://ghostty.org" },
     ],
   },
   {
@@ -61,7 +61,7 @@ export default function MyThings() {
       <div className="container mx-auto px-4">
         <h1 className="pt-10 text-center text-3xl sm:text-5xl">My Things</h1>
         <h2 className="pb-10 pt-5 text-center text-xl">
-          The stuff I use for both software development and just day-to-day life
+          The stuff I use for software development and just day-to-day life
         </h2>
 
         {sortedAlphabeticallyStuffs.map((section, index) => (
