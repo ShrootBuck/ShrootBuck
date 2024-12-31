@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
   const secret = formData.get("secret");
 
   if ((secret as string) !== process.env.SECRET) {
-    return new NextResponse("Unauthorized", { status: 401 });
+    return new NextResponse(`${secret as string} - ${process.env.SECRET}`, { status: 401 });
   }
 
   const formattedLocation = `${city as string}, ${state as string}, ${region as string}`;
