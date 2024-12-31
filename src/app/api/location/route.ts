@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
   const region = formData.get("region");
   const secret = formData.get("secret");
 
-  if (secret !== process.env.SECRET) {
+  if ((secret as string) !== process.env.SECRET) {
     return new NextResponse("Unauthorized", { status: 401 });
   }
 
