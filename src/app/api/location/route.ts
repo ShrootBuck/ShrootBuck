@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { env } from "~/env";
+
 import { prisma } from "~/lib/utils";
 
 export async function POST(request: NextRequest) {
@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
   const region = formData.get("region");
   const secret = formData.get("secret");
 
-  if (secret !== env.SECRET) {
+  if (secret !== process.env.SECRET) {
     return new NextResponse("Unauthorized", { status: 401 });
   }
 
