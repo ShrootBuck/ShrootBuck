@@ -1,3 +1,4 @@
+export const revalidate = 60 * 60; // 1 hour
 export const dynamic = "force-dynamic";
 
 /* eslint-disable @next/next/no-img-element */
