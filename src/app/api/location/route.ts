@@ -1,6 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { env } from "~/env";
 
+import { prisma } from "~/lib/utils";
+
 export async function POST(request: NextRequest) {
   const formData = await request.formData();
 
