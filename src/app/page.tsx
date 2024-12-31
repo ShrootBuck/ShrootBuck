@@ -14,6 +14,8 @@ export default function Home() {
       </h1>
       <h2 className="text-center text-xl">A programmer from Tucson, AZ</h2>
 
+      <h3 className="text-center text-lg">Currently: Tucson AZ</h3>
+
       <div className="flex justify-center">
         <ul>
           <li className="list-disc text-blue-600 hover:text-blue-500">
