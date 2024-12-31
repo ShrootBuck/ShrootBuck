@@ -28,10 +28,10 @@ export default async function Home() {
       </h1>
       <h2 className="text-center text-xl">A programmer from Tucson, AZ</h2>
 
-      <h3 className="pt-12 text-center text-lg">
-        <span className="inline-flex items-center gap-2">
-          <LucideMapPin className="text-blue-600" />
-          <span className="font-semibold">Current Location: </span>{" "}
+      <h3 className="flex items-center justify-center gap-2 pt-12 text-center text-lg leading-none">
+        <LucideMapPin className="text-blue-600" />
+        <span className="whitespace-normal">
+          <span className="font-semibold">Current Location:</span>{" "}
           <span>{currentLocation?.location}</span>
         </span>
       </h3>
