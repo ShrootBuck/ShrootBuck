@@ -1,17 +1,23 @@
-export const revalidate = 60 * 60; // 1 hour
-export const dynamic = "force-dynamic";
-
 /* eslint-disable @next/next/no-img-element */
+import { unstable_cache } from "next/cache";
 
 import { TextHoverEffect } from "~/components/ui/text-hover-effect";
 import { SocialsDock } from "./socials-dock";
 import Link from "next/link";
 import { prisma } from "~/lib/utils";
 
+const getLocation = unstable_cache(
+  async () => {
+    return await prisma.location.findFirst({
+      where: { id: "0" },
+    });
+  },
+  ["location"],
+  { revalidate: 3600, tags: ["location"] },
+);
+
 export default async function Home() {
-  const currentLocation = await prisma.location.findFirst({
-    where: { id: "0" },
-  });
+  const currentLocation = await getLocation();
 
   return (
     <>
