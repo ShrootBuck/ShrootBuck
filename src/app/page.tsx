@@ -1,24 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
-import { unstable_cache } from "next/cache";
 
 import { TextHoverEffect } from "~/components/ui/text-hover-effect";
 import { SocialsDock } from "./socials-dock";
 import Link from "next/link";
-import { CircleHelp, LucideMapPin } from "lucide-react";
+import { LucideMapPin } from "lucide-react";
 import { prisma } from "~/lib/utils";
 
-const getLocation = unstable_cache(
-  async () => {
-    return await prisma.location.findFirst({
-      where: { id: "0" },
-    });
-  },
-  ["location"],
-  { revalidate: 3600, tags: ["location"] },
-);
-
 export default async function Home() {
-  const currentLocation = await getLocation();
+  const currentLocation = await prisma.location.findFirst({
+    where: { id: "0" },
+  });
 
   return (
     <>
