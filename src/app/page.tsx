@@ -68,6 +68,8 @@ export default async function Home() {
       </div>
 
       <SocialsDock />
+
+      <br />
     </>
   );
 }
