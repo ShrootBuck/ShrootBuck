@@ -6,6 +6,8 @@ import Link from "next/link";
 import { LucideMapPin } from "lucide-react";
 import { prisma } from "~/lib/utils";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const currentLocation = await prisma.location.findFirst({
     where: { id: "0" },
