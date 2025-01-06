@@ -11,11 +11,11 @@ export default function MyThings() {
         <h1 className="pt-10 text-center text-3xl sm:text-5xl">
           <span className="inline-flex items-center gap-2">
             <LucideMapPin size={32} className="text-blue-600" />
-            Current Location Tracker
+            Location Tracker
           </span>
         </h1>
 
-        <div className="m-auto lg:w-1/2">
+        <div className="m-auto text-justify lg:w-1/2">
           <h2 className="pb-10 pt-5 text-xl">
             It&apos;s actually quite simple. Every hour, an iOS Shortcut sends
             my iPhone&apos;s current city, state, and region to the

@@ -24,7 +24,7 @@ export default async function Home() {
       <h3 className="flex items-center justify-center gap-2 pt-12 text-center text-lg leading-none">
         <LucideMapPin className="text-blue-600" />
         <span className="whitespace-normal">
-          <span className="font-semibold">Current Location:</span>{" "}
+          <span className="font-semibold">Location:</span>{" "}
           <span>{currentLocation?.location}</span>
         </span>
       </h3>
