@@ -23,11 +23,12 @@ const myStuffs: Stuffs[] = [
   {
     header: "Software Development",
     innerstuffs: [
-      { name: "Visual Studio Code", url: "https://code.visualstudio.com" },
+      { name: "Zed", url: "https://zed.dev" },
       { name: "Beekeeper Studio", url: "https://www.beekeeperstudio.io" },
       { name: "Insomnia", url: "https://insomnia.rest" },
       { name: "Plane", url: "https://plane.so" },
       { name: "Ghostty", url: "https://ghostty.org" },
+      { name: "Docker", url: "https://www.docker.com" },
     ],
   },
   {
@@ -36,10 +37,6 @@ const myStuffs: Stuffs[] = [
       { name: "Proton Suite", url: "https://proton.me" },
       { name: "AFFiNE", url: "https://affine.pro" },
       { name: "Zen Browser", url: "https://zen-browser.app" },
-      {
-        name: "Freeform",
-        url: "https://support.apple.com/guide/freeform",
-      },
     ],
   },
 ];
