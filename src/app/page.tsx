@@ -65,12 +65,12 @@ export default async function Home() {
         <div className="flex flex-col items-center md:flex-row">
           <img
             src="https://github-readme-stats.vercel.app/api?username=ShrootBuck&hide=stars&hide_title=false&hide_rank=true&show_icons=true&include_all_commits=true&count_private=true&disable_animations=false&theme=dark&locale=en&hide_border=false&order=1"
-            alt="stats graph"
+            alt=""
             className="mb-5 md:mb-0 md:mr-5"
           />
           <img
             src="https://github-readme-stats.vercel.app/api/top-langs?username=ShrootBuck&locale=en&hide_title=false&layout=compact&card_width=320&langs_count=5&theme=dark&hide_border=false&order=2"
-            alt="languages graph"
+            alt=""
           />
         </div>
       </div>
