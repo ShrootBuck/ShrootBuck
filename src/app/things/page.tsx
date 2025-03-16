@@ -36,7 +36,7 @@ const myStuffs: Stuffs[] = [
     innerstuffs: [
       { name: "Proton Suite", url: "https://proton.me" },
       { name: "AFFiNE", url: "https://affine.pro" },
-      { name: "Zen Browser", url: "https://zen-browser.app" },
+      { name: "Brave", url: "https://brave.com" },
     ],
   },
 ];
