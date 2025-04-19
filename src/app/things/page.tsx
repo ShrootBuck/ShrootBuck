@@ -34,7 +34,7 @@ const myStuffs: Stuffs[] = [
   {
     header: "Productivity",
     innerstuffs: [
-      { name: "Proton Suite", url: "https://proton.me" },
+      { name: "Proton Suite", url: "https://go.getproton.me/SH1XL" },
       { name: "AFFiNE", url: "https://affine.pro" },
       { name: "Brave", url: "https://brave.com" },
     ],

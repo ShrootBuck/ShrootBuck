@@ -11,17 +11,21 @@ export const dynamic = "force-dynamic";
 
 type Language = {
   name: string; // Used for SVGs
+  url: string; // URL to language home page
 };
 
 const languages: Language[] = [
-  { name: "go" },
-  { name: "zig" },
-  { name: "javascript" },
-  { name: "lua" },
-  { name: "php" },
-  { name: "python" },
-  { name: "rust" },
-  { name: "typescript" },
+  { name: "go", url: "https://go.dev" },
+  { name: "zig", url: "https://ziglang.org" },
+  {
+    name: "javascript",
+    url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+  },
+  { name: "lua", url: "https://www.lua.org" },
+  { name: "php", url: "https://www.php.net" },
+  { name: "python", url: "https://www.python.org" },
+  { name: "rust", url: "https://www.rust-lang.org" },
+  { name: "typescript", url: "https://www.typescriptlang.org" },
 ].sort((a, b) => a.name.localeCompare(b.name));
 
 export default async function Home() {
@@ -51,14 +55,15 @@ export default async function Home() {
       <h3 className="pt-12 text-center text-lg">Programming Languages</h3>
       <div className="flex flex-wrap justify-center">
         {languages.map((lang) => (
-          <Image
-            key={lang.name}
-            src={`/${lang.name}.svg`}
-            alt={lang.name}
-            width={48}
-            height={48}
-            className="m-2"
-          />
+          <Link key={lang.name} href={lang.url} target="_blank">
+            <Image
+              src={`/${lang.name}.svg`}
+              alt={lang.name}
+              width={48}
+              height={48}
+              className="m-2"
+            />
+          </Link>
         ))}
       </div>
       <div className="flex flex-col items-center justify-center p-10 md:flex-row">
@@ -66,11 +71,12 @@ export default async function Home() {
           <img
             src="https://github-readme-stats.vercel.app/api?username=ShrootBuck&hide=stars&hide_title=false&hide_rank=true&show_icons=true&include_all_commits=true&count_private=true&disable_animations=false&theme=dark&locale=en&hide_border=false&order=1"
             alt=""
-            className="mb-5 md:mb-0 md:mr-5"
+            className="mb-5 h-[170px] w-[350px] object-contain md:mb-0 md:mr-5"
           />
           <img
             src="https://github-readme-stats.vercel.app/api/top-langs?username=ShrootBuck&locale=en&hide_title=false&layout=compact&card_width=320&langs_count=5&theme=dark&hide_border=false&order=2"
             alt=""
+            className="h-[170px] w-[350px] object-contain"
           />
         </div>
       </div>
