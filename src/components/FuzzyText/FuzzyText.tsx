@@ -4,6 +4,11 @@
 
 import React, { useEffect, useRef } from "react";
 
+// Define a custom interface for canvas with cleanupFuzzyText property
+interface FuzzyTextCanvas extends HTMLCanvasElement {
+  cleanupFuzzyText?: () => void;
+}
+
 interface FuzzyTextProps {
   children: React.ReactNode;
   fontSize?: number | string;
@@ -25,7 +30,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
   baseIntensity = 0.18,
   hoverIntensity = 0.5,
 }) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef<FuzzyTextCanvas>(null);
 
   useEffect(() => {
     let animationFrameId: number;
@@ -34,6 +39,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
     if (!canvas) return;
 
     const init = async () => {
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       if (document.fonts?.ready) {
         await document.fonts.ready;
       }
@@ -157,6 +163,8 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
         e.preventDefault();
         const rect = canvas.getBoundingClientRect();
         const touch = e.touches[0];
+        // Check if touch exists before accessing its properties
+        if (!touch) return;
         const x = touch.clientX - rect.left;
         const y = touch.clientY - rect.top;
         isHovering = isInsideTextArea(x, y);
@@ -185,16 +193,16 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
         }
       };
 
-      (canvas as any).cleanupFuzzyText = cleanup;
+      canvas.cleanupFuzzyText = cleanup;
     };
 
-    init();
+    void init();
 
     return () => {
       isCancelled = true;
       window.cancelAnimationFrame(animationFrameId);
-      if (canvas && (canvas as any).cleanupFuzzyText) {
-        (canvas as any).cleanupFuzzyText();
+      if (canvas?.cleanupFuzzyText) {
+        canvas.cleanupFuzzyText();
       }
     };
   }, [
