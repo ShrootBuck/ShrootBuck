@@ -15,8 +15,8 @@ type Language = {
 };
 
 const languages: Language[] = [
-  { name: "go", url: "https://go.dev" },
-  { name: "zig", url: "https://ziglang.org" },
+  // { name: "go", url: "https://go.dev" },
+  // { name: "zig", url: "https://ziglang.org" },
   {
     name: "javascript",
     url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
