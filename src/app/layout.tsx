@@ -24,7 +24,7 @@ export default function RootLayout({
       </head>
       <body>
         <OpenPanelComponent
-          apiUrl="https://analytics.zaydkrunz.com"
+          apiUrl="https://analytics.zaydkrunz.com/api"
           clientId="adb0f65a-136e-4f57-9bbc-2825227814a3"
           clientSecret="sec_666c85968aa766da215e"
           trackScreenViews={true}
