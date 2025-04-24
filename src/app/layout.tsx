@@ -1,6 +1,7 @@
 import "~/styles/globals.css";
 import { type Metadata } from "next";
 import { ThemeProvider } from "~/components/theme-provider";
+import { OpenPanelComponent } from "@openpanel/nextjs";
 
 export const metadata: Metadata = {
   title: "Zayd Krunz",
@@ -22,6 +23,13 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <OpenPanelComponent
+          apiUrl="https://analytics.zaydkrunz.com"
+          clientId="adb0f65a-136e-4f57-9bbc-2825227814a3"
+          clientSecret="sec_666c85968aa766da215e"
+          trackScreenViews={true}
+          trackOutgoingLinks={true}
+        />
         <ThemeProvider attribute="class" defaultTheme="dark">
           {children}
         </ThemeProvider>
