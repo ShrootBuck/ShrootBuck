@@ -1,7 +1,6 @@
 import "~/styles/globals.css";
 import { type Metadata } from "next";
 import { ThemeProvider } from "~/components/theme-provider";
-import { PostHogProvider } from "~/components/PostHogProvider";
 
 export const metadata: Metadata = {
   title: "Zayd Krunz",
@@ -23,11 +22,9 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <PostHogProvider>
-          <ThemeProvider attribute="class" defaultTheme="dark">
-            {children}
-          </ThemeProvider>
-        </PostHogProvider>
+        <ThemeProvider attribute="class" defaultTheme="dark">
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
