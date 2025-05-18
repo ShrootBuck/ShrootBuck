@@ -17,12 +17,11 @@ const config = {
     return [
       {
         source: "/resume",
-        destination: "https://rxresu.me/shrootbuck/resume",
+        destination: "https://rxresu.me/shrootbuck/master-resume",
         permanent: true,
       },
     ];
   },
-
 };
 
 export default config;
