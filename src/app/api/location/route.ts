@@ -17,9 +17,16 @@ export async function POST(request: NextRequest) {
     });
   }
 
-  const locationParts = [city, state, region].filter(
-    (part) => part && typeof part === "string" && part.trim() !== "",
-  );
+  const trimCity = city && typeof city === "string" ? city.trim() : "";
+  const trimState = state && typeof state === "string" ? state.trim() : "";
+  const trimRegion = region && typeof region === "string" ? region.trim() : "";
+
+  const locationParts = [];
+
+  if (trimCity) locationParts.push(trimCity);
+  if (trimState && trimState !== trimCity) locationParts.push(trimState);
+  if (trimRegion && trimRegion !== trimState) locationParts.push(trimRegion);
+
   const formattedLocation = locationParts.join(", ");
 
   await prisma.location.upsert({
