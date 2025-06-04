@@ -17,7 +17,10 @@ export async function POST(request: NextRequest) {
     });
   }
 
-  const formattedLocation = `${city as string}, ${state as string}, ${region as string}`;
+  const locationParts = [city, state, region].filter(
+    (part) => part && typeof part === "string" && part.trim() !== "",
+  );
+  const formattedLocation = locationParts.join(", ");
 
   await prisma.location.upsert({
     where: { id: "0" },
