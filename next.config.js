@@ -20,6 +20,12 @@ const config = {
         destination: "https://rxresu.me/shrootbuck/master-resume",
         permanent: true,
       },
+      {
+        source: "/spcs",
+        destination:
+          "https://github.com/ShrootBuck/stanford-predictive-maintenance",
+        permanent: true,
+      },
     ];
   },
 };
