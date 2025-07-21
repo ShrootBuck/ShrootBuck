@@ -26,8 +26,8 @@ const languages: Language[] = [
   { name: "php", url: "https://www.php.net" },
   { name: "postgresql", url: "https://www.postgresql.org" },
   { name: "python", url: "https://www.python.org" },
-  { name: "r", url: "https://www.r-project.org" },
-  { name: "rust", url: "https://www.rust-lang.org" },
+  // { name: "r", url: "https://www.r-project.org" },
+  // { name: "rust", url: "https://www.rust-lang.org" },
   { name: "typescript", url: "https://www.typescriptlang.org" },
 ].sort((a, b) => a.name.localeCompare(b.name));
 
