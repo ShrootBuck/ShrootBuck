@@ -71,6 +71,7 @@ export default async function Home() {
       </div>
       <div className="flex flex-col items-center justify-center p-10 md:flex-row">
         <div className="flex flex-col items-center md:flex-row">
+          {/*
           <img
             src="https://github-readme-stats.vercel.app/api?username=ShrootBuck&hide=stars&hide_title=false&hide_rank=true&show_icons=true&include_all_commits=true&count_private=true&disable_animations=false&theme=dark&locale=en&hide_border=false&order=1"
             alt=""
@@ -81,6 +82,7 @@ export default async function Home() {
             alt=""
             className="h-[170px] w-[350px] object-contain"
           />
+          */}
         </div>
       </div>
 
