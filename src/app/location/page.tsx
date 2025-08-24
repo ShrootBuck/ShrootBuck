@@ -27,19 +27,19 @@ export default function LocationPage() {
           <section>
             <h3>The System</h3>
             <p>
-              It's pretty simple. Every hour, an iOS Shortcut sends my iPhone's
-              current location to the <code>/api/location</code> route in a POST
-              request. The server then stores the data in a PostgreSQL database
-              (which is overkill) and serves it to visitors.
+              It&apos;s pretty simple. Every hour, an iOS Shortcut sends my
+              iPhone&apos;s current location to the <code>/api/location</code>{" "}
+              route in a POST request. The server then stores the data in a
+              PostgreSQL database (which is overkill) and serves it to visitors.
             </p>
             <p>
               This gives you a real-time view of where I am in the world,
-              updated automatically throughout the day. It's useful for friends
-              and family, and honestly just a fun little project.{" "}
+              updated automatically throughout the day. It&apos;s useful for
+              friends and family, and honestly just a fun little project.{" "}
             </p>
             <p>
-              If you're interested in how this works technically, you can find
-              the complete source code on{" "}
+              If you&apos;re interested in how this works technically, you can
+              find the complete source code on{" "}
               <a
                 href="https://github.com/ShrootBuck/ShrootBuck"
                 target="_blank"

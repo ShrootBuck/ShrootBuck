@@ -1,5 +1,6 @@
 import { LucideMapPin } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { prisma } from "~/lib/utils";
 
 export const dynamic = "force-dynamic";
@@ -13,8 +14,9 @@ export default async function Home() {
       <header>
         <h1>Zayd Krunz</h1>
         <h2>
-          Student <span style={{ color: "#ffffff" }}>//</span> Programmer{" "}
-          <span style={{ color: "#ffffff" }}>//</span> Aspiring Quant Researcher
+          Student <span style={{ color: "#ffffff" }}>{"//"}</span> Programmer{" "}
+          <span style={{ color: "#ffffff" }}>{"//"}</span> Aspiring Quant
+          Researcher
         </h2>
         <div
           style={{
@@ -34,7 +36,7 @@ export default async function Home() {
           >
             <span>
               <strong>Currently:</strong>{" "}
-              {currentLocation?.location || "Tucson, AZ"}
+              {currentLocation?.location ?? "Tucson, AZ"}
             </span>
           </Link>
         </div>
@@ -44,16 +46,16 @@ export default async function Home() {
         <section id="about">
           <h3>About Me</h3>
           <p>
-            I'm an 11th grade student at BASIS Tucson North currently juggling
-            seven AP classes while pursuing my passion for programming and
-            quantitative finance. With a goal of becoming a Quant Researcher at
-            Citadel, I'm constantly pushing myself to excel in mathematics,
-            computer science, and problem-solving.
+            I&apos;m an 11th grade student at BASIS Tucson North currently
+            juggling seven AP classes while pursuing my passion for programming
+            and quantitative finance. With a goal of becoming a Quant Researcher
+            at Citadel, I&apos;m constantly pushing myself to excel in
+            mathematics, computer science, and problem-solving.
           </p>
           <p>
-            When I'm not grinding through AP coursework, I'm competing in USACO
-            (currently Bronze), preparing for the AMC 12 to qualify for AIME, or
-            working on personal programming projects.
+            When I&apos;m not grinding through AP coursework, I&apos;m competing
+            in USACO (currently Bronze), preparing for the AMC 12 to qualify for
+            AIME, or working on personal programming projects.
           </p>
         </section>
 
@@ -169,7 +171,7 @@ export default async function Home() {
             solutions, and thoughts on tech and quantitative finance.
           </p>
           <p>
-            I'm always interested in discussing quantitative finance,
+            I&apos;m always interested in discussing quantitative finance,
             competitive programming, or collaboration opportunities with fellow
             students and professionals in tech.
           </p>
@@ -194,9 +196,11 @@ export default async function Home() {
             width: "60%",
           }}
         >
-          <img
+          <Image
             src="/signature.svg"
             alt="Signature of Zayd Krunz"
+            width={300}
+            height={100}
             style={{
               display: "block",
               width: "100%",
