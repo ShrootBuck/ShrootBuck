@@ -1,38 +1,56 @@
 import { LucideMapPin } from "lucide-react";
 import Link from "next/link";
 
-export default function MyThings() {
+export default function LocationPage() {
   return (
     <>
       <div className="p-5">
         <Link href="/">← Back</Link>
       </div>
-      <div className="container mx-auto px-4">
-        <h1 className="pt-10 text-center text-3xl sm:text-5xl">
-          <span className="inline-flex items-center gap-2">
-            <LucideMapPin size={32} className="text-blue-600" />
-            Location Tracker?
-          </span>
-        </h1>
+      <div className="container">
+        <header>
+          <h1
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "0.5rem",
+            }}
+          >
+            <LucideMapPin size={32} style={{ color: "var(--accent)" }} />
+            Location Tracker
+          </h1>
+          <h2>How does this work?</h2>
+        </header>
 
-        <div className="m-auto lg:w-1/2">
-          <h2 className="pb-10 pt-5 text-xl">
-            It&apos;s pretty simple. Every hour, an iOS Shortcut sends my
-            iPhone&apos;s current location to the /api/location route in a POST
-            request. The server then stores the data in a PostgreSQL database
-            (which is overkill) and served to visitors.
-            <br />
-            <br />
-            If you&apos;re interested in the code, you can find it on{" "}
-            <Link
-              className="text-blue-600 hover:text-blue-500"
-              href={"https://github.com/ShrootBuck/ShrootBuck"}
-            >
-              GitHub
-            </Link>
-            .
-          </h2>
-        </div>
+        <main>
+          <section>
+            <h3>The System</h3>
+            <p>
+              It's pretty simple. Every hour, an iOS Shortcut sends my iPhone's
+              current location to the <code>/api/location</code> route in a POST
+              request. The server then stores the data in a PostgreSQL database
+              (which is overkill) and serves it to visitors.
+            </p>
+            <p>
+              This gives you a real-time view of where I am in the world,
+              updated automatically throughout the day. It's useful for friends
+              and family, and honestly just a fun little project.{" "}
+            </p>
+            <p>
+              If you're interested in how this works technically, you can find
+              the complete source code on{" "}
+              <a
+                href="https://github.com/ShrootBuck/ShrootBuck"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </a>
+              .
+            </p>
+          </section>
+        </main>
       </div>
     </>
   );

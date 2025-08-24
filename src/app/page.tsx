@@ -1,102 +1,210 @@
-/* eslint-disable @next/next/no-img-element */
-
-import { TextHoverEffect } from "~/components/ui/text-hover-effect";
-import { SocialsDock } from "./socials-dock";
-import Link from "next/link";
 import { LucideMapPin } from "lucide-react";
+import Link from "next/link";
 import { prisma } from "~/lib/utils";
-import Image from "next/image";
 
 export const dynamic = "force-dynamic";
-
-type Language = {
-  name: string; // Used for SVGs
-  url: string; // URL to language home page
-};
-
-const languages: Language[] = [
-  // { name: "go", url: "https://go.dev" },
-  // { name: "zig", url: "https://ziglang.org" },
-  { name: "cpp", url: "https://isocpp.org" },
-  {
-    name: "javascript",
-    url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
-  },
-  { name: "lua", url: "https://www.lua.org" },
-  { name: "php", url: "https://www.php.net" },
-  { name: "postgresql", url: "https://www.postgresql.org" },
-  { name: "python", url: "https://www.python.org" },
-  // { name: "r", url: "https://www.r-project.org" },
-  // { name: "rust", url: "https://www.rust-lang.org" },
-  { name: "typescript", url: "https://www.typescriptlang.org" },
-].sort((a, b) => a.name.localeCompare(b.name));
 
 export default async function Home() {
   const currentLocation = await prisma.location.findFirst({
     where: { id: "0" },
   });
-
   return (
-    <>
-      <h1 className="pt-10 text-center text-3xl sm:text-5xl">
-        Hi 👋, I&apos;m <span className="lg:hidden">Zayd Krunz</span>
-        <TextHoverEffect text="Zayd Krunz" />
-      </h1>
-      <h2 className="text-center text-xl">A programmer from Tucson, AZ</h2>
-      <h3 className="flex items-center justify-center gap-2 pt-12 text-center text-lg leading-none">
-        <LucideMapPin className="text-blue-600" />
-        <span className="whitespace-normal">
-          <span className="font-semibold">Location:</span>{" "}
-          <span>{currentLocation?.location}</span>
-        </span>
-      </h3>
-      <p className="text-center">
-        <Link className="text-blue-600 hover:text-blue-500" href="/location">
-          How does this work?
-        </Link>
-      </p>
-      <h3 className="pt-12 text-center text-lg">Programming Languages</h3>
-      <div className="flex flex-wrap justify-center">
-        {languages.map((lang) => (
-          <Link key={lang.name} href={lang.url} target="_blank">
-            <Image
-              src={`/${lang.name}.svg`}
-              alt={lang.name}
-              width={48}
-              height={48}
-              className="m-2"
-            />
+    <div className="container">
+      <header>
+        <h1>Zayd Krunz</h1>
+        <h2>
+          Student <span style={{ color: "#ffffff" }}>//</span> Programmer{" "}
+          <span style={{ color: "#ffffff" }}>//</span> Aspiring Quant Researcher
+        </h2>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "0.5rem",
+            marginTop: "1rem",
+            color: "var(--text-secondary)",
+            fontSize: "0.9rem",
+          }}
+        >
+          <LucideMapPin size={16} style={{ color: "var(--accent)" }} />
+          <Link
+            href="/location"
+            style={{ textDecoration: "none", color: "var(--accent)" }}
+          >
+            <span>
+              <strong>Currently:</strong>{" "}
+              {currentLocation?.location || "Tucson, AZ"}
+            </span>
           </Link>
-        ))}
-      </div>
-      <div className="flex flex-col items-center justify-center p-10 md:flex-row">
-        <div className="flex flex-col items-center md:flex-row">
-          {/*
-          <img
-            src="https://github-readme-stats.vercel.app/api?username=ShrootBuck&hide=stars&hide_title=false&hide_rank=true&show_icons=true&include_all_commits=true&count_private=true&disable_animations=false&theme=dark&locale=en&hide_border=false&order=1"
-            alt=""
-            className="mb-5 h-[170px] w-[350px] object-contain md:mb-0 md:mr-5"
-          />
-          <img
-            src="https://github-readme-stats.vercel.app/api/top-langs?username=ShrootBuck&locale=en&hide_title=false&layout=compact&card_width=320&langs_count=5&theme=dark&hide_border=false&order=2"
-            alt=""
-            className="h-[170px] w-[350px] object-contain"
-          />
-          */}
         </div>
-      </div>
+      </header>
 
-      <h3 className="text-center text-lg">Other Things</h3>
-      <div className="flex justify-center pb-5">
-        <ul>
-          <li className="list-disc">
-            <Link className="text-blue-600 hover:text-blue-500" href="/things">
-              Stuff I Use
-            </Link>
-          </li>
-        </ul>
+      <main>
+        <section id="about">
+          <h3>About Me</h3>
+          <p>
+            I'm an 11th grade student at BASIS Tucson North currently juggling
+            seven AP classes while pursuing my passion for programming and
+            quantitative finance. With a goal of becoming a Quant Researcher at
+            Citadel, I'm constantly pushing myself to excel in mathematics,
+            computer science, and problem-solving.
+          </p>
+          <p>
+            When I'm not grinding through AP coursework, I'm competing in USACO
+            (currently Bronze), preparing for the AMC 12 to qualify for AIME, or
+            working on personal programming projects.
+          </p>
+        </section>
+
+        {/* <section id="projects">
+          <h3>Projects</h3>
+          <div className="project-grid">
+            <div className="card">
+              <h4>Lorem Ipsum Project</h4>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation.
+              </p>
+            </div>
+            <div className="card">
+              <h4>Dolor Sit Amet</h4>
+              <p>
+                Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident.
+              </p>
+            </div>
+            <div className="card">
+              <h4>Consectetur Adipiscing</h4>
+              <p>
+                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+                quae ab illo inventore.
+              </p>
+            </div>
+          </div>
+        </section> */}
+
+        <section id="achievements">
+          <h3>Achievements & Skills</h3>
+          <ul>
+            <li>
+              <strong>Academic Excellence:</strong> Four 5s on AP exams
+              (Chemistry, Calculus AB, European History, Literature), currently
+              taking seven APs including Calculus BC and Computer Science A.
+            </li>
+            {/* <li>
+              <strong>Standardized Tests:</strong> Targeting 1600 SAT score,
+              strong performance on AP exams with consistent 4s and 5s.
+            </li> */}
+            <li>
+              <strong>Competitions:</strong> USACO Bronze Competitor, actively
+              preparing for AMC 12 to qualify for AIME.
+            </li>
+            <li>
+              <strong>Programming Languages:</strong> Python, C++, Java,
+              JavaScript, TypeScript, Lua, PHP.
+            </li>
+            <li>
+              <strong>Frameworks & Tools:</strong> Next.js, React, Git, Docker,
+              TensorFlow, PostgreSQL, Prisma.
+            </li>
+            <li>
+              <strong>Goals:</strong> MIT or Stanford admission, Quant
+              Researcher at Citadel, eventually Portfolio Manager.
+            </li>
+          </ul>
+        </section>
+
+        <section id="resume">
+          <h3>Resume</h3>
+          <p>
+            Looking for a more detailed overview of my experience and
+            qualifications? You can download my current resume below.
+          </p>
+          <p>
+            <a
+              href="https://rxresu.me/shrootbuck/master-resume"
+              target="_blank"
+              rel="noopener noreferrer"
+              id="resume-link"
+            >
+              View Resume
+            </a>
+          </p>
+        </section>
+
+        <section id="contact">
+          <h3>Contact</h3>
+          <p>
+            The best way to reach me is via{" "}
+            <a href="mailto:contact@zaydkrunz.com">email</a>. You can also find
+            me on{" "}
+            <a
+              href="https://github.com/ShrootBuck"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </a>
+            ,{" "}
+            <a
+              href="https://x.com/shrootbuck"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Twitter
+            </a>
+            , and my{" "}
+            <a
+              href="https://tenbyte.org"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              blog
+            </a>{" "}
+            where I share my programming projects, competitive programming
+            solutions, and thoughts on tech and quantitative finance.
+          </p>
+          <p>
+            I'm always interested in discussing quantitative finance,
+            competitive programming, or collaboration opportunities with fellow
+            students and professionals in tech.
+          </p>
+        </section>
+      </main>
+
+      <div
+        style={{
+          textAlign: "center",
+          padding: "2rem",
+          borderTop: "1px solid var(--border)",
+        }}
+      >
+        <a
+          href="https://signature.cnrad.dev/shrootbuck"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: "inline-block",
+            margin: "0 auto",
+            maxWidth: "300px",
+            width: "60%",
+          }}
+        >
+          <img
+            src="/signature.svg"
+            alt="Signature of Zayd Krunz"
+            style={{
+              display: "block",
+              width: "100%",
+              opacity: 0.85,
+            }}
+          />
+        </a>
       </div>
-      <SocialsDock />
-    </>
+    </div>
   );
 }
