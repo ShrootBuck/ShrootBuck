@@ -160,15 +160,18 @@ export default async function Home() {
               Twitter
             </a>
             , and my{" "}
-            <a
-              href="https://tenbyte.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              blog
-            </a>{" "}
-            where I share my programming projects, competitive programming
-            solutions, and thoughts on tech and quantitative finance.
+            <del>
+              <a
+                href="https://tenbyte.org"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                blog
+              </a>
+            </del>{" "}
+            (currently down for maintenance) where I share my programming
+            projects, competitive programming solutions, and thoughts on tech
+            and finance.
           </p>
           <p>
             I&apos;m always interested in discussing quantitative finance,
