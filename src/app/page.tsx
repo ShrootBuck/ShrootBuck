@@ -47,15 +47,22 @@ export default async function Home() {
           <h3>About Me</h3>
           <p>
             I&apos;m an 11th grade student at BASIS Tucson North currently
-            juggling seven AP classes while pursuing my passion for programming
+            taking seven AP classes while pursuing my passion for programming
             and quantitative finance. With a goal of becoming a Quant Researcher
             at Citadel, I&apos;m constantly pushing myself to excel in
             mathematics, computer science, and problem-solving.
           </p>
           <p>
-            When I&apos;m not grinding through AP coursework, I&apos;m competing
-            in USACO (currently Bronze), preparing for the AMC 12 to qualify for
-            AIME, or working on personal programming projects.
+            When I&apos;m not grinding through AP slop, I&apos;m{" "}
+            <a
+              href="https://github.com/ShrootBuck/USACO"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              working through USACO
+            </a>{" "}
+            (currently Bronze), preparing for the AMC 12 to qualify for AIME,
+            and working on personal programming projects.
           </p>
         </section>
 
@@ -93,9 +100,10 @@ export default async function Home() {
           <h3>Achievements & Skills</h3>
           <ul>
             <li>
-              <strong>Academic Excellence:</strong> Four 5s on AP exams
-              (Chemistry, Calculus AB, European History, Literature), currently
-              taking seven APs including Calculus BC and Computer Science A.
+              <strong>Academic Excellence:</strong> 5s on AP exams (Chemistry,
+              Calculus AB, European History, Literature), currently taking AP
+              Seminar, AP Calc BC, AP Lang, APUSH, AP French, AP Physics 1, and
+              AP Computer Science A.
             </li>
             {/* <li>
               <strong>Standardized Tests:</strong> Targeting 1600 SAT score,
@@ -174,9 +182,9 @@ export default async function Home() {
             and finance.
           </p>
           <p>
-            I&apos;m always interested in discussing quantitative finance,
-            competitive programming, or collaboration opportunities with fellow
-            students and professionals in tech.
+            I&apos;m always interested in discussing programming, finance, or
+            collaboration opportunities with fellow students and professionals
+            in tech.
           </p>
         </section>
       </main>
