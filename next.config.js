@@ -26,6 +26,31 @@ const config = {
           "https://github.com/ShrootBuck/stanford-predictive-maintenance",
         permanent: true,
       },
+      {
+        source: "/github",
+        destination: "https://github.com/ShrootBuck",
+        permanent: true,
+      },
+      {
+        source: "/x",
+        destination: "https://x.com/ShrootBuck",
+        permanent: true,
+      },
+      {
+        source: "/twitter",
+        destination: "https://x.com/ShrootBuck",
+        permanent: true,
+      },
+      {
+        source: "/blog",
+        destination: "https://tenbyte.org",
+        permanent: true,
+      },
+      {
+        source: "/email",
+        destination: "mailto:contact@zaydkrunz.com",
+        permanent: true,
+      },
     ];
   },
 };
