@@ -177,9 +177,16 @@ export default async function Home() {
                 blog
               </a>
             </del>{" "}
-            (currently down for maintenance) where I share my programming
-            projects, competitive programming solutions, and thoughts on tech
-            and finance.
+            (down until{" "}
+            <a
+              href="https://docs.ghost.org/install/docker"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Ghost&apos;s Docker installation
+            </a>{" "}
+            is out of preview) where I share my programming projects,
+            competitive programming solutions, and thoughts on tech and finance.
           </p>
           <p>
             I&apos;m always interested in discussing programming, finance, or
