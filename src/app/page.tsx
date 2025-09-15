@@ -40,6 +40,23 @@ export default async function Home() {
             </span>
           </Link>
         </div>
+
+        {/* Navigation */}
+        <nav
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "2rem",
+            fontSize: "0.9rem",
+          }}
+        >
+          <Link
+            href="/photography"
+            className="text-blue-400 no-underline hover:underline"
+          >
+            Photography
+          </Link>
+        </nav>
       </header>
 
       <main>

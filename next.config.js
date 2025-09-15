@@ -7,9 +7,10 @@ await import("./src/env.js");
 /** @type {import("next").NextConfig} */
 const config = {
   images: {
+    minimumCacheTTL: 31536000,
     remotePatterns: [
       {
-        hostname: "github-readme-stats.vercel.app",
+        hostname: "8upload.com",
       },
     ],
   },
