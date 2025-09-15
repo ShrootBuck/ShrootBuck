@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+
+import Masonry from "react-masonry-css";
 
 const images = [
   // Top is oldest, bottom is newest
-  "https://8upload.com/image/68c79bb5e1766/b28927f7-e2f1-48ed-90a9-7032780ea3a8.jpeg",
   "https://8upload.com/image/68c79bb3e9e9d/IMG_1901.jpeg",
   "https://8upload.com/image/68c79bb200d18/IMG_1905.jpeg",
   "https://8upload.com/image/68c79bb005ca6/IMG_1899.jpeg",
@@ -16,11 +16,22 @@ const images = [
   "https://8upload.com/image/68c79ba92714f/IMG_0048.jpeg",
   "https://8upload.com/image/68c79ba7b62d5/IMG_4464.jpeg",
   "https://8upload.com/image/68c79ba5b1494/IMG_1884.jpeg",
+  "https://8upload.com/image/68c79f53459ce/IMG_1903.jpeg",
+  "https://8upload.com/image/68c79f5566476/IMG_1904.jpeg",
+  "https://8upload.com/image/68c79f576ae1b/774b1318-c583-4e8c-89cd-f0fec9317e17.jpeg",
+  "https://8upload.com/image/68c79f57e7281/IMG_2146.jpeg",
+  "https://8upload.com/image/68c79f59e0d80/IMG_2150.jpeg",
+  "https://8upload.com/image/68c79f5c0db5e/IMG_3093.jpeg",
 ];
 
-export default function PhotographyPage() {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+const breakpointColumnsObj = {
+  default: 4,
+  1100: 3,
+  700: 2,
+  500: 1,
+};
 
+export default function PhotographyPage() {
   return (
     <div className="py-8">
       <Link
@@ -29,45 +40,36 @@ export default function PhotographyPage() {
       >
         &larr; Back to Home
       </Link>
-      <h1 className="mb-8 text-center text-4xl font-bold">Photos</h1>
-      <div className="grid grid-cols-1 gap-6 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {images
-          .slice()
-          .reverse()
-          .map((src, index) => (
-            <div
-              key={index}
-              className="mb-6 cursor-pointer"
-              onClick={() => setSelectedImage(src)}
-            >
-              <Image
-                src={src}
-                alt={`Photo ${index + 1}`}
-                width={500}
-                height={500}
-                priority
-                className="h-auto w-full rounded-lg transition-all duration-150 ease-in-out hover:shadow-[0_0_35px_10px_rgba(255,255,255,0.4)]"
-              />
-            </div>
-          ))}
-      </div>
-
-      {selectedImage && (
-        <div
-          className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-80"
-          onClick={() => setSelectedImage(null)}
+      <h1 className="text-center text-4xl font-bold">Photos</h1>
+      <p className="mb-8 text-center text-gray-400">
+        Once my iPhone 17 Pro arrives, I will hopefully be taking higher quality
+        pictures.
+      </p>
+      <div className="px-4">
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className="my-masonry-grid"
+          columnClassName="my-masonry-grid_column"
         >
-          <div className="relative h-full max-h-full w-full max-w-4xl">
-            <Image
-              src={selectedImage}
-              alt="Selected image"
-              layout="fill"
-              objectFit="contain"
-              className="rounded-lg"
-            />
-          </div>
-        </div>
-      )}
+          {images
+            .slice()
+            .reverse()
+            .map((src, index) => (
+              <div key={index} className="mb-6 cursor-pointer">
+                <a href={src} target="_blank" rel="noopener noreferrer">
+                  <Image
+                    src={src}
+                    alt={`Photo ${index + 1}`}
+                    width={500}
+                    height={500}
+                    priority
+                    className="h-auto w-full rounded-lg transition-all duration-150 ease-in-out hover:shadow-[0_0_35px_10px_rgba(255,255,255,0.4)]"
+                  />
+                </a>
+              </div>
+            ))}
+        </Masonry>
+      </div>
     </div>
   );
 }

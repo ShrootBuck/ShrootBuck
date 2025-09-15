@@ -7,7 +7,7 @@ await import("./src/env.js");
 /** @type {import("next").NextConfig} */
 const config = {
   images: {
-    minimumCacheTTL: 31536000,
+    minimumCacheTTL: 31536000, // 1 year (365 days * 24 hours * 60 minutes * 60 seconds)
     remotePatterns: [
       {
         hostname: "8upload.com",
