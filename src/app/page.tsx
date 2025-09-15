@@ -32,7 +32,8 @@ export default async function Home() {
           <LucideMapPin size={16} style={{ color: "var(--accent)" }} />
           <Link
             href="/location"
-            style={{ textDecoration: "none", color: "var(--accent)" }}
+            className="text-blue-400 no-underline hover:underline"
+            style={{ color: "var(--accent)" }}
           >
             <span>
               <strong>Currently:</strong>{" "}
@@ -53,6 +54,7 @@ export default async function Home() {
           <Link
             href="/photography"
             className="text-blue-400 no-underline hover:underline"
+            style={{ color: "var(--accent)" }}
           >
             Photography
           </Link>
