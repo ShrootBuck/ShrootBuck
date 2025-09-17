@@ -28,6 +28,11 @@ const config = {
         permanent: true,
       },
       {
+        source: "/usaco",
+        destination: "https://github.com/ShrootBuck/USACO",
+        permanent: true,
+      },
+      {
         source: "/github",
         destination: "https://github.com/ShrootBuck",
         permanent: true,
