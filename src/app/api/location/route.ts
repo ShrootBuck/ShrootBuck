@@ -3,6 +3,31 @@ import { env } from "~/env";
 
 import { prisma } from "~/lib/utils";
 
+export async function GET() {
+  try {
+    const currentLocation = await prisma.location.findFirst({
+      where: { id: "0" },
+    });
+
+    return new Response(
+      JSON.stringify({
+        location: currentLocation?.location ?? "Tucson, AZ",
+      }),
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=7200",
+        },
+      },
+    );
+  } catch (error) {
+    return new Response(JSON.stringify({ error: "Failed to fetch location" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+}
+
 export async function POST(request: NextRequest) {
   const formData = await request.formData();
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { prisma } from "~/lib/utils";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600; // Revalidate every hour (3600 seconds)
 
 export default async function Home() {
   const currentLocation = await prisma.location.findFirst({

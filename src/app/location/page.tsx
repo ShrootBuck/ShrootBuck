@@ -27,10 +27,11 @@ export default function LocationPage() {
           <section>
             <h3>The System</h3>
             <p>
-              It&apos;s pretty simple. Every hour, an iOS Shortcut sends my
-              iPhone&apos;s current location to the <code>/api/location</code>{" "}
-              route in a POST request. The server then stores the data in a
-              PostgreSQL database (which is overkill) and serves it to visitors.
+              It&apos;s pretty simple. At sunrise and sunset, an iOS Shortcut
+              sends my iPhone&apos;s current location to the{" "}
+              <code>/api/location</code> route in a POST request. The server
+              then stores the data in a PostgreSQL database (which is overkill)
+              and serves it to visitors.
             </p>
             <p>
               This gives you a real-time view of where I am in the world,
