@@ -5,7 +5,25 @@ import { Footer } from "~/components/ui/footer";
 export const metadata: Metadata = {
   title: "Zayd Krunz",
   description: "Student, Programmer, Aspiring Quant Researcher",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.png", type: "image/png", sizes: "32x32" },
+    ],
+    apple: "/apple-touch-icon.png",
+    other: [
+      {
+        rel: "android-chrome",
+        url: "/android-chrome-192x192.png",
+        sizes: "192x192",
+      },
+      {
+        rel: "android-chrome",
+        url: "/android-chrome-512x512.png",
+        sizes: "512x512",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
