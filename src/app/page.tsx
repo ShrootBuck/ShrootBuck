@@ -222,7 +222,7 @@ export default async function Home() {
           borderTop: "1px solid var(--border)",
         }}
       >
-        <a
+        {/* <a
           href="https://signature.cnrad.dev/shrootbuck"
           target="_blank"
           rel="noopener noreferrer"
@@ -232,19 +232,21 @@ export default async function Home() {
             maxWidth: "300px",
             width: "60%",
           }}
-        >
-          <Image
-            src="/signature.svg"
-            alt="Signature of Zayd Krunz"
-            width={300}
-            height={100}
-            style={{
-              display: "block",
-              width: "100%",
-              opacity: 0.85,
-            }}
-          />
-        </a>
+        > */}
+        <Image
+          src="/signature.svg"
+          alt="Signature of Zayd Krunz"
+          width={300}
+          height={100}
+          style={{
+            display: "block",
+            width: "100%",
+            opacity: 0.85,
+            margin: "0 auto",
+            maxWidth: "300px",
+          }}
+        />
+        {/* </a> */}
       </div>
     </div>
   );
