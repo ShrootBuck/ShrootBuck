@@ -155,7 +155,7 @@ export default async function Home() {
           </p>
           <p>
             <a
-              href="https://rxresu.me/shrootbuck/master-resume"
+              href="https://raw.githubusercontent.com/ShrootBuck/ShrootBuck/refs/heads/main/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               id="resume-link"
@@ -238,6 +238,7 @@ export default async function Home() {
           alt="Signature of Zayd Krunz"
           width={300}
           height={100}
+          draggable={false}
           style={{
             display: "block",
             width: "100%",
