@@ -155,7 +155,7 @@ export default async function Home() {
           </p>
           <p>
             <a
-              href="https://raw.githubusercontent.com/ShrootBuck/ShrootBuck/refs/heads/main/resume.pdf"
+              href="https://nctnabncanovcjnyqiid.supabase.co/storage/v1/object/public/PublicStorage/master-resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               id="resume-link"
