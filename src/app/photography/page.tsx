@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import Masonry from "react-masonry-css";
 
-const NUM_IMAGES = 21;
+const NUM_IMAGES = 22;
 
 const images = Array.from(
   { length: NUM_IMAGES },
