@@ -186,6 +186,14 @@ export default async function Home() {
             >
               Twitter
             </a>
+            ,{" "}
+            <a
+              href="https://codeforces.com/profile/ShrootBuck"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Codeforces
+            </a>
             , and my{" "}
             <del>
               <a

@@ -39,6 +39,11 @@ const config = {
         permanent: true,
       },
       {
+        source: "/codeforces",
+        destination: "https://codeforces.com/profile/ShrootBuck",
+        permanent: true,
+      },
+      {
         source: "/x",
         destination: "https://x.com/ShrootBuck",
         permanent: true,
