@@ -29,8 +29,8 @@ const config = {
         permanent: true,
       },
       {
-        source: "/usaco",
-        destination: "https://github.com/ShrootBuck/USACO",
+        source: "/cp",
+        destination: "https://github.com/ShrootBuck/CompetitiveProgramming",
         permanent: true,
       },
       {

@@ -15,8 +15,7 @@ export default async function Home() {
         <h1>Zayd Krunz</h1>
         <h2>
           Student <span style={{ color: "#ffffff" }}>{"//"}</span> Programmer{" "}
-          <span style={{ color: "#ffffff" }}>{"//"}</span> Aspiring Quant
-          Researcher
+          <span style={{ color: "#ffffff" }}>{"//"}</span> Builder
         </h2>
         <div
           style={{
@@ -52,11 +51,11 @@ export default async function Home() {
           }}
         >
           <Link
-            href="/photography"
+            href="/photos"
             className="text-blue-400 no-underline hover:underline"
             style={{ color: "var(--accent)" }}
           >
-            Photography
+            Photos
           </Link>
         </nav>
       </header>
@@ -65,23 +64,20 @@ export default async function Home() {
         <section id="about">
           <h3>About Me</h3>
           <p>
-            I&apos;m an 11th grade student at BASIS Tucson North currently
-            taking seven AP classes while pursuing my passion for programming
-            and quantitative finance. With a goal of becoming a Quant Researcher
-            at Citadel, I&apos;m constantly pushing myself to excel in
-            mathematics, computer science, and problem-solving.
-          </p>
-          <p>
-            When I&apos;m not grinding through AP slop, I&apos;m{" "}
-            <a
-              href="https://github.com/ShrootBuck/USACO"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              working through USACO
+            I&apos;m a junior at BASIS Tucson North currently taking seven AP
+            classes while pursuing my passion for programming and quantitative
+            finance. I&apos;m constantly pushing myself to excel in mathematics,
+            computer science, and problem-solving. Beyond academics, I train for
+            competitions like{" "}
+            <a href="/cp" target="_blank" rel="noopener">
+              USACO
             </a>{" "}
-            (currently Bronze), preparing for the AMC 12 to qualify for AIME,
-            and working on personal programming projects.
+            and the AMC 12/AIME. I enjoy building my own software projects
+            whenever I get the chance (see my{" "}
+            <a href="/github" target="_blank" rel="noopener">
+              GitHub
+            </a>
+            ).
           </p>
         </section>
 
@@ -124,25 +120,21 @@ export default async function Home() {
               Seminar, AP Calc BC, AP Lang, APUSH, AP French, AP Physics 1, and
               AP Computer Science A.
             </li>
-            {/* <li>
-              <strong>Standardized Tests:</strong> Targeting 1600 SAT score,
-              strong performance on AP exams with consistent 4s and 5s.
-            </li> */}
             <li>
-              <strong>Competitions:</strong> USACO Bronze Competitor, actively
-              preparing for AMC 12 to qualify for AIME.
+              <strong>Standardized Tests:</strong> 1500 SAT score
             </li>
             <li>
-              <strong>Programming Languages:</strong> Python, C++, Java,
-              JavaScript, TypeScript, Lua, PHP.
+              <strong>Competitions:</strong> Actively competing in USACO
+              (currently Bronze) and preparing for the AMC 12 with the goal of
+              qualifying for the AIME.
             </li>
             <li>
-              <strong>Frameworks & Tools:</strong> Next.js, React, Git, Docker,
-              TensorFlow, PostgreSQL, Prisma.
+              <strong>Programming Languages:</strong> Python, C++, JavaScript,
+              TypeScript, Lua, PHP.
             </li>
             <li>
-              <strong>Goals:</strong> MIT or Stanford admission, Quant
-              Researcher at Citadel, eventually Portfolio Manager.
+              <strong>Frameworks & Tools:</strong> Pytorch, Pandas, NumPy,
+              SciPy, PostgreSQL, Next.js, React
             </li>
           </ul>
         </section>
@@ -151,13 +143,13 @@ export default async function Home() {
           <h3>Resume</h3>
           <p>
             Looking for a more detailed overview of my experience and
-            qualifications? You can download my current resume below.
+            qualifications? You can view and download my latest resume below.
           </p>
           <p>
             <a
               href="https://nctnabncanovcjnyqiid.supabase.co/storage/v1/object/public/PublicStorage/master-resume.pdf"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener"
               id="resume-link"
             >
               View Resume
@@ -174,51 +166,28 @@ export default async function Home() {
             <a
               href="https://github.com/ShrootBuck"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener"
             >
               GitHub
             </a>
             ,{" "}
-            <a
-              href="https://x.com/shrootbuck"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="https://x.com/shrootbuck" target="_blank" rel="noopener">
               Twitter
             </a>
-            ,{" "}
+            , and{" "}
             <a
               href="https://codeforces.com/profile/ShrootBuck"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener"
             >
               Codeforces
             </a>
-            , and my{" "}
-            <del>
-              <a
-                href="https://tenbyte.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                blog
-              </a>
-            </del>{" "}
-            (down until{" "}
-            <a
-              href="https://docs.ghost.org/install/docker"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Ghost&apos;s Docker installation
-            </a>{" "}
-            is out of preview) where I share my programming projects,
-            competitive programming solutions, and thoughts on tech and finance.
+            .
           </p>
           <p>
             I&apos;m always interested in discussing programming, finance, or
-            collaboration opportunities with fellow students and professionals
-            in tech.
+            collaboration opportunities with fellow students or professionals in
+            tech. Hit me up!
           </p>
         </section>
       </main>
@@ -233,7 +202,7 @@ export default async function Home() {
         {/* <a
           href="https://signature.cnrad.dev/shrootbuck"
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noopener"
           style={{
             display: "inline-block",
             margin: "0 auto",

@@ -4,7 +4,7 @@ import { Footer } from "~/components/ui/footer";
 
 export const metadata: Metadata = {
   title: "Zayd Krunz",
-  description: "Student, Programmer, Aspiring Quant Researcher",
+  description: "Student, Programmer, Builder",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -33,10 +33,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta
-          name="description"
-          content="Student, Programmer, Aspiring Quant Researcher"
-        />
+        <meta name="description" content="Student, Programmer, Builder" />
       </head>
       <body>
         {children}
