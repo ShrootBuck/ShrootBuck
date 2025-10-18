@@ -40,7 +40,7 @@ export default function LocationPage() {
             </p>
             <p>
               If you&apos;re interested in how this works technically, you can
-              find the complete source code on{" "}
+              find the complete source of this entire website on{" "}
               <a
                 href="https://github.com/ShrootBuck/ShrootBuck"
                 target="_blank"
