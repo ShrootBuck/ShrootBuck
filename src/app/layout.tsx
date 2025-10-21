@@ -1,7 +1,6 @@
 import "~/styles/globals.css";
 import { type Metadata } from "next";
 import { Footer } from "~/components/ui/footer";
-import { CursorAura } from "~/components/CursorAura/CursorAura";
 
 export const metadata: Metadata = {
   title: "Zayd Krunz",
@@ -37,7 +36,6 @@ export default function RootLayout({
         <meta name="description" content="Student, Programmer, Builder" />
       </head>
       <body>
-        <CursorAura />
         {children}
         <Footer />
       </body>
