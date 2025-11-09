@@ -1,4 +1,4 @@
-import { LucideMapPin } from "lucide-react";
+import { LucideMapPin, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { prisma } from "~/lib/utils";
@@ -151,8 +151,24 @@ export default async function Home() {
               target="_blank"
               rel="noopener"
               id="resume-link"
+              aria-label="View Resume (opens in a new tab)"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.4rem",
+                whiteSpace: "nowrap",
+                flexWrap: "nowrap",
+              }}
             >
               View Resume
+              <ExternalLink
+                size={16}
+                style={{
+                  display: "inline-block",
+                  marginLeft: "0.35rem",
+                  transform: "translateY(-1px)",
+                }}
+              />
             </a>
           </p>
         </section>
