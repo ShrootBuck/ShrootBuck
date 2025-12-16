@@ -23,6 +23,12 @@ const config = {
         permanent: true,
       },
       {
+        source: "/irr",
+        destination:
+          "https://nctnabncanovcjnyqiid.supabase.co/storage/v1/object/public/PublicStorage/irr.pdf",
+        permanent: true,
+      },
+      {
         source: "/spcs",
         destination:
           "https://github.com/ShrootBuck/stanford-predictive-maintenance",
