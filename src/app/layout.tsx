@@ -1,6 +1,8 @@
 import "~/styles/globals.css";
 import { type Metadata } from "next";
 import { Footer } from "~/components/ui/footer";
+import { PostHogProvider } from "./providers";
+import PostHogPageView from "./posthog-pageview";
 
 export const metadata: Metadata = {
   title: "Zayd Krunz",
@@ -36,8 +38,11 @@ export default function RootLayout({
         <meta name="description" content="Student, Programmer, Builder" />
       </head>
       <body>
-        {children}
-        <Footer />
+        <PostHogProvider>
+          <PostHogPageView />
+          {children}
+          <Footer />
+        </PostHogProvider>
       </body>
     </html>
   );
