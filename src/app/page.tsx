@@ -14,8 +14,11 @@ export default async function Home() {
       <header>
         <h1>Zayd Krunz</h1>
         <h2>
-          Student <span style={{ color: "#ffffff" }}>{"//"}</span> Programmer{" "}
-          <span style={{ color: "#ffffff" }}>{"//"}</span> Builder
+          Student
+          <span style={{ color: "#ffffff", userSelect: "none" }}>{" // "}</span>
+          Programmer
+          <span style={{ color: "#ffffff", userSelect: "none" }}>{" // "}</span>
+          Builder
         </h2>
         <div
           style={{
@@ -48,8 +51,19 @@ export default async function Home() {
             justifyContent: "center",
             marginTop: "2rem",
             fontSize: "0.9rem",
+            gap: "1.5rem",
           }}
         >
+          <Link
+            href="/research"
+            className="text-blue-400 no-underline hover:underline"
+            style={{ color: "var(--accent)" }}
+          >
+            Research
+          </Link>
+          <span style={{ color: "var(--text-secondary)", userSelect: "none" }}>
+            /
+          </span>
           <Link
             href="/photos"
             className="text-blue-400 no-underline hover:underline"
@@ -121,7 +135,7 @@ export default async function Home() {
               AP Computer Science A.
             </li>
             <li>
-              <strong>Standardized Tests:</strong> 1500 SAT score
+              <strong>Standardized Tests:</strong> 1500 SAT, 1480 PSAT
             </li>
             <li>
               <strong>Competitions:</strong> Actively competing in USACO

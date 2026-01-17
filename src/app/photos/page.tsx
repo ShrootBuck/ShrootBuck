@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 
 import Masonry from "react-masonry-css";
+import BackToHomeLink from "~/components/back-to-home-link";
 
 const NUM_IMAGES = 22;
 
@@ -22,17 +22,14 @@ const breakpointColumnsObj = {
 
 export default function PhotographyPage() {
   return (
-    <div className="py-8">
-      <Link
-        href="/"
-        className="mb-4 block text-center text-gray-400 hover:text-white"
-      >
-        &larr; Back to Home
-      </Link>
-      <h1 className="text-center text-4xl font-bold">Photos</h1>
-      <p className="mb-8 text-center text-gray-400">
-        A pretty random collection of photos taken over the years.
-      </p>
+    <div>
+      <div className="container">
+        <BackToHomeLink />
+        <header>
+          <h1>Photos</h1>
+          <h2>A pretty random collection of photos taken over the years.</h2>
+        </header>
+      </div>
       <div className="px-4">
         <Masonry
           breakpointCols={breakpointColumnsObj}
