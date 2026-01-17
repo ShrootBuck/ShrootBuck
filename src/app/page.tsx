@@ -79,12 +79,11 @@ export default async function Home() {
           <h3>About Me</h3>
           <p>
             I&apos;m a junior at BASIS Tucson North currently taking seven AP
-            classes while pursuing my passion for programming and quantitative
-            finance. I&apos;m constantly pushing myself to excel in mathematics,
-            computer science, and problem-solving. Beyond academics, I train for
-            competitions like{" "}
+            classes while pursuing my passion for programming. I&apos;m always
+            pushing myself to excel in mathematics, computer science, and
+            problem-solving. Beyond academics, I train for{" "}
             <a href="/cp" target="_blank" rel="noopener">
-              USACO
+              competitive programming
             </a>{" "}
             and the AMC 12/AIME. I enjoy building my own software projects
             whenever I get the chance (see my{" "}
@@ -95,36 +94,6 @@ export default async function Home() {
           </p>
         </section>
 
-        {/* <section id="projects">
-          <h3>Projects</h3>
-          <div className="project-grid">
-            <div className="card">
-              <h4>Lorem Ipsum Project</h4>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation.
-              </p>
-            </div>
-            <div className="card">
-              <h4>Dolor Sit Amet</h4>
-              <p>
-                Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat non proident.
-              </p>
-            </div>
-            <div className="card">
-              <h4>Consectetur Adipiscing</h4>
-              <p>
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-                quae ab illo inventore.
-              </p>
-            </div>
-          </div>
-        </section> */}
-
         <section id="achievements">
           <h3>Achievements & Skills</h3>
           <ul>
@@ -132,7 +101,7 @@ export default async function Home() {
               <strong>Academic Excellence:</strong> 5s on AP exams (Chemistry,
               Calculus AB, European History, Literature), currently taking AP
               Seminar, AP Calc BC, AP Lang, APUSH, AP French, AP Physics 1, and
-              AP Computer Science A.
+              AP Computer Science A
             </li>
             <li>
               <strong>Standardized Tests:</strong> 1500 SAT, 1480 PSAT
@@ -140,11 +109,11 @@ export default async function Home() {
             <li>
               <strong>Competitions:</strong> Actively competing in USACO
               (currently Bronze) and preparing for the AMC 12 with the goal of
-              qualifying for the AIME.
+              qualifying for the AIME
             </li>
             <li>
               <strong>Programming Languages:</strong> Python, C++, JavaScript,
-              TypeScript, Lua, PHP.
+              TypeScript, Lua, PHP
             </li>
             <li>
               <strong>Frameworks & Tools:</strong> Pytorch, Pandas, NumPy,
@@ -193,31 +162,19 @@ export default async function Home() {
             The best way to reach me is via{" "}
             <a href="mailto:contact@zaydkrunz.com">email</a>. You can also find
             me on{" "}
-            <a
-              href="https://github.com/ShrootBuck"
-              target="_blank"
-              rel="noopener"
-            >
+            <a href="/github" target="_blank" rel="noopener">
               GitHub
             </a>
             ,{" "}
-            <a href="https://x.com/shrootbuck" target="_blank" rel="noopener">
+            <a href="/x" target="_blank" rel="noopener">
               Twitter
             </a>
             , and{" "}
-            <a
-              href="https://codeforces.com/profile/ShrootBuck"
-              target="_blank"
-              rel="noopener"
-            >
+            <a href="/codeforces" target="_blank" rel="noopener">
               Codeforces
             </a>
-            .
-          </p>
-          <p>
-            I&apos;m always interested in discussing programming, finance, or
-            collaboration opportunities with fellow students or professionals in
-            tech. Hit me up!
+            . I&apos;m always open to discussing tech, philosophy, or working
+            together. Feel free to reach out!
           </p>
         </section>
       </main>
