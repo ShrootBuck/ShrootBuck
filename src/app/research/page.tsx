@@ -1,10 +1,10 @@
 import BackToHomeLink from "~/components/back-to-home-link";
 
-export const metadata = {
-  title: "Research | Zayd Krunz",
-};
-
 const posters = [
+  {
+    imageUrl:
+      "https://nctnabncanovcjnyqiid.supabase.co/storage/v1/object/public/PublicStorage/Sharma_Krunz_Weakly_Supervised_RFI_Poster.png",
+  },
   {
     imageUrl:
       "https://raw.githubusercontent.com/ShrootBuck/stanford-predictive-maintenance/refs/heads/main/Poster.png",
@@ -30,7 +30,16 @@ export default function ResearchPage() {
       <main>
         <section id="posters">
           <h3>Posters</h3>
-          <div className="project-grid">
+          <p
+            style={{
+              fontStyle: "italic",
+              color: "var(--text-secondary)",
+              marginBottom: "1.5rem",
+            }}
+          >
+            Some posters are clickable and have more information.
+          </p>
+          <div className="poster-grid">
             {posters.map((poster, index) => (
               <div key={index}>
                 {poster.webUrl ? (
@@ -50,7 +59,7 @@ export default function ResearchPage() {
                   <img
                     src={poster.imageUrl}
                     alt={poster.alt}
-                    className="h-auto w-full rounded-lg transition-all duration-150 ease-in-out hover:shadow-[0_0_35px_10px_rgba(255,255,255,0.4)]"
+                    className="h-auto w-full rounded-lg"
                   />
                 )}
               </div>
