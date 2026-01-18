@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import BackToHomeLink from "~/components/back-to-home-link";
 
 export const metadata: Metadata = {
@@ -9,6 +10,7 @@ const posters = [
   {
     imageUrl:
       "https://nctnabncanovcjnyqiid.supabase.co/storage/v1/object/public/PublicStorage/Sharma_Krunz_Weakly_Supervised_RFI_Poster.png",
+    alt: "Weakly Supervised RFI Poster",
   },
   {
     imageUrl:
@@ -54,16 +56,20 @@ export default function ResearchPage() {
                     rel="noopener noreferrer"
                     className="block"
                   >
-                    <img
+                    <Image
                       src={poster.imageUrl}
                       alt={poster.alt}
+                      width={3840}
+                      height={2880}
                       className="h-auto w-full rounded-lg transition-all duration-150 ease-in-out hover:shadow-[0_0_35px_10px_rgba(255,255,255,0.4)]"
                     />
                   </a>
                 ) : (
-                  <img
+                  <Image
                     src={poster.imageUrl}
                     alt={poster.alt}
+                    width={3840}
+                    height={2880}
                     className="h-auto w-full rounded-lg"
                   />
                 )}

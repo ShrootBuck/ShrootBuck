@@ -12,6 +12,9 @@ const config = {
       {
         hostname: "nctnabncanovcjnyqiid.supabase.co",
       },
+      {
+        hostname: "raw.githubusercontent.com",
+      },
     ],
   },
   async redirects() {
