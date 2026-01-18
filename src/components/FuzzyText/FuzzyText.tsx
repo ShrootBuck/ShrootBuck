@@ -67,7 +67,13 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
         document.body.removeChild(temp);
       }
 
-      const text = React.Children.toArray(children).join("");
+      const text = React.Children.toArray(children)
+        .map((child) =>
+          typeof child === "string" || typeof child === "number"
+            ? String(child)
+            : "",
+        )
+        .join("");
 
       const offscreen = document.createElement("canvas");
       const offCtx = offscreen.getContext("2d");

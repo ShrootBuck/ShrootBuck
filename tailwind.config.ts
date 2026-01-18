@@ -1,4 +1,5 @@
 import { type Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 // @ts-expect-error This is how Tailwind CSS is imported
 import flattenColorPalette from "tailwindcss/lib/util/flattenColorPalette";
@@ -57,7 +58,7 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), addVariablesForColors],
+  plugins: [tailwindcssAnimate, addVariablesForColors],
 } satisfies Config;
 
 // TypeScript should be illegal

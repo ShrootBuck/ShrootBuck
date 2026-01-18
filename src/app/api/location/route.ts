@@ -20,7 +20,7 @@ export async function GET() {
         },
       },
     );
-  } catch (error) {
+  } catch (_error) {
     return new Response(JSON.stringify({ error: "Failed to fetch location" }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
