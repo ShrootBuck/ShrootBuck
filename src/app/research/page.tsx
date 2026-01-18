@@ -1,4 +1,9 @@
+import type { Metadata } from "next";
 import BackToHomeLink from "~/components/back-to-home-link";
+
+export const metadata: Metadata = {
+  title: "Research",
+};
 
 const posters = [
   {

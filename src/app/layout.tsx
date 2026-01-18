@@ -5,7 +5,10 @@ import { PostHogProvider } from "./providers";
 import PostHogPageView from "./posthog-pageview";
 
 export const metadata: Metadata = {
-  title: "Zayd Krunz",
+  title: {
+    default: "Zayd Krunz",
+    template: "%s // Zayd Krunz",
+  },
   description: "Student, Programmer, Builder",
   icons: {
     icon: [

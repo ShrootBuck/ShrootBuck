@@ -1,5 +1,10 @@
+import type { Metadata } from "next";
 import { LucideMapPin } from "lucide-react";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Location",
+};
 
 export default function LocationPage() {
   return (
