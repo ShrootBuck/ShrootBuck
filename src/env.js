@@ -10,7 +10,6 @@ export const env = createEnv({
     NODE_ENV: z.enum(["development", "test", "production"]),
     SECRET: z.string(),
     DATABASE_URL: z.string(),
-    MONITOR_SECRET_KEY: z.string(),
   },
 
   /**
@@ -35,7 +34,6 @@ export const env = createEnv({
     NODE_ENV: process.env.NODE_ENV,
     SECRET: process.env.SECRET,
     DATABASE_URL: process.env.DATABASE_URL,
-    MONITOR_SECRET_KEY: process.env.MONITOR_SECRET_KEY,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
     NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
     NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
