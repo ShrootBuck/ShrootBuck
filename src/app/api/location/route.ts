@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { revalidatePath } from "next/cache";
 import { env } from "~/env";
 
 import { prisma } from "~/lib/utils";
@@ -59,6 +60,9 @@ export async function POST(request: NextRequest) {
     create: { id: "0", location: formattedLocation },
     update: { location: formattedLocation },
   });
+
+  // Bust the cache so the home page shows the new location immediately
+  revalidatePath("/");
 
   return new Response("Location updated!");
 }
