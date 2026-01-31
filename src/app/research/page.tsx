@@ -37,42 +37,37 @@ export default function ResearchPage() {
       <main>
         <section id="posters">
           <h3>Posters</h3>
-          <p
-            style={{
-              fontStyle: "italic",
-              color: "var(--text-secondary)",
-              marginBottom: "1.5rem",
-            }}
-          >
-            Some posters are clickable and have more information.
-          </p>
+
           <div className="poster-grid">
             {posters.map((poster, index) => (
               <div key={index}>
-                {poster.webUrl ? (
+                <Image
+                  src={poster.imageUrl}
+                  alt={poster.alt}
+                  width={3840}
+                  height={2880}
+                  className="h-auto w-full rounded-lg"
+                />
+                <div className="mt-2 flex gap-4 text-sm">
                   <a
-                    href={poster.webUrl}
+                    href={poster.imageUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block"
+                    className="underline hover:text-blue-400"
                   >
-                    <Image
-                      src={poster.imageUrl}
-                      alt={poster.alt}
-                      width={3840}
-                      height={2880}
-                      className="h-auto w-full rounded-lg transition-all duration-150 ease-in-out hover:shadow-[0_0_35px_10px_rgba(255,255,255,0.4)]"
-                    />
+                    Fullscreen
                   </a>
-                ) : (
-                  <Image
-                    src={poster.imageUrl}
-                    alt={poster.alt}
-                    width={3840}
-                    height={2880}
-                    className="h-auto w-full rounded-lg"
-                  />
-                )}
+                  {poster.webUrl && (
+                    <a
+                      href={poster.webUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline hover:text-blue-400"
+                    >
+                      More details
+                    </a>
+                  )}
+                </div>
               </div>
             ))}
           </div>
