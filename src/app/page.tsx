@@ -108,7 +108,7 @@ export default async function Home() {
             </li>
             <li>
               <strong>Competitions:</strong> Actively competing in USACO
-              (currently Bronze) and preparing for the AMC 12 with the goal of
+              (currently Silver) and preparing for the AMC 12 with the goal of
               qualifying for the AIME
             </li>
             <li>
