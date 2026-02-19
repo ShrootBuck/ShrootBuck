@@ -173,8 +173,7 @@ export default async function Home() {
             <a href="/codeforces" target="_blank" rel="noopener">
               Codeforces
             </a>
-            . I&apos;m always open to discussing tech, philosophy, or working
-            together. Feel free to reach out!
+            . I&apos;m always open to collaborating, so feel free to reach out!
           </p>
         </section>
       </main>
