@@ -76,7 +76,7 @@ export default function ResearchPage() {
         <section id="papers">
           <h3>Papers</h3>
           <p style={{ fontStyle: "italic", color: "var(--text-secondary)" }}>
-            Research on Bernstein polynomials coming soon...
+            Research coming soon...
           </p>
         </section>
       </main>
