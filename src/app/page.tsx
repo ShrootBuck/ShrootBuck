@@ -1,14 +1,29 @@
 import { LucideMapPin, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { prisma } from "~/lib/utils";
 
-export const revalidate = 3600; // Revalidate every hour (3600 seconds)
+interface LocationResponse {
+  location: string;
+}
+
+async function getLocation(): Promise<LocationResponse> {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}/api/location`,
+      {
+        next: { revalidate: 300 }, // 5 minutes
+      },
+    );
+    if (!res.ok) throw new Error("Failed to fetch location");
+    return (await res.json()) as LocationResponse;
+  } catch {
+    // Fallback during build or if API is down
+    return { location: "Tucson, AZ" };
+  }
+}
 
 export default async function Home() {
-  const currentLocation = await prisma.location.findFirst({
-    where: { id: "0" },
-  });
+  const { location: currentLocation } = await getLocation();
   return (
     <div className="container">
       <header>
@@ -38,8 +53,7 @@ export default async function Home() {
             style={{ color: "var(--accent)" }}
           >
             <span>
-              <strong>Currently:</strong>{" "}
-              {currentLocation?.location ?? "Tucson, AZ"}
+              <strong>Currently:</strong> {currentLocation ?? "Tucson, AZ"}
             </span>
           </Link>
         </div>

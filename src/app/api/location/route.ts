@@ -17,7 +17,7 @@ export async function GET() {
       {
         headers: {
           "Content-Type": "application/json",
-          "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=7200",
+          "Cache-Control": "public, s-maxage=300, stale-while-revalidate=3600",
         },
       },
     );
@@ -61,8 +61,9 @@ export async function POST(request: NextRequest) {
     update: { location: formattedLocation },
   });
 
-  // Bust the cache so the home page shows the new location immediately
+  // Bust the cache so the home page and API show the new location immediately
   revalidatePath("/");
+  revalidatePath("/api/location");
 
   return new Response("Location updated!");
 }
