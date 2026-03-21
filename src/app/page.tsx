@@ -2,22 +2,20 @@ import { LucideMapPin, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
+import { prisma } from "~/lib/utils";
+
 interface LocationResponse {
   location: string;
 }
 
 async function getLocation(): Promise<LocationResponse> {
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}/api/location`,
-      {
-        next: { revalidate: 300 }, // 5 minutes
-      },
-    );
-    if (!res.ok) throw new Error("Failed to fetch location");
-    return (await res.json()) as LocationResponse;
+    const currentLocation = await prisma.location.findFirst({
+      where: { id: "0" },
+    });
+    return { location: currentLocation?.location ?? "Tucson, AZ" };
   } catch {
-    // Fallback during build or if API is down
+    // Fallback if DB fails
     return { location: "Tucson, AZ" };
   }
 }
