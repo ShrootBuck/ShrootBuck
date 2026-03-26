@@ -119,9 +119,11 @@ export default async function Home() {
               <strong>Standardized Tests:</strong> 1500 SAT, 1480 PSAT
             </li>
             <li>
-              <strong>Competitions:</strong> Actively competing in USACO
-              (currently Silver) and preparing for the AMC 12 with the goal of
-              qualifying for the AIME
+              <strong>Competitions:</strong> Actively competing in USACO (Silver
+              division) and{" "}
+              <a href="/codeforces" target="_blank">
+                Codeforces
+              </a>
             </li>
             <li>
               <strong>Programming Languages:</strong> Python, C++, JavaScript,
