@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Clock } from "lucide-react";
 
 interface LiveTimeProps {
@@ -9,6 +9,7 @@ interface LiveTimeProps {
 
 export function LiveTime({ timezone }: LiveTimeProps) {
   const [time, setTime] = useState<string>("");
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const updateTime = () => {
@@ -23,9 +24,20 @@ export function LiveTime({ timezone }: LiveTimeProps) {
     };
 
     updateTime();
-    const interval = setInterval(updateTime, 60000);
 
-    return () => clearInterval(interval);
+    const now = new Date();
+    const msUntilNextMinute =
+      (60 - now.getSeconds()) * 1000 - now.getMilliseconds();
+
+    const timeout = setTimeout(() => {
+      updateTime();
+      intervalRef.current = setInterval(updateTime, 60000);
+    }, msUntilNextMinute);
+
+    return () => {
+      clearTimeout(timeout);
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
   }, [timezone]);
 
   if (!time) return null;
