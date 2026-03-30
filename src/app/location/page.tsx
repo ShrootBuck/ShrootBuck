@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { LucideMapPin } from "lucide-react";
+import { LucideMapPin, Clock } from "lucide-react";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -35,14 +35,15 @@ export default function LocationPage() {
               It&apos;s pretty simple. At sunrise and sunset, an iOS Shortcut
               sends my iPhone&apos;s current location to the{" "}
               <code>/api/location</code> route in a POST request. The server
-              then stores the data in a PostgreSQL database (which is overkill)
-              and serves it to visitors.
+              then stores the data in a database and serves it to visitors.
             </p>
             <p>
-              This gives you a real-time view of where I am in the world,
-              updated automatically throughout the day. It&apos;s useful for
-              friends and family, and honestly just a fun little project.{" "}
+              This gives you a real-time view of where I am in the world as well
+              as the current local time, updated automatically throughout the
+              day. It&apos;s useful for friends and family, and honestly just a
+              fun project.{" "}
             </p>
+
             <p>
               If you&apos;re interested in how this works technically, you can
               find the complete source of this entire website on{" "}
@@ -52,6 +53,14 @@ export default function LocationPage() {
                 rel="noopener noreferrer"
               >
                 GitHub
+              </a>
+              . The shortcut file can be downloaded{" "}
+              <a
+                href="https://nctnabncanovcjnyqiid.supabase.co/storage/v1/object/public/PublicStorage/Upload%20Location%20To%20Server.shortcut"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                here
               </a>
               .
             </p>

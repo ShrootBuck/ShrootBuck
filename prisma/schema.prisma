@@ -12,6 +12,7 @@ datasource db {
 }
 
 model Location {
-  id       String @id
+  id       String  @id
   location String
+  timezone String?
 }

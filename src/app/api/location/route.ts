@@ -6,13 +6,12 @@ import { prisma } from "~/lib/utils";
 
 export async function GET() {
   try {
-    const currentLocation = await prisma.location.findFirst({
-      where: { id: "0" },
-    });
+    const currentLocation = await prisma.location.findFirst();
 
     return new Response(
       JSON.stringify({
         location: currentLocation?.location ?? "Tucson, AZ",
+        timezone: currentLocation?.timezone ?? "America/Phoenix",
       }),
       {
         headers: {
@@ -34,6 +33,7 @@ export async function POST(request: NextRequest) {
   const city = formData.get("city");
   const state = formData.get("state");
   const region = formData.get("region");
+  const timezone = formData.get("timezone");
   const secret = formData.get("secret");
 
   if ((secret as string) !== env.SECRET) {
@@ -45,6 +45,10 @@ export async function POST(request: NextRequest) {
   const trimCity = city && typeof city === "string" ? city.trim() : "";
   const trimState = state && typeof state === "string" ? state.trim() : "";
   const trimRegion = region && typeof region === "string" ? region.trim() : "";
+  const trimTimezone =
+    timezone && typeof timezone === "string"
+      ? timezone.trim()
+      : "America/Phoenix";
 
   const locationParts = [];
 
@@ -56,8 +60,8 @@ export async function POST(request: NextRequest) {
 
   await prisma.location.upsert({
     where: { id: "0" },
-    create: { id: "0", location: formattedLocation },
-    update: { location: formattedLocation },
+    create: { id: "0", location: formattedLocation, timezone: trimTimezone },
+    update: { location: formattedLocation, timezone: trimTimezone },
   });
 
   // Bust the cache so the home page and API show the new location immediately

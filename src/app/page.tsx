@@ -1,27 +1,30 @@
-import { LucideMapPin, ExternalLink } from "lucide-react";
+import { LucideMapPin, ExternalLink, Clock } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
 import { prisma } from "~/lib/utils";
+import { LiveTime } from "~/components/live-time";
 
 interface LocationResponse {
   location: string;
+  timezone: string;
 }
 
 async function getLocation(): Promise<LocationResponse> {
   try {
-    const currentLocation = await prisma.location.findFirst({
-      where: { id: "0" },
-    });
-    return { location: currentLocation?.location ?? "Tucson, AZ" };
+    const currentLocation = await prisma.location.findFirst();
+    return {
+      location: currentLocation?.location ?? "Tucson, AZ",
+      timezone: currentLocation?.timezone ?? "America/Phoenix",
+    };
   } catch {
     // Fallback if DB fails
-    return { location: "Tucson, AZ" };
+    return { location: "Tucson, AZ", timezone: "America/Phoenix" };
   }
 }
 
 export default async function Home() {
-  const { location: currentLocation } = await getLocation();
+  const { location: currentLocation, timezone } = await getLocation();
   return (
     <div className="container">
       <header>
@@ -55,6 +58,8 @@ export default async function Home() {
             </span>
           </Link>
         </div>
+
+        <LiveTime timezone={timezone} />
 
         {/* Navigation */}
         <nav
