@@ -109,6 +109,19 @@ export default async function Home() {
             </a>
             ).
           </p>
+          <p>
+            My latest project,{" "}
+            <a
+              href="https://nudge.zaydkrunz.com"
+              target="_blank"
+              rel="noopener"
+            >
+              Nudge
+            </a>
+            , helps competitive programmers learn from Codeforces problems
+            through progressive hints, encouraging real problem-solving instead
+            of jumping straight to editorials.
+          </p>
         </section>
 
         <section id="achievements">
