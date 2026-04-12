@@ -14,6 +14,10 @@
   --card-bg-hover: #0f0f0f;
 }
 
+html {
+  color-scheme: dark;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -25,6 +29,7 @@ body {
   line-height: 1.7;
   margin: 0;
   padding: 0;
+  min-height: 100dvh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -51,6 +56,7 @@ header h1 {
   margin: 0;
   color: var(--text-primary);
   letter-spacing: -0.02em;
+  text-wrap: balance;
 }
 
 @media (max-width: 768px) {
@@ -213,6 +219,16 @@ a:hover::after {
   width: 100%;
 }
 
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+a:focus-visible::after {
+  width: 100%;
+}
+
 p {
   color: var(--text-secondary);
   margin-bottom: 1rem;
@@ -242,6 +258,10 @@ main {
   font-size: 0.9rem;
 }
 
+header .header-meta + .header-meta {
+  margin-top: 0.35rem;
+}
+
 .header-meta .icon {
   color: var(--accent);
   flex-shrink: 0;
@@ -249,10 +269,13 @@ main {
 
 .header-nav {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   margin-top: 2rem;
   font-size: 0.9rem;
   gap: 1.5rem;
+  row-gap: 0.5rem;
 }
 
 .nav-separator {
@@ -289,6 +312,16 @@ main {
     0 0 40px rgba(74, 144, 226, 0.08) !important;
 }
 
+#resume-link:focus-visible {
+  outline: none !important;
+  background-color: var(--accent) !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  box-shadow:
+    0 0 20px var(--accent-glow),
+    0 0 40px rgba(74, 144, 226, 0.08) !important;
+}
+
 .signature-section {
   text-align: center;
   padding-bottom: 1rem;
@@ -310,6 +343,7 @@ main {
 footer {
   text-align: center;
   padding: 2rem;
+  padding-bottom: max(2rem, env(safe-area-inset-bottom));
   font-size: 0.8rem;
   color: var(--text-secondary);
   border-top: 1px solid var(--border);
@@ -359,4 +393,14 @@ footer:hover p {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #333;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
