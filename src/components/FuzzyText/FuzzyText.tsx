@@ -1,10 +1,5 @@
-/*
-	Installed from https://reactbits.dev/ts/tailwind/
-*/
-
 import React, { useEffect, useRef } from "react";
 
-// Define a custom interface for canvas with cleanupFuzzyText property
 interface FuzzyTextCanvas extends HTMLCanvasElement {
   cleanupFuzzyText?: () => void;
 }
@@ -39,8 +34,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
     if (!canvas) return;
 
     const init = async () => {
-      // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      if (document.fonts?.ready) {
+      if (document.fonts) {
         await document.fonts.ready;
       }
       if (isCancelled) return;
@@ -169,7 +163,6 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
         e.preventDefault();
         const rect = canvas.getBoundingClientRect();
         const touch = e.touches[0];
-        // Check if touch exists before accessing its properties
         if (!touch) return;
         const x = touch.clientX - rect.left;
         const y = touch.clientY - rect.top;

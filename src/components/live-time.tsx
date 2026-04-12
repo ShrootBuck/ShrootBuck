@@ -43,17 +43,8 @@ export function LiveTime({ timezone }: LiveTimeProps) {
   if (!time) return null;
 
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "0.5rem",
-        color: "var(--text-secondary)",
-        fontSize: "0.9rem",
-      }}
-    >
-      <Clock size={16} style={{ color: "var(--accent)" }} />
+    <div className="header-meta">
+      <Clock size={16} className="icon" />
       <span>
         <strong>Time for me:</strong> {time}
       </span>

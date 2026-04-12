@@ -5,11 +5,13 @@
 
 :root {
   --background: #000000;
-  --text-primary: #ffffff;
-  --text-secondary: #aaaaaa;
+  --text-primary: #f0f0f0;
+  --text-secondary: #8a8f98;
   --accent: #4a90e2;
-  --border: #222222;
-  --card-bg: #111111;
+  --accent-glow: rgba(74, 144, 226, 0.15);
+  --border: #1a1a1a;
+  --card-bg: #0a0a0a;
+  --card-bg-hover: #0f0f0f;
 }
 
 * {
@@ -20,9 +22,11 @@ body {
   background-color: var(--background);
   color: var(--text-primary);
   font-family: "Commit Mono", monospace;
-  line-height: 1.6;
+  line-height: 1.7;
   margin: 0;
   padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
@@ -33,19 +37,20 @@ body {
 
 @media (max-width: 768px) {
   .container {
-    padding: 1rem 2rem;
+    padding: 1rem 1.5rem;
   }
 }
 
 header {
   text-align: center;
-  padding: 2rem 0;
+  padding: 2.5rem 0 2rem;
 }
 
 header h1 {
   font-size: 2.5rem;
   margin: 0;
   color: var(--text-primary);
+  letter-spacing: -0.02em;
 }
 
 @media (max-width: 768px) {
@@ -55,30 +60,46 @@ header h1 {
 }
 
 header h2 {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 400;
   color: var(--text-secondary);
   margin-top: 0.5rem;
+  letter-spacing: 0.02em;
 }
 
 @media (max-width: 768px) {
   header h2 {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 }
 
 section {
-  padding: 2rem 0;
+  padding: 2.5rem 0;
   border-top: 1px solid var(--border);
 }
 
 h3 {
   color: var(--accent);
-  font-size: 1.5rem;
-  border-bottom: 2px solid var(--accent);
-  padding-bottom: 0.5rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border-bottom: none;
+  padding-bottom: 0;
   display: inline-block;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  position: relative;
+}
+
+h3::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  border-radius: 1px;
 }
 
 .project-grid {
@@ -116,13 +137,23 @@ h3 {
   background: var(--card-bg);
   border: 1px solid var(--border);
   padding: 1.5rem;
-  border-radius: 6px;
+  border-radius: 8px;
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.card:hover {
+  border-color: rgba(74, 144, 226, 0.3);
+  background: var(--card-bg-hover);
+  box-shadow: 0 0 20px var(--accent-glow);
 }
 
 .card h4 {
   margin-top: 0;
   margin-bottom: 0.5rem;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   color: var(--text-primary);
 }
 
@@ -139,23 +170,141 @@ ul {
 
 li {
   padding-left: 0;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   position: relative;
+  transition: transform 0.15s ease;
 }
 
 li:before {
   content: ">> ";
   color: var(--accent);
   font-weight: bold;
+  opacity: 0.7;
+}
+
+li:hover:before {
+  opacity: 1;
 }
 
 a {
   color: var(--accent);
   text-decoration: none;
+  position: relative;
+  padding-bottom: 1px;
+  transition: color 0.2s ease;
+}
+
+a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.25s ease;
 }
 
 a:hover {
-  text-decoration: underline;
+  text-decoration: none;
+}
+
+a:hover::after {
+  width: 100%;
+}
+
+p {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text-primary);
+}
+
+main {
+  color: var(--text-secondary);
+}
+
+.header-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.header-meta .icon {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.header-nav {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  gap: 1.5rem;
+}
+
+.nav-separator {
+  color: var(--text-secondary);
+  user-select: none;
+  opacity: 0.4;
+}
+
+#resume-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  padding: 0.6rem 1.2rem !important;
+  background-color: transparent !important;
+  border: 1px solid var(--accent) !important;
+  border-radius: 6px !important;
+  color: var(--accent) !important;
+  text-decoration: none !important;
+  font-size: 0.9rem !important;
+  white-space: nowrap !important;
+  transition: all 0.25s ease !important;
+}
+
+#resume-link::after {
+  display: none !important;
+}
+
+#resume-link:hover {
+  background-color: var(--accent) !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  box-shadow:
+    0 0 20px var(--accent-glow),
+    0 0 40px rgba(74, 144, 226, 0.08) !important;
+}
+
+.signature-section {
+  text-align: center;
+  padding-bottom: 1rem;
+}
+
+.signature-section img {
+  display: block;
+  width: 100%;
+  opacity: 0.7;
+  margin: 0 auto;
+  max-width: 280px;
+  transition: opacity 0.3s ease;
+}
+
+.signature-section:hover img {
+  opacity: 0.9;
 }
 
 footer {
@@ -166,59 +315,48 @@ footer {
   border-top: 1px solid var(--border);
 }
 
-p {
-  color: var(--text-secondary);
-  margin-bottom: 1rem;
+footer p {
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
 }
 
-/* Override some default heading styles */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: var(--text-primary);
-}
-
-/* Make sure all text follows the color scheme */
-main {
-  color: var(--text-secondary);
-}
-
-/* Resume button styling - simple outline approach */
-#resume-link {
-  display: inline-block !important;
-  padding: 0.6rem 1rem !important;
-  background-color: transparent !important;
-  border: 1px solid var(--accent) !important;
-  border-radius: 4px !important;
-  color: var(--accent) !important;
-  text-decoration: none !important;
-  font-size: 0.9rem !important;
-  transition: all 0.2s ease !important;
-}
-
-#resume-link:hover {
-  background-color: var(--accent) !important;
-  color: #ffffff !important;
-  text-decoration: none !important;
+footer:hover p {
+  opacity: 0.7;
 }
 
 .my-masonry-grid {
-  display: -webkit-box; /* Not needed if autoprefixing */
-  display: -ms-flexbox; /* Not needed if autoprefixing */
   display: flex;
-  margin-left: -30px; /* gutter size offset */
+  margin-left: -30px;
   width: auto;
 }
+
 .my-masonry-grid_column {
-  padding-left: 30px; /* gutter size */
+  padding-left: 30px;
   background-clip: padding-box;
 }
 
-/* Style your items */
 .my-masonry-grid_column > div {
-  /* change div to reference your elements you put in <Masonry> */
   margin-bottom: 30px;
+}
+
+::selection {
+  background: rgba(74, 144, 226, 0.3);
+  color: var(--text-primary);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #333;
 }

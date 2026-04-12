@@ -61,7 +61,6 @@ export default {
   plugins: [tailwindcssAnimate, addVariablesForColors],
 } satisfies Config;
 
-// TypeScript should be illegal
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function addVariablesForColors({ addBase, theme }: any) {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call

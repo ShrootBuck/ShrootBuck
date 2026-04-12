@@ -1,6 +1,5 @@
-import { LucideMapPin, ExternalLink, Clock } from "lucide-react";
+import { LucideMapPin, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 
 import { prisma } from "~/lib/utils";
 import { LiveTime } from "~/components/live-time";
@@ -18,7 +17,6 @@ async function getLocation(): Promise<LocationResponse> {
       timezone: currentLocation?.timezone ?? "America/Phoenix",
     };
   } catch {
-    // Fallback if DB fails
     return { location: "Tucson, AZ", timezone: "America/Phoenix" };
   }
 }
@@ -31,63 +29,25 @@ export default async function Home() {
         <h1>Zayd Krunz</h1>
         <h2>
           Student
-          <span style={{ color: "#ffffff", userSelect: "none" }}>{" // "}</span>
+          <span className="nav-separator">{" // "}</span>
           Programmer
-          <span style={{ color: "#ffffff", userSelect: "none" }}>{" // "}</span>
+          <span className="nav-separator">{" // "}</span>
           Builder
         </h2>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "0.5rem",
-            marginTop: "1rem",
-            color: "var(--text-secondary)",
-            fontSize: "0.9rem",
-          }}
-        >
-          <LucideMapPin size={16} style={{ color: "var(--accent)" }} />
-          <Link
-            href="/location"
-            className="text-blue-400 no-underline hover:underline"
-            style={{ color: "var(--accent)" }}
-          >
-            <span>
-              <strong>Currently:</strong> {currentLocation ?? "Tucson, AZ"}
-            </span>
+
+        <div className="header-meta">
+          <LucideMapPin size={16} className="icon" />
+          <Link href="/location">
+            <strong>Currently:</strong> {currentLocation ?? "Tucson, AZ"}
           </Link>
         </div>
 
         <LiveTime timezone={timezone} />
 
-        {/* Navigation */}
-        <nav
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginTop: "2rem",
-            fontSize: "0.9rem",
-            gap: "1.5rem",
-          }}
-        >
-          <Link
-            href="/research"
-            className="text-blue-400 no-underline hover:underline"
-            style={{ color: "var(--accent)" }}
-          >
-            Research
-          </Link>
-          <span style={{ color: "var(--text-secondary)", userSelect: "none" }}>
-            /
-          </span>
-          <Link
-            href="/photos"
-            className="text-blue-400 no-underline hover:underline"
-            style={{ color: "var(--accent)" }}
-          >
-            Photos
-          </Link>
+        <nav className="header-nav">
+          <Link href="/research">Research</Link>
+          <span className="nav-separator">/</span>
+          <Link href="/photos">Photos</Link>
         </nav>
       </header>
 
@@ -167,23 +127,9 @@ export default async function Home() {
               rel="noopener"
               id="resume-link"
               aria-label="View Resume (opens in a new tab)"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.4rem",
-                whiteSpace: "nowrap",
-                flexWrap: "nowrap",
-              }}
             >
               View Resume
-              <ExternalLink
-                size={16}
-                style={{
-                  display: "inline-block",
-                  marginLeft: "0.35rem",
-                  transform: "translateY(-1px)",
-                }}
-              />
+              <ExternalLink size={16} />
             </a>
           </p>
         </section>
@@ -209,41 +155,6 @@ export default async function Home() {
           </p>
         </section>
       </main>
-
-      <div
-        style={{
-          textAlign: "center",
-          padding: "2rem",
-          borderTop: "1px solid var(--border)",
-        }}
-      >
-        {/* <a
-          href="https://signature.cnrad.dev/shrootbuck"
-          target="_blank"
-          rel="noopener"
-          style={{
-            display: "inline-block",
-            margin: "0 auto",
-            maxWidth: "300px",
-            width: "60%",
-          }}
-        > */}
-        <Image
-          src="/signature.svg"
-          alt="Signature of Zayd Krunz"
-          width={300}
-          height={100}
-          draggable={false}
-          style={{
-            display: "block",
-            width: "100%",
-            opacity: 0.85,
-            margin: "0 auto",
-            maxWidth: "300px",
-          }}
-        />
-        {/* </a> */}
-      </div>
     </div>
   );
 }

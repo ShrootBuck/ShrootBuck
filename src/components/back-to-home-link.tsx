@@ -10,7 +10,7 @@ export default function BackToHomeLink({
   return (
     <Link
       href="/"
-      className="mb-4 block text-center text-gray-400 hover:text-white"
+      className="mb-6 mt-2 block text-center text-sm text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
     >
       &larr; {label}
     </Link>

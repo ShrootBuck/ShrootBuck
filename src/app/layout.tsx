@@ -4,6 +4,8 @@ import { Footer } from "~/components/ui/footer";
 import { PostHogProvider } from "./providers";
 import PostHogPageView from "./posthog-pageview";
 
+const nerdFavicon = "https://fav.farm/🤓";
+
 export const metadata: Metadata = {
   title: {
     default: "Zayd Krunz",
@@ -11,23 +13,9 @@ export const metadata: Metadata = {
   },
   description: "Student, Programmer, Builder",
   icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon.png", type: "image/png", sizes: "32x32" },
-    ],
-    apple: "/apple-touch-icon.png",
-    other: [
-      {
-        rel: "android-chrome",
-        url: "/android-chrome-192x192.png",
-        sizes: "192x192",
-      },
-      {
-        rel: "android-chrome",
-        url: "/android-chrome-512x512.png",
-        sizes: "512x512",
-      },
-    ],
+    icon: nerdFavicon,
+    apple: nerdFavicon,
+    shortcut: nerdFavicon,
   },
 };
 

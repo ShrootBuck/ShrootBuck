@@ -1,4 +1,3 @@
-// src/app/posthog-pageview.tsx
 "use client";
 
 import { usePathname, useSearchParams } from "next/navigation";
@@ -11,7 +10,6 @@ function PostHogPageViewContent() {
   const posthog = usePostHog();
 
   useEffect(() => {
-    // Track pageviews
     if (pathname && posthog) {
       let url = window.origin + pathname;
       if (searchParams.toString()) {

@@ -29,7 +29,7 @@ export default function ResearchPage() {
         <h1>Research</h1>
         <h2>
           Posters
-          <span style={{ color: "#ffffff", userSelect: "none" }}>{" // "}</span>
+          <span className="nav-separator">{" // "}</span>
           Papers
         </h2>
       </header>
@@ -53,7 +53,6 @@ export default function ResearchPage() {
                     href={poster.imageUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="underline hover:text-blue-400"
                   >
                     Fullscreen
                   </a>
@@ -62,7 +61,6 @@ export default function ResearchPage() {
                       href={poster.webUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="underline hover:text-blue-400"
                     >
                       More details
                     </a>
@@ -75,9 +73,7 @@ export default function ResearchPage() {
 
         <section id="papers">
           <h3>Papers</h3>
-          <p style={{ fontStyle: "italic", color: "var(--text-secondary)" }}>
-            Research coming soon...
-          </p>
+          <p style={{ fontStyle: "italic" }}>Research coming soon...</p>
         </section>
       </main>
     </div>

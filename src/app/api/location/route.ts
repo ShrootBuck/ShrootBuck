@@ -64,7 +64,6 @@ export async function POST(request: NextRequest) {
     update: { location: formattedLocation, timezone: trimTimezone },
   });
 
-  // Bust the cache so the home page and API show the new location immediately
   revalidatePath("/");
   revalidatePath("/api/location");
 

@@ -12,7 +12,7 @@ export default function NotFound() {
             baseIntensity={0.1}
             hoverIntensity={0.25}
             enableHover={true}
-            fontSize="clamp(1rem, 2vw, 1.5rem)" // Appropriate size for back button
+            fontSize="clamp(1rem, 2vw, 1.5rem)"
             fontWeight={600}
           >
             ← Back
@@ -25,7 +25,7 @@ export default function NotFound() {
             baseIntensity={0.2}
             hoverIntensity={0.5}
             enableHover={true}
-            fontSize="clamp(6rem, 15vw, 12rem)" // Larger size for the 404
+            fontSize="clamp(6rem, 15vw, 12rem)"
             fontWeight={900}
           >
             404
@@ -37,7 +37,7 @@ export default function NotFound() {
             baseIntensity={0.1}
             hoverIntensity={0.25}
             enableHover={true}
-            fontSize="clamp(1.5rem, 5vw, 3rem)" // Smaller size for "Not Found"
+            fontSize="clamp(1.5rem, 5vw, 3rem)"
             fontWeight={700}
           >
             Not Found
