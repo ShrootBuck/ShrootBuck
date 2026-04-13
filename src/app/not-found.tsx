@@ -6,8 +6,12 @@ import Link from "next/link";
 export default function NotFound() {
   return (
     <div className="relative flex min-h-screen flex-col">
-      <div className="p-5">
-        <Link href="/">
+      <div className="flex justify-start p-5">
+        <Link
+          id="not-found-back"
+          href="/"
+          className="inline-block w-fit max-w-full"
+        >
           <FuzzyText
             baseIntensity={0.1}
             hoverIntensity={0.25}

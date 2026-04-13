@@ -322,6 +322,15 @@ header .header-meta + .header-meta {
     0 0 40px rgba(74, 144, 226, 0.08) !important;
 }
 
+/* FuzzyText back control — no global link underline */
+#not-found-back {
+  padding-bottom: 0;
+}
+
+#not-found-back::after {
+  display: none !important;
+}
+
 .signature-section {
   text-align: center;
   padding-bottom: 1rem;
