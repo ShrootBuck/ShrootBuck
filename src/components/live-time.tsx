@@ -5,22 +5,25 @@ import { Clock } from "lucide-react";
 
 interface LiveTimeProps {
   timezone: string;
+  initialTime: string;
 }
 
-export function LiveTime({ timezone }: LiveTimeProps) {
-  const [time, setTime] = useState<string>("");
+function formatCurrentTime(timezone: string) {
+  return new Intl.DateTimeFormat("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+    timeZone: timezone,
+  }).format(new Date());
+}
+
+export function LiveTime({ timezone, initialTime }: LiveTimeProps) {
+  const [time, setTime] = useState(initialTime);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const updateTime = () => {
-      const now = new Date();
-      const formatter = new Intl.DateTimeFormat("en-US", {
-        hour: "numeric",
-        minute: "2-digit",
-        hour12: true,
-        timeZone: timezone,
-      });
-      setTime(formatter.format(now));
+      setTime(formatCurrentTime(timezone));
     };
 
     updateTime();
@@ -39,8 +42,6 @@ export function LiveTime({ timezone }: LiveTimeProps) {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
   }, [timezone]);
-
-  if (!time) return null;
 
   return (
     <div className="header-meta">

@@ -9,6 +9,15 @@ interface LocationResponse {
   timezone: string;
 }
 
+function formatCurrentTime(timezone: string) {
+  return new Intl.DateTimeFormat("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+    timeZone: timezone,
+  }).format(new Date());
+}
+
 async function getLocation(): Promise<LocationResponse> {
   try {
     const currentLocation = await prisma.location.findFirst();
@@ -23,6 +32,8 @@ async function getLocation(): Promise<LocationResponse> {
 
 export default async function Home() {
   const { location: currentLocation, timezone } = await getLocation();
+  const initialTime = formatCurrentTime(timezone);
+
   return (
     <div className="container">
       <header>
@@ -42,7 +53,7 @@ export default async function Home() {
           </Link>
         </div>
 
-        <LiveTime timezone={timezone} />
+        <LiveTime timezone={timezone} initialTime={initialTime} />
 
         <nav className="header-nav">
           <Link href="/research">Research</Link>
