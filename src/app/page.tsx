@@ -105,7 +105,7 @@ export default async function Home() {
               AP Computer Science A
             </li>
             <li>
-              <strong>Standardized Tests:</strong> 1500 SAT, 1480 PSAT
+              <strong>Standardized Tests:</strong> 1500 SAT, 1480 PSAT, 34 ACT (Math: 36, Science: 35)
             </li>
             <li>
               <strong>Competitions:</strong> Actively competing in USACO (Silver
