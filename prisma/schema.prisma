@@ -16,3 +16,8 @@ model Location {
   location String
   timezone String?
 }
+
+model SleepStatus {
+  id     String @id
+  status String
+}
