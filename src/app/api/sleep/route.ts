@@ -6,11 +6,13 @@ import { prisma } from "~/lib/utils";
 
 export async function GET() {
   try {
-    const currentStatus = await prisma.sleepStatus.findFirst();
+    const currentStatus = await prisma.status.findUnique({
+      where: { id: "1" },
+    });
 
     return new Response(
       JSON.stringify({
-        status: currentStatus?.status ?? "awake",
+        status: currentStatus?.value ?? "awake",
       }),
       {
         headers: {
@@ -46,10 +48,10 @@ export async function POST(request: NextRequest) {
       ? status.trim().toLowerCase()
       : "awake";
 
-  await prisma.sleepStatus.upsert({
-    where: { id: "0" },
-    create: { id: "0", status: trimStatus },
-    update: { status: trimStatus },
+  await prisma.status.upsert({
+    where: { id: "1" },
+    create: { id: "1", value: trimStatus },
+    update: { value: trimStatus },
   });
 
   revalidatePath("/");

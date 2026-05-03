@@ -20,9 +20,11 @@ function formatCurrentTime(timezone: string) {
 
 async function getLocation(): Promise<LocationResponse> {
   try {
-    const currentLocation = await prisma.location.findFirst();
+    const currentLocation = await prisma.status.findUnique({
+      where: { id: "0" },
+    });
     return {
-      location: currentLocation?.location ?? "Tucson, AZ",
+      location: currentLocation?.value ?? "Tucson, AZ",
       timezone: currentLocation?.timezone ?? "America/Phoenix",
     };
   } catch {
@@ -30,10 +32,12 @@ async function getLocation(): Promise<LocationResponse> {
   }
 }
 
-async function getSleepStatus(): Promise<string> {
+async function getSleep(): Promise<string> {
   try {
-    const currentStatus = await prisma.sleepStatus.findFirst();
-    return currentStatus?.status ?? "awake";
+    const currentStatus = await prisma.status.findUnique({
+      where: { id: "1" },
+    });
+    return currentStatus?.value ?? "awake";
   } catch {
     return "awake";
   }
@@ -42,8 +46,8 @@ async function getSleepStatus(): Promise<string> {
 export default async function Home() {
   const { location: currentLocation, timezone } = await getLocation();
   const initialTime = formatCurrentTime(timezone);
-  const sleepStatus = await getSleepStatus();
-  const isAwake = sleepStatus === "awake";
+  const sleep = await getSleep();
+  const isAwake = sleep === "awake";
 
   return (
     <div className="container">

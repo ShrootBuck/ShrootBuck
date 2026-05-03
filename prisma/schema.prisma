@@ -11,13 +11,8 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model Location {
+model Status {
   id       String  @id
-  location String
+  value    String
   timezone String?
-}
-
-model SleepStatus {
-  id     String @id
-  status String
 }

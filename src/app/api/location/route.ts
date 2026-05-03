@@ -6,11 +6,13 @@ import { prisma } from "~/lib/utils";
 
 export async function GET() {
   try {
-    const currentLocation = await prisma.location.findFirst();
+    const currentLocation = await prisma.status.findUnique({
+      where: { id: "0" },
+    });
 
     return new Response(
       JSON.stringify({
-        location: currentLocation?.location ?? "Tucson, AZ",
+        location: currentLocation?.value ?? "Tucson, AZ",
         timezone: currentLocation?.timezone ?? "America/Phoenix",
       }),
       {
@@ -58,10 +60,10 @@ export async function POST(request: NextRequest) {
 
   const formattedLocation = locationParts.join(", ");
 
-  await prisma.location.upsert({
+  await prisma.status.upsert({
     where: { id: "0" },
-    create: { id: "0", location: formattedLocation, timezone: trimTimezone },
-    update: { location: formattedLocation, timezone: trimTimezone },
+    create: { id: "0", value: formattedLocation, timezone: trimTimezone },
+    update: { value: formattedLocation, timezone: trimTimezone },
   });
 
   revalidatePath("/");
