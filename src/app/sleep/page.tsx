@@ -160,11 +160,11 @@ export default async function SleepPage() {
           </div>
 
           <div className="mt-2 flex justify-between px-[4.5rem] text-xs text-[var(--muted-foreground)]">
-            <span>12p</span>
-            <span>6p</span>
-            <span>12a</span>
-            <span>6a</span>
-            <span>12p</span>
+            <span>12 PM</span>
+            <span>6 PM</span>
+            <span>12 AM</span>
+            <span>6 AM</span>
+            <span>12 PM</span>
           </div>
         </section>
 
