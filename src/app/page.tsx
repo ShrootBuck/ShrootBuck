@@ -61,6 +61,8 @@ export default async function Home() {
           <Link href="/research">Research</Link>
           <span className="nav-separator">/</span>
           <Link href="/photos">Photos</Link>
+          <span className="nav-separator">/</span>
+          <Link href="/sleep">Sleep</Link>
         </nav>
       </header>
 
@@ -107,7 +109,8 @@ export default async function Home() {
               AP Computer Science A
             </li>
             <li>
-              <strong>Standardized Tests:</strong> 1500 SAT, 1480 PSAT, 34 ACT (Math: 36, Science: 35)
+              <strong>Standardized Tests:</strong> 1500 SAT, 1480 PSAT, 34 ACT
+              (Math: 36, Science: 35)
             </li>
             <li>
               <strong>Competitions:</strong> Actively competing in USACO (Silver
