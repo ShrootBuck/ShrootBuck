@@ -4,29 +4,59 @@ import { env } from "~/env";
 
 import { prisma } from "~/lib/utils";
 
-export async function GET() {
-  try {
-    const currentStatus = await prisma.status.findUnique({
-      where: { id: "1" },
-    });
+function startOfDay(d: Date) {
+  const result = new Date(d);
+  result.setHours(0, 0, 0, 0);
+  return result;
+}
 
-    return new Response(
-      JSON.stringify({
-        status: currentStatus?.value ?? "awake",
-      }),
-      {
-        headers: {
-          "Content-Type": "application/json",
+function endOfDay(d: Date) {
+  const result = new Date(d);
+  result.setHours(23, 59, 59, 999);
+  return result;
+}
+
+function addDays(d: Date, days: number) {
+  const result = new Date(d);
+  result.setDate(result.getDate() + days);
+  return result;
+}
+
+export async function GET(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    let from = searchParams.get("from");
+    let to = searchParams.get("to");
+
+    if (!from || !to) {
+      const now = new Date();
+      const sevenDaysAgo = addDays(now, -6);
+      from = startOfDay(sevenDaysAgo).toISOString();
+      to = endOfDay(now).toISOString();
+    }
+
+    const fromDate = new Date(from);
+    const toDate = new Date(to);
+
+    if (isNaN(fromDate.getTime()) || isNaN(toDate.getTime())) {
+      return Response.json({ error: "Invalid date format" }, { status: 400 });
+    }
+
+    const intervals = await prisma.sleepInterval.findMany({
+      where: {
+        startedAt: {
+          gte: fromDate,
+          lte: toDate,
         },
       },
-    );
-  } catch (_error) {
-    return new Response(
-      JSON.stringify({ error: "Failed to fetch sleep status" }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      },
+      orderBy: { startedAt: "desc" },
+    });
+
+    return Response.json({ intervals });
+  } catch {
+    return Response.json(
+      { error: "Failed to fetch sleep intervals" },
+      { status: 500 },
     );
   }
 }
@@ -34,7 +64,6 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   const formData = await request.formData();
 
-  const status = formData.get("status");
   const secret = formData.get("secret");
 
   if ((secret as string) !== env.SECRET) {
@@ -43,19 +72,39 @@ export async function POST(request: NextRequest) {
     });
   }
 
-  const trimStatus =
-    status && typeof status === "string"
-      ? status.trim().toLowerCase()
-      : "awake";
+  const startedAt = formData.get("startedAt") as string | null;
+  const endedAt = formData.get("endedAt") as string | null;
 
-  await prisma.status.upsert({
-    where: { id: "1" },
-    create: { id: "1", value: trimStatus },
-    update: { value: trimStatus },
+  if (!startedAt || !endedAt) {
+    return new NextResponse("Missing required fields: startedAt, endedAt", {
+      status: 400,
+    });
+  }
+
+  const parsedStart = new Date(startedAt);
+  const parsedEnd = new Date(endedAt);
+
+  if (isNaN(parsedStart.getTime()) || isNaN(parsedEnd.getTime())) {
+    return new NextResponse("Invalid date format", { status: 400 });
+  }
+
+  const existing = await prisma.sleepInterval.findUnique({
+    where: { startedAt: parsedStart },
   });
 
-  revalidatePath("/");
+  const interval = await prisma.sleepInterval.upsert({
+    where: { startedAt: parsedStart },
+    create: {
+      startedAt: parsedStart,
+      endedAt: parsedEnd,
+    },
+    update: {
+      endedAt: parsedEnd,
+    },
+  });
+
+  revalidatePath("/sleep");
   revalidatePath("/api/sleep");
 
-  return new Response("Sleep status updated!");
+  return Response.json(interval, { status: existing ? 200 : 201 });
 }

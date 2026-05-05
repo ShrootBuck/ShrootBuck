@@ -1,4 +1,4 @@
-import { LucideMapPin, ExternalLink, Sun, Moon } from "lucide-react";
+import { LucideMapPin, ExternalLink } from "lucide-react";
 import Link from "next/link";
 
 import { prisma } from "~/lib/utils";
@@ -32,22 +32,9 @@ async function getLocation(): Promise<LocationResponse> {
   }
 }
 
-async function getSleep(): Promise<string> {
-  try {
-    const currentStatus = await prisma.status.findUnique({
-      where: { id: "1" },
-    });
-    return currentStatus?.value ?? "awake";
-  } catch {
-    return "awake";
-  }
-}
-
 export default async function Home() {
   const { location: currentLocation, timezone } = await getLocation();
   const initialTime = formatCurrentTime(timezone);
-  const sleep = await getSleep();
-  const isAwake = sleep === "awake";
 
   return (
     <div className="container">
@@ -69,17 +56,6 @@ export default async function Home() {
         </div>
 
         <LiveTime timezone={timezone} initialTime={initialTime} />
-
-        {/* <div className="header-meta">
-          {isAwake ? (
-            <Sun size={16} className="icon" />
-          ) : (
-            <Moon size={16} className="icon" />
-          )}
-          <Link href="/sleep">
-            Currently {isAwake ? "awake" : "asleep"}
-          </Link>
-        </div> */}
 
         <nav className="header-nav">
           <Link href="/research">Research</Link>

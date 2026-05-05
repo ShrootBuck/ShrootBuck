@@ -16,3 +16,10 @@ model Status {
   value    String
   timezone String?
 }
+
+model SleepInterval {
+  id        String   @id @default(cuid())
+  startedAt DateTime @unique
+  endedAt   DateTime
+  createdAt DateTime @default(now())
+}
