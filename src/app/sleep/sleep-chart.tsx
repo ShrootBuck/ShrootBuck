@@ -52,7 +52,7 @@ function formatDuration(ms: number) {
 
 function formatDayLabel(dayStart: Date) {
   // dayStart is noon of day N. Sleep belongs to night of N -> N+1.
-  const weekday = new Intl.DateTimeFormat("en-US", { weekday: "short" }).format(
+  const weekday = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(
     dayStart,
   );
   const md = new Intl.DateTimeFormat("en-US", {
@@ -60,6 +60,50 @@ function formatDayLabel(dayStart: Date) {
     day: "numeric",
   }).format(dayStart);
   return { weekday, md };
+}
+
+function buildRows(
+  days: Date[],
+  intervals: { id: string; startedAt: Date; endedAt: Date }[],
+) {
+  return days.map((dayStart) => {
+    const dayEnd = addDays(dayStart, 1);
+    const dayStartMs = dayStart.getTime();
+    const dayEndMs = dayEnd.getTime();
+
+    const segments: Segment[] = [];
+    let totalMs = 0;
+
+    for (const int of intervals) {
+      const s = int.startedAt.getTime();
+      const e = int.endedAt.getTime();
+      const segStart = Math.max(s, dayStartMs);
+      const segEnd = Math.min(e, dayEndMs);
+      if (segStart >= segEnd) continue;
+
+      segments.push({
+        key: `${int.id}-${dayStartMs}`,
+        startPct: ((segStart - dayStartMs) / DAY_MS) * 100,
+        endPct: ((segEnd - dayStartMs) / DAY_MS) * 100,
+        intervalStart: int.startedAt,
+        intervalEnd: int.endedAt,
+        durationMs: e - s,
+      });
+      totalMs += segEnd - segStart;
+    }
+
+    return { dayStart, dayEnd, segments, totalMs };
+  });
+}
+
+function computeStats(rows: ReturnType<typeof buildRows>) {
+  const nightsWithSleep = rows.filter((r) => r.totalMs > 0);
+  const totalMs = rows.reduce((acc, r) => acc + r.totalMs, 0);
+  const avgMs =
+    nightsWithSleep.length > 0 ? totalMs / nightsWithSleep.length : 0;
+  const bestMs = rows.reduce((acc, r) => Math.max(acc, r.totalMs), 0);
+  const bestNight = rows.find((r) => r.totalMs === bestMs && bestMs > 0);
+  return { totalMs, avgMs, bestMs, bestNight, nightsWithSleep };
 }
 
 export default function SleepChart({
@@ -87,48 +131,21 @@ export default function SleepChart({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSleepDayStart.getTime()]);
 
-  // Build segments + per-day total duration
-  const rows = useMemo(() => {
-    return days.map((dayStart) => {
-      const dayEnd = addDays(dayStart, 1);
-      const dayStartMs = dayStart.getTime();
-      const dayEndMs = dayEnd.getTime();
+  const prevDays = useMemo(() => {
+    const out: Date[] = [];
+    for (let i = 13; i >= 7; i--) out.push(addDays(currentSleepDayStart, -i));
+    return out;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentSleepDayStart.getTime()]);
 
-      const segments: Segment[] = [];
-      let totalMs = 0;
+  const rows = useMemo(() => buildRows(days, intervals), [days, intervals]);
+  const prevRows = useMemo(
+    () => buildRows(prevDays, intervals),
+    [prevDays, intervals],
+  );
 
-      for (const int of intervals) {
-        const s = int.startedAt.getTime();
-        const e = int.endedAt.getTime();
-        const segStart = Math.max(s, dayStartMs);
-        const segEnd = Math.min(e, dayEndMs);
-        if (segStart >= segEnd) continue;
-
-        segments.push({
-          key: `${int.id}-${dayStartMs}`,
-          startPct: ((segStart - dayStartMs) / DAY_MS) * 100,
-          endPct: ((segEnd - dayStartMs) / DAY_MS) * 100,
-          intervalStart: int.startedAt,
-          intervalEnd: int.endedAt,
-          durationMs: e - s,
-        });
-        totalMs += segEnd - segStart;
-      }
-
-      return { dayStart, dayEnd, segments, totalMs };
-    });
-  }, [days, intervals]);
-
-  // Stats for the week
-  const stats = useMemo(() => {
-    const nightsWithSleep = rows.filter((r) => r.totalMs > 0);
-    const totalMs = rows.reduce((acc, r) => acc + r.totalMs, 0);
-    const avgMs =
-      nightsWithSleep.length > 0 ? totalMs / nightsWithSleep.length : 0;
-    const bestMs = rows.reduce((acc, r) => Math.max(acc, r.totalMs), 0);
-    const bestNight = rows.find((r) => r.totalMs === bestMs && bestMs > 0);
-    return { totalMs, avgMs, bestMs, bestNight, nightsWithSleep };
-  }, [rows]);
+  const stats = useMemo(() => computeStats(rows), [rows]);
+  const prevStats = useMemo(() => computeStats(prevRows), [prevRows]);
 
   const [hovered, setHovered] = useState<Segment | null>(null);
 
@@ -146,12 +163,25 @@ export default function SleepChart({
     "12 PM",
   ];
 
+  // Trend vs previous 7 days
+  const hasPrevData = prevStats.nightsWithSleep.length > 0;
+  const trendMs = stats.avgMs - prevStats.avgMs;
+  const trendValue =
+    stats.nightsWithSleep.length > 0 && hasPrevData
+      ? `${trendMs > 0 ? "↑" : trendMs < 0 ? "↓" : "→"} ${formatDuration(Math.abs(trendMs))}`
+      : "—";
+  const trendSub = hasPrevData
+    ? `vs prev ${prevStats.nightsWithSleep.length} nights`
+    : "No prev data";
+  const trendColor =
+    trendMs > 0 ? "text-green-500" : trendMs < 0 ? "text-red-500" : "";
+
   return (
     <div>
       {/* Summary stats */}
       <div className="mb-6 grid grid-cols-3 gap-3">
         <StatCard
-          label="Avg / night"
+          label="AVERAGE"
           value={stats.avgMs > 0 ? formatDuration(stats.avgMs) : "—"}
           sub={`${stats.nightsWithSleep.length}/7 nights`}
         />
@@ -165,9 +195,10 @@ export default function SleepChart({
           }
         />
         <StatCard
-          label="Total (7d)"
-          value={stats.totalMs > 0 ? formatDuration(stats.totalMs) : "—"}
-          sub=""
+          label="Trend"
+          value={trendValue}
+          sub={trendSub}
+          valueClassName={trendColor}
         />
       </div>
 
@@ -200,7 +231,10 @@ export default function SleepChart({
             const hasSleep = row.totalMs > 0;
 
             return (
-              <div key={row.dayStart.toISOString()} className="flex items-center gap-3">
+              <div
+                key={row.dayStart.toISOString()}
+                className="flex items-center gap-3"
+              >
                 <div className="w-[76px] shrink-0 text-right">
                   <div className="text-sm font-medium text-[var(--text-primary)]">
                     {label.weekday}
@@ -276,17 +310,21 @@ function StatCard({
   label,
   value,
   sub,
+  valueClassName,
 }: {
   label: string;
   value: string;
   sub: string;
+  valueClassName?: string;
 }) {
   return (
     <div className="rounded-md border border-[var(--border)] bg-[var(--card-bg)] p-3">
       <div className="text-[11px] uppercase tracking-wider text-[var(--text-secondary)] opacity-70">
         {label}
       </div>
-      <div className="mt-1 text-xl font-bold text-[var(--text-primary)] tabular-nums">
+      <div
+        className={`mt-1 text-xl font-bold tabular-nums ${valueClassName || "text-[var(--text-primary)]"}`}
+      >
         {value}
       </div>
       {sub && (

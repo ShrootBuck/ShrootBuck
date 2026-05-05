@@ -54,7 +54,7 @@ function endOfSleepDay(d: Date) {
 async function getRecentIntervals() {
   const now = new Date();
   const currentSleepDayStart = startOfSleepDay(now);
-  const oldestSleepDayStart = addDays(currentSleepDayStart, -6);
+  const oldestSleepDayStart = addDays(currentSleepDayStart, -13);
 
   const from = oldestSleepDayStart;
   const to = endOfSleepDay(now);
@@ -78,6 +78,15 @@ export default async function SleepPage() {
     intervals = [];
     error = true;
   }
+
+  const now = new Date();
+  const currentSleepDayStart = startOfSleepDay(now);
+  const listFrom = addDays(currentSleepDayStart, -6);
+  const listTo = endOfSleepDay(now);
+
+  const listIntervals = intervals.filter(
+    (i) => i.endedAt >= listFrom && i.startedAt <= listTo,
+  );
 
   // Serialize for the client component
   const intervalsForClient = intervals.map((i) => ({
@@ -111,11 +120,11 @@ export default async function SleepPage() {
           <h3>Intervals</h3>
           {error ? (
             <p className="text-red-500">Failed to load sleep intervals.</p>
-          ) : intervals.length === 0 ? (
+          ) : listIntervals.length === 0 ? (
             <p className="text-[var(--text-secondary)]">No sleep intervals yet.</p>
           ) : (
             <div className="mt-2 space-y-2">
-              {intervals.map((int) => {
+              {listIntervals.map((int) => {
                 const dur = int.endedAt.getTime() - int.startedAt.getTime();
                 return (
                   <div
