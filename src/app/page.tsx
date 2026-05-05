@@ -70,7 +70,7 @@ export default async function Home() {
 
         <LiveTime timezone={timezone} initialTime={initialTime} />
 
-        <div className="header-meta">
+        {/* <div className="header-meta">
           {isAwake ? (
             <Sun size={16} className="icon" />
           ) : (
@@ -79,7 +79,7 @@ export default async function Home() {
           <Link href="/sleep">
             Currently {isAwake ? "awake" : "asleep"}
           </Link>
-        </div>
+        </div> */}
 
         <nav className="header-nav">
           <Link href="/research">Research</Link>
