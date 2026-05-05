@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { SleepInterval } from "@prisma/client";
 import { Moon } from "lucide-react";
 import BackToHomeLink from "~/components/back-to-home-link";
 import { prisma } from "~/lib/utils";
@@ -6,6 +7,8 @@ import { prisma } from "~/lib/utils";
 export const metadata: Metadata = {
   title: "Sleep",
 };
+
+export const dynamic = "force-dynamic";
 
 function formatTime(date: Date) {
   return new Intl.DateTimeFormat("en-US", {
@@ -23,22 +26,27 @@ function formatDay(date: Date) {
   }).format(date);
 }
 
-function startOfDay(d: Date) {
-  const result = new Date(d);
-  result.setHours(0, 0, 0, 0);
-  return result;
-}
-
-function endOfDay(d: Date) {
-  const result = new Date(d);
-  result.setHours(23, 59, 59, 999);
-  return result;
-}
-
 function addDays(d: Date, days: number) {
   const result = new Date(d);
   result.setDate(result.getDate() + days);
   return result;
+}
+
+/** A "sleep day" runs noon -> noon so typical sleep (10pm-7am)
+ *  appears as one continuous bar instead of being split across midnight. */
+function startOfSleepDay(d: Date) {
+  const result = new Date(d);
+  if (result.getHours() >= 12) {
+    result.setHours(12, 0, 0, 0);
+  } else {
+    result.setHours(12, 0, 0, 0);
+    result.setDate(result.getDate() - 1);
+  }
+  return result;
+}
+
+function endOfSleepDay(d: Date) {
+  return addDays(startOfSleepDay(d), 1);
 }
 
 function segmentToDay(
@@ -61,33 +69,42 @@ function segmentToDay(
 }
 
 async function getRecentIntervals() {
-  try {
-    const now = new Date();
-    const sevenDaysAgo = addDays(now, -6);
-    const from = startOfDay(sevenDaysAgo);
-    const to = endOfDay(now);
+  const now = new Date();
+  const currentSleepDayStart = startOfSleepDay(now);
+  const oldestSleepDayStart = addDays(currentSleepDayStart, -6);
 
-    return await prisma.sleepInterval.findMany({
-      where: {
-        startedAt: {
-          gte: from,
-          lte: to,
-        },
-      },
-      orderBy: { startedAt: "desc" },
-    });
-  } catch {
-    return [];
-  }
+  const from = oldestSleepDayStart;
+  const to = endOfSleepDay(now);
+
+  // Find intervals that *overlap* the sleep-day window.
+  // Using only `startedAt` misses intervals that began before midnight
+  // and continued into the first day of the range.
+  return await prisma.sleepInterval.findMany({
+    where: {
+      startedAt: { lte: to },
+      endedAt: { gte: from },
+    },
+    orderBy: { startedAt: "desc" },
+  });
 }
 
 export default async function SleepPage() {
-  const intervals = await getRecentIntervals();
+  let intervals: SleepInterval[] = [];
+  let error = false;
+
+  try {
+    intervals = await getRecentIntervals();
+  } catch {
+    intervals = [];
+    error = true;
+  }
 
   const now = new Date();
+  const currentSleepDayStart = startOfSleepDay(now);
+
   const days: Date[] = [];
   for (let i = 6; i >= 0; i--) {
-    days.push(addDays(now, -i));
+    days.push(addDays(currentSleepDayStart, -i));
   }
 
   return (
@@ -106,8 +123,8 @@ export default async function SleepPage() {
         <section>
           <div className="space-y-2">
             {days.map((day) => {
-              const dayStart = startOfDay(day);
-              const dayEnd = endOfDay(day);
+              const dayStart = day;
+              const dayEnd = addDays(day, 1);
               const segments = intervals
                 .map((int) => segmentToDay(int, dayStart, dayEnd))
                 .filter(Boolean);
@@ -128,12 +145,12 @@ export default async function SleepPage() {
                         }}
                       />
                     ))}
-                    {/* Hour markers */}
-                    {[6, 12, 18].map((h) => (
+                    {/* Hour markers: 6p, 12a, 6a */}
+                    {[0.25, 0.5, 0.75].map((pct) => (
                       <div
-                        key={h}
+                        key={pct}
                         className="absolute top-0 h-full w-px bg-[var(--border)] opacity-50"
-                        style={{ left: `${(h / 24) * 100}%` }}
+                        style={{ left: `${pct * 100}%` }}
                       />
                     ))}
                   </div>
@@ -143,17 +160,19 @@ export default async function SleepPage() {
           </div>
 
           <div className="mt-2 flex justify-between px-[4.5rem] text-xs text-[var(--muted-foreground)]">
-            <span>12a</span>
-            <span>6a</span>
             <span>12p</span>
             <span>6p</span>
             <span>12a</span>
+            <span>6a</span>
+            <span>12p</span>
           </div>
         </section>
 
         <section className="mt-8">
           <h3>Intervals</h3>
-          {intervals.length === 0 ? (
+          {error ? (
+            <p className="text-red-500">Failed to load sleep intervals.</p>
+          ) : intervals.length === 0 ? (
             <p className="text-[var(--muted-foreground)]">No sleep intervals yet.</p>
           ) : (
             <div className="mt-2 space-y-2">

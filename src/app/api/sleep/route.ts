@@ -44,10 +44,8 @@ export async function GET(request: NextRequest) {
 
     const intervals = await prisma.sleepInterval.findMany({
       where: {
-        startedAt: {
-          gte: fromDate,
-          lte: toDate,
-        },
+        startedAt: { lte: toDate },
+        endedAt: { gte: fromDate },
       },
       orderBy: { startedAt: "desc" },
     });
