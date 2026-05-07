@@ -273,7 +273,7 @@ export default function SleepChart({
 
                   {/* Sleep bars */}
                   {row.segments.map((seg) => {
-                    const width = Math.max(seg.endPct - seg.startPct, 0.4);
+                    const width = Math.max(seg.endPct - seg.startPct, 1.0);
                     return (
                       <div
                         key={seg.key}
