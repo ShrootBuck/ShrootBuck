@@ -3,6 +3,7 @@ import { revalidatePath } from "next/cache";
 import { env } from "~/env";
 
 import { prisma } from "~/lib/utils";
+import { serializeMergedSleepIntervals } from "~/lib/sleep";
 
 function startOfDay(d: Date) {
   const result = new Date(d);
@@ -50,7 +51,7 @@ export async function GET(request: NextRequest) {
       orderBy: { startedAt: "desc" },
     });
 
-    return Response.json({ intervals });
+    return Response.json({ intervals: serializeMergedSleepIntervals(intervals) });
   } catch {
     return Response.json(
       { error: "Failed to fetch sleep intervals" },

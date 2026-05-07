@@ -3,6 +3,7 @@ import type { SleepInterval } from "@prisma/client";
 import { Moon } from "lucide-react";
 import BackToHomeLink from "~/components/back-to-home-link";
 import { prisma } from "~/lib/utils";
+import { serializeMergedSleepIntervals } from "~/lib/sleep";
 import SleepChart from "./sleep-chart";
 import SleepIntervalsList from "./sleep-intervals-list";
 
@@ -46,12 +47,12 @@ async function getRecentIntervals() {
   const to = addDays(endOfSleepDay(now), 1);
 
   return await prisma.sleepInterval.findMany({
-    where: {
-      startedAt: { lte: to },
-      endedAt: { gte: from },
-    },
-    orderBy: { startedAt: "desc" },
-  });
+      where: {
+        startedAt: { lte: to },
+        endedAt: { gte: from },
+      },
+      orderBy: { startedAt: "desc" },
+    });
 }
 
 export default async function SleepPage() {
@@ -65,12 +66,7 @@ export default async function SleepPage() {
     error = true;
   }
 
-  // Serialize for the client component
-  const intervalsForClient = intervals.map((i) => ({
-    id: i.id,
-    startedAt: i.startedAt.toISOString(),
-    endedAt: i.endedAt.toISOString(),
-  }));
+  const intervalsForClient = serializeMergedSleepIntervals(intervals);
 
   return (
     <div className="container">
