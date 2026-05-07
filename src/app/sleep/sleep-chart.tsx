@@ -18,17 +18,17 @@ const SLEEP_DAY_OFFSET_HRS = 12; // sleep day runs noon -> noon
 
 function addDays(d: Date, days: number) {
   const r = new Date(d);
-  r.setDate(r.getDate() + days);
+  r.setUTCDate(r.getUTCDate() + days);
   return r;
 }
 
 function startOfSleepDay(d: Date) {
   const r = new Date(d);
-  if (r.getHours() >= SLEEP_DAY_OFFSET_HRS) {
-    r.setHours(SLEEP_DAY_OFFSET_HRS, 0, 0, 0);
+  if (r.getUTCHours() >= SLEEP_DAY_OFFSET_HRS) {
+    r.setUTCHours(SLEEP_DAY_OFFSET_HRS, 0, 0, 0);
   } else {
-    r.setHours(SLEEP_DAY_OFFSET_HRS, 0, 0, 0);
-    r.setDate(r.getDate() - 1);
+    r.setUTCHours(SLEEP_DAY_OFFSET_HRS, 0, 0, 0);
+    r.setUTCDate(r.getUTCDate() - 1);
   }
   return r;
 }
@@ -38,6 +38,7 @@ function formatTime(d: Date) {
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
+    timeZone: "UTC",
   }).format(d);
 }
 
@@ -52,12 +53,13 @@ function formatDuration(ms: number) {
 
 function formatDayLabel(dayStart: Date) {
   // dayStart is noon of day N. Sleep belongs to night of N -> N+1.
-  const weekday = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(
+  const weekday = new Intl.DateTimeFormat("en-US", { weekday: "long", timeZone: "UTC" }).format(
     dayStart,
   );
   const md = new Intl.DateTimeFormat("en-US", {
     month: "numeric",
     day: "numeric",
+    timeZone: "UTC"
   }).format(dayStart);
   return { weekday, md };
 }
@@ -121,8 +123,20 @@ export default function SleepChart({
     [intervalsRaw],
   );
 
-  const now = new Date();
-  const currentSleepDayStart = startOfSleepDay(now);
+  const currentSleepDayStart = useMemo(() => {
+    const nowLocal = new Date();
+    const now = new Date(
+      Date.UTC(
+        nowLocal.getFullYear(),
+        nowLocal.getMonth(),
+        nowLocal.getDate(),
+        nowLocal.getHours(),
+        nowLocal.getMinutes(),
+        nowLocal.getSeconds(),
+      ),
+    );
+    return startOfSleepDay(now);
+  }, []);
 
   const days = useMemo(() => {
     const out: Date[] = [];

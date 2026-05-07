@@ -4,6 +4,7 @@ import { Moon } from "lucide-react";
 import BackToHomeLink from "~/components/back-to-home-link";
 import { prisma } from "~/lib/utils";
 import SleepChart from "./sleep-chart";
+import SleepIntervalsList from "./sleep-intervals-list";
 
 export const metadata: Metadata = {
   title: "Sleep",
@@ -11,26 +12,9 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-function formatTime(date: Date) {
-  return new Intl.DateTimeFormat("en-US", {
-    hour: "numeric",
-    minute: "2-digit",
-    hour12: true,
-  }).format(date);
-}
-
-function formatDuration(ms: number) {
-  const totalMin = Math.round(ms / 60000);
-  const h = Math.floor(totalMin / 60);
-  const m = totalMin % 60;
-  if (h === 0) return `${m}m`;
-  if (m === 0) return `${h}h`;
-  return `${h}h ${m}m`;
-}
-
 function addDays(d: Date, days: number) {
   const result = new Date(d);
-  result.setDate(result.getDate() + days);
+  result.setUTCDate(result.getUTCDate() + days);
   return result;
 }
 
@@ -38,11 +22,11 @@ function addDays(d: Date, days: number) {
  *  appears as one continuous bar instead of being split across midnight. */
 function startOfSleepDay(d: Date) {
   const result = new Date(d);
-  if (result.getHours() >= 12) {
-    result.setHours(12, 0, 0, 0);
+  if (result.getUTCHours() >= 12) {
+    result.setUTCHours(12, 0, 0, 0);
   } else {
-    result.setHours(12, 0, 0, 0);
-    result.setDate(result.getDate() - 1);
+    result.setUTCHours(12, 0, 0, 0);
+    result.setUTCDate(result.getUTCDate() - 1);
   }
   return result;
 }
@@ -53,11 +37,13 @@ function endOfSleepDay(d: Date) {
 
 async function getRecentIntervals() {
   const now = new Date();
+  // Don't bother mapping to UTC local here because we fetch extra anyway
   const currentSleepDayStart = startOfSleepDay(now);
-  const oldestSleepDayStart = addDays(currentSleepDayStart, -13);
+  // Fetch a bit wider range on the server to account for timezone offset differences
+  const oldestSleepDayStart = addDays(currentSleepDayStart, -14);
 
   const from = oldestSleepDayStart;
-  const to = endOfSleepDay(now);
+  const to = addDays(endOfSleepDay(now), 1);
 
   return await prisma.sleepInterval.findMany({
     where: {
@@ -78,15 +64,6 @@ export default async function SleepPage() {
     intervals = [];
     error = true;
   }
-
-  const now = new Date();
-  const currentSleepDayStart = startOfSleepDay(now);
-  const listFrom = addDays(currentSleepDayStart, -6);
-  const listTo = endOfSleepDay(now);
-
-  const listIntervals = intervals.filter(
-    (i) => i.endedAt >= listFrom && i.startedAt <= listTo,
-  );
 
   // Serialize for the client component
   const intervalsForClient = intervals.map((i) => ({
@@ -120,34 +97,8 @@ export default async function SleepPage() {
           <h3>Intervals</h3>
           {error ? (
             <p className="text-red-500">Failed to load sleep intervals.</p>
-          ) : listIntervals.length === 0 ? (
-            <p className="text-[var(--text-secondary)]">No sleep intervals yet.</p>
           ) : (
-            <div className="mt-2 space-y-2">
-              {listIntervals.map((int) => {
-                const dur = int.endedAt.getTime() - int.startedAt.getTime();
-                return (
-                  <div
-                    key={int.id}
-                    className="flex items-center justify-between gap-3 border-b border-[var(--border)] py-2 last:border-0"
-                  >
-                    <span>
-                      Slept from <strong>{formatTime(int.startedAt)}</strong>
-                      {" "}to <strong>{formatTime(int.endedAt)}</strong>
-                      <span className="ml-2 text-sm text-[var(--text-secondary)] opacity-70">
-                        ({formatDuration(dur)})
-                      </span>
-                    </span>
-                    <span className="shrink-0 text-sm text-[var(--text-secondary)]">
-                      {new Intl.DateTimeFormat("en-US", {
-                        month: "short",
-                        day: "numeric",
-                      }).format(int.startedAt)}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+            <SleepIntervalsList intervalsRaw={intervalsForClient} />
           )}
         </section>
       </main>
