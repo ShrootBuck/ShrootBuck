@@ -18,14 +18,14 @@ function addDays(d: Date, days: number) {
   return result;
 }
 
-/** A "sleep day" runs noon -> noon so typical sleep (10pm-7am)
+/** The chart can shift dynamically client-side; server fetch uses the 6pm fallback
  *  appears as one continuous bar instead of being split across midnight. */
 function startOfSleepDay(d: Date) {
   const result = new Date(d);
-  if (result.getUTCHours() >= 12) {
-    result.setUTCHours(12, 0, 0, 0);
+  if (result.getUTCHours() >= 18) {
+    result.setUTCHours(18, 0, 0, 0);
   } else {
-    result.setUTCHours(12, 0, 0, 0);
+    result.setUTCHours(18, 0, 0, 0);
     result.setUTCDate(result.getUTCDate() - 1);
   }
   return result;

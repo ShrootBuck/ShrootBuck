@@ -1,6 +1,5 @@
 "use client";
 
-import type { SleepInterval } from "@prisma/client";
 import { useMemo } from "react";
 
 function formatTime(date: Date) {
@@ -29,10 +28,10 @@ function addDays(d: Date, days: number) {
 
 function startOfSleepDay(d: Date) {
   const result = new Date(d);
-  if (result.getUTCHours() >= 12) {
-    result.setUTCHours(12, 0, 0, 0);
+  if (result.getUTCHours() >= 18) {
+    result.setUTCHours(18, 0, 0, 0);
   } else {
-    result.setUTCHours(12, 0, 0, 0);
+    result.setUTCHours(18, 0, 0, 0);
     result.setUTCDate(result.getUTCDate() - 1);
   }
   return result;

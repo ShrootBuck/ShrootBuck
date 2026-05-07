@@ -14,7 +14,11 @@ type Segment = {
 };
 
 const DAY_MS = 86_400_000;
-const SLEEP_DAY_OFFSET_HRS = 12; // sleep day runs noon -> noon
+const HOUR_MS = 3_600_000;
+const MINUTES_PER_DAY = 1_440;
+const MIN_SLEEP_MS = 2 * HOUR_MS;
+const FALLBACK_SLEEP_DAY_OFFSET_HRS = 18; // 6pm -> 6pm when data is sparse/weird
+const TICK_STEP_HRS = 3;
 
 function addDays(d: Date, days: number) {
   const r = new Date(d);
@@ -22,15 +26,89 @@ function addDays(d: Date, days: number) {
   return r;
 }
 
-function startOfSleepDay(d: Date) {
+function startOfSleepDay(d: Date, offsetHrs: number) {
   const r = new Date(d);
-  if (r.getUTCHours() >= SLEEP_DAY_OFFSET_HRS) {
-    r.setUTCHours(SLEEP_DAY_OFFSET_HRS, 0, 0, 0);
+  if (r.getUTCHours() >= offsetHrs) {
+    r.setUTCHours(offsetHrs, 0, 0, 0);
   } else {
-    r.setUTCHours(SLEEP_DAY_OFFSET_HRS, 0, 0, 0);
+    r.setUTCHours(offsetHrs, 0, 0, 0);
     r.setUTCDate(r.getUTCDate() - 1);
   }
   return r;
+}
+
+function minutesOfDay(d: Date) {
+  return d.getUTCHours() * 60 + d.getUTCMinutes();
+}
+
+function roundToNearestTickHour(minutes: number) {
+  const tickMinutes = TICK_STEP_HRS * 60;
+  const rounded = Math.round(minutes / tickMinutes) * tickMinutes;
+  return Math.floor((rounded % MINUTES_PER_DAY) / 60);
+}
+
+function computeDynamicSleepDayOffset(intervals: { startedAt: Date; endedAt: Date }[]) {
+  const ranges: { start: number; end: number }[] = [];
+
+  for (const interval of intervals) {
+    const duration = interval.endedAt.getTime() - interval.startedAt.getTime();
+    if (duration < MIN_SLEEP_MS || duration >= DAY_MS) continue;
+
+    const start = minutesOfDay(interval.startedAt);
+    const end = minutesOfDay(interval.endedAt);
+
+    if (start === end) continue;
+    if (start < end) {
+      ranges.push({ start, end });
+    } else {
+      ranges.push({ start, end: MINUTES_PER_DAY }, { start: 0, end });
+    }
+  }
+
+  if (ranges.length === 0) return FALLBACK_SLEEP_DAY_OFFSET_HRS;
+
+  ranges.sort((a, b) => a.start - b.start || a.end - b.end);
+
+  const merged: { start: number; end: number }[] = [];
+  for (const range of ranges) {
+    const last = merged.at(-1);
+    if (!last || range.start > last.end) {
+      merged.push({ ...range });
+    } else {
+      last.end = Math.max(last.end, range.end);
+    }
+  }
+
+  if (merged.length === 0) return FALLBACK_SLEEP_DAY_OFFSET_HRS;
+
+  const firstRange = merged[0];
+  const lastRange = merged[merged.length - 1];
+  if (!firstRange || !lastRange) return FALLBACK_SLEEP_DAY_OFFSET_HRS;
+
+  let bestGapStart = lastRange.end;
+  let bestGapEnd = firstRange.start + MINUTES_PER_DAY;
+  let bestGapSize = bestGapEnd - bestGapStart;
+
+  for (let i = 0; i < merged.length - 1; i++) {
+    const currentRange = merged[i];
+    const nextRange = merged[i + 1];
+    if (!currentRange || !nextRange) continue;
+
+    const gapStart = currentRange.end;
+    const gapEnd = nextRange.start;
+    const gapSize = gapEnd - gapStart;
+    if (gapSize > bestGapSize) {
+      bestGapStart = gapStart;
+      bestGapEnd = gapEnd;
+      bestGapSize = gapSize;
+    }
+  }
+
+  // If sleep covers nearly everything, don't let naps/all-nighters make the axis go feral.
+  if (bestGapSize < TICK_STEP_HRS * 60) return FALLBACK_SLEEP_DAY_OFFSET_HRS;
+
+  const midpoint = (bestGapStart + bestGapEnd) / 2;
+  return roundToNearestTickHour(midpoint % MINUTES_PER_DAY);
 }
 
 function formatTime(d: Date) {
@@ -52,7 +130,6 @@ function formatDuration(ms: number) {
 }
 
 function formatDayLabel(dayStart: Date) {
-  // dayStart is noon of day N. Sleep belongs to night of N -> N+1.
   const weekday = new Intl.DateTimeFormat("en-US", { weekday: "long", timeZone: "UTC" }).format(
     dayStart,
   );
@@ -62,6 +139,15 @@ function formatDayLabel(dayStart: Date) {
     timeZone: "UTC"
   }).format(dayStart);
   return { weekday, md };
+}
+
+function formatTickLabel(offsetHrs: number, tick: number) {
+  const hour = (offsetHrs + tick * 24) % 24;
+  return new Intl.DateTimeFormat("en-US", {
+    hour: "numeric",
+    hour12: true,
+    timeZone: "UTC",
+  }).format(new Date(Date.UTC(2000, 0, 1, hour)));
 }
 
 function buildRows(
@@ -123,6 +209,11 @@ export default function SleepChart({
     [intervalsRaw],
   );
 
+  const sleepDayOffsetHrs = useMemo(
+    () => computeDynamicSleepDayOffset(intervals),
+    [intervals],
+  );
+
   const currentSleepDayStart = useMemo(() => {
     const nowLocal = new Date();
     const now = new Date(
@@ -135,8 +226,8 @@ export default function SleepChart({
         nowLocal.getSeconds(),
       ),
     );
-    return startOfSleepDay(now);
-  }, []);
+    return startOfSleepDay(now, sleepDayOffsetHrs);
+  }, [sleepDayOffsetHrs]);
 
   const days = useMemo(() => {
     const out: Date[] = [];
@@ -163,19 +254,8 @@ export default function SleepChart({
 
   const [hovered, setHovered] = useState<Segment | null>(null);
 
-  // Hour ticks: 12p, 3p, 6p, 9p, 12a, 3a, 6a, 9a, 12p
   const ticks = [0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1];
-  const tickLabels = [
-    "12 PM",
-    "3 PM",
-    "6 PM",
-    "9 PM",
-    "12 AM",
-    "3 AM",
-    "6 AM",
-    "9 AM",
-    "12 PM",
-  ];
+  const tickLabels = ticks.map((tick) => formatTickLabel(sleepDayOffsetHrs, tick));
 
   // Trend vs previous 7 days
   const hasPrevData = prevStats.nightsWithSleep.length > 0;
@@ -337,7 +417,7 @@ function StatCard({
         {label}
       </div>
       <div
-        className={`mt-1 text-xl font-bold tabular-nums ${valueClassName || "text-[var(--text-primary)]"}`}
+        className={`mt-1 text-xl font-bold tabular-nums ${valueClassName ?? "text-[var(--text-primary)]"}`}
       >
         {value}
       </div>
