@@ -16,6 +16,24 @@ export function addDaysUtc(d: Date, days: number) {
   return result;
 }
 
+export function toUtcWallClock(d: Date) {
+  return new Date(
+    Date.UTC(
+      d.getFullYear(),
+      d.getMonth(),
+      d.getDate(),
+      d.getHours(),
+      d.getMinutes(),
+      d.getSeconds(),
+      d.getMilliseconds(),
+    ),
+  );
+}
+
+export function nowUtcWallClock() {
+  return toUtcWallClock(new Date());
+}
+
 export function startOfUtcDay(d: Date) {
   const result = new Date(d);
   result.setUTCHours(0, 0, 0, 0);
@@ -75,6 +93,7 @@ export function formatDuration(ms: number) {
   return `${h}h ${m}m`;
 }
 
+/** Merge strictly overlapping intervals. Gaps are kept as-is. */
 export function mergeSleepIntervals(intervals: SleepIntervalRow[]) {
   if (intervals.length === 0) return [];
 

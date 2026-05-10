@@ -1,7 +1,12 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { addDaysUtc, formatDuration, formatTimeUtc, startOfSleepDayUtc } from "~/lib/sleep";
+import {
+  addDaysUtc,
+  formatDuration,
+  formatTimeUtc,
+  startOfSleepDayUtc,
+} from "~/lib/sleep";
 
 type Interval = { id: string; startedAt: string; endedAt: string };
 
@@ -162,8 +167,10 @@ function computeStats(rows: ReturnType<typeof buildRows>) {
 
 export default function SleepChart({
   intervalsRaw,
+  serverNow,
 }: {
   intervalsRaw: Interval[];
+  serverNow: string;
 }) {
   const intervals = useMemo(
     () =>
@@ -181,9 +188,8 @@ export default function SleepChart({
   );
 
   const currentSleepDayStart = useMemo(() => {
-    const now = new Date();
-    return startOfSleepDayUtc(now, sleepDayOffsetHrs);
-  }, [sleepDayOffsetHrs]);
+    return startOfSleepDayUtc(new Date(serverNow), sleepDayOffsetHrs);
+  }, [serverNow, sleepDayOffsetHrs]);
 
   const days = useMemo(() => {
     const out: Date[] = [];

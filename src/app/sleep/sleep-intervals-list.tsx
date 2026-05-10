@@ -12,8 +12,10 @@ import {
 
 export default function SleepIntervalsList({
   intervalsRaw,
+  serverNow,
 }: {
   intervalsRaw: { id: string; startedAt: string; endedAt: string }[];
+  serverNow: string;
 }) {
   const listIntervals = useMemo(() => {
     const intervals = intervalsRaw.map((i) => ({
@@ -22,7 +24,7 @@ export default function SleepIntervalsList({
       endedAt: new Date(i.endedAt),
     }));
 
-    const now = new Date();
+    const now = new Date(serverNow);
     const currentSleepDayStart = startOfSleepDayUtc(now);
     const listFrom = addDaysUtc(currentSleepDayStart, -6);
     const listTo = endOfSleepDayUtc(now);
@@ -30,7 +32,7 @@ export default function SleepIntervalsList({
     return intervals.filter(
       (i) => i.endedAt >= listFrom && i.startedAt <= listTo,
     );
-  }, [intervalsRaw]);
+  }, [intervalsRaw, serverNow]);
 
   if (listIntervals.length === 0) {
     return <p className="text-[var(--text-secondary)]">No sleep intervals yet.</p>;

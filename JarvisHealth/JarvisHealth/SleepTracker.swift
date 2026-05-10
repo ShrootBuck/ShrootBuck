@@ -143,17 +143,26 @@ class SleepTracker: ObservableObject {
                 self.lastUpdate = Date()
             }
 
+            let group = DispatchGroup()
             var newestEnd: Date?
+
             for interval in intervals {
                 if !force, let lastSynced = self.lastSyncedEndDate, interval.end <= lastSynced {
                     continue
                 }
-                self.sendServerInterval(startDate: interval.start, endDate: interval.end)
-                newestEnd = max(newestEnd ?? interval.end, interval.end)
+                group.enter()
+                self.sendServerInterval(startDate: interval.start, endDate: interval.end) { success in
+                    if success {
+                        newestEnd = max(newestEnd ?? interval.end, interval.end)
+                    }
+                    group.leave()
+                }
             }
 
-            if let newestEnd = newestEnd {
-                self.lastSyncedEndDate = newestEnd
+            group.notify(queue: .main) {
+                if let newestEnd = newestEnd {
+                    self.lastSyncedEndDate = newestEnd
+                }
             }
         }
 
@@ -215,10 +224,11 @@ class SleepTracker: ObservableObject {
         return "\(year)-\(month)-\(day)T\(hour):\(minute):\(second).000Z"
     }
     
-    private func sendServerInterval(startDate: Date, endDate: Date) {
+    private func sendServerInterval(startDate: Date, endDate: Date, completion: @escaping (Bool) -> Void) {
         guard let secret = getSecret(), !secret.isEmpty else {
             DispatchQueue.main.async {
                 self.errorMessage = "No secret saved. Add your server secret below."
+                completion(false)
             }
             return
         }
@@ -236,32 +246,40 @@ class SleepTracker: ObservableObject {
             "secret": secret
         ]
 
-        guard let body = try? JSONSerialization.data(withJSONObject: payload) else { return }
+        guard let body = try? JSONSerialization.data(withJSONObject: payload) else {
+            completion(false)
+            return
+        }
 
         request.httpBody = body
-        
+
         let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
             DispatchQueue.main.async {
                 if let error = error {
                     self?.errorMessage = "Server update error: \(error.localizedDescription)"
+                    completion(false)
                     return
                 }
-                
+
                 guard let httpResponse = response as? HTTPURLResponse else {
                     self?.errorMessage = "Server update failed: invalid response"
+                    completion(false)
                     return
                 }
-                
+
                 if httpResponse.statusCode == 401 {
                     self?.errorMessage = "Server rejected update: invalid secret"
+                    completion(false)
                 } else if !(200...299).contains(httpResponse.statusCode) {
                     self?.errorMessage = "Server update failed: HTTP \(httpResponse.statusCode)"
+                    completion(false)
                 } else {
                     self?.errorMessage = nil
+                    completion(true)
                 }
             }
         }
-        
+
         task.resume()
     }
 

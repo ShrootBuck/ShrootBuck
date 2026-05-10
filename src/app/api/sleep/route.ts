@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { revalidatePath } from "next/cache";
+import type { SleepInterval } from "@prisma/client";
 import { env } from "~/env";
 
 import { prisma } from "~/lib/utils";
@@ -8,6 +9,7 @@ import {
   startOfUtcDay,
   endOfUtcDay,
   addDaysUtc,
+  nowUtcWallClock,
 } from "~/lib/sleep";
 
 export async function GET(request: NextRequest) {
@@ -17,7 +19,7 @@ export async function GET(request: NextRequest) {
     let to = searchParams.get("to");
 
     if (!from || !to) {
-      const now = new Date();
+      const now = nowUtcWallClock();
       const sevenDaysAgo = addDaysUtc(now, -6);
       from = startOfUtcDay(sevenDaysAgo).toISOString();
       to = endOfUtcDay(now).toISOString();
@@ -38,7 +40,9 @@ export async function GET(request: NextRequest) {
       orderBy: { startedAt: "desc" },
     });
 
-    return Response.json({ intervals: serializeMergedSleepIntervals(intervals) });
+    return Response.json({
+      intervals: serializeMergedSleepIntervals(intervals),
+    });
   } catch {
     return Response.json(
       { error: "Failed to fetch sleep intervals" },
@@ -81,23 +85,40 @@ export async function POST(request: NextRequest) {
     return new NextResponse("endedAt must be after startedAt", { status: 400 });
   }
 
-  const existing = await prisma.sleepInterval.findUnique({
-    where: { startedAt: parsedStart },
+  // Find any intervals that overlap with the incoming one.
+  const overlapping = await prisma.sleepInterval.findMany({
+    where: {
+      startedAt: { lte: parsedEnd },
+      endedAt: { gte: parsedStart },
+    },
   });
 
-  const interval = await prisma.sleepInterval.upsert({
-    where: { startedAt: parsedStart },
-    create: {
-      startedAt: parsedStart,
-      endedAt: parsedEnd,
-    },
-    update: {
-      endedAt: parsedEnd,
-    },
-  });
+  let interval: SleepInterval;
+
+  if (overlapping.length === 0) {
+    interval = await prisma.sleepInterval.create({
+      data: { startedAt: parsedStart, endedAt: parsedEnd },
+    });
+  } else {
+    const allStarts = [parsedStart, ...overlapping.map((i) => i.startedAt)];
+    const allEnds = [parsedEnd, ...overlapping.map((i) => i.endedAt)];
+    const mergedStart = new Date(Math.min(...allStarts.map((d) => d.getTime())));
+    const mergedEnd = new Date(Math.max(...allEnds.map((d) => d.getTime())));
+
+    const [deleted, created] = await prisma.$transaction([
+      prisma.sleepInterval.deleteMany({
+        where: { id: { in: overlapping.map((i) => i.id) } },
+      }),
+      prisma.sleepInterval.create({
+        data: { startedAt: mergedStart, endedAt: mergedEnd },
+      }),
+    ]);
+
+    interval = created;
+  }
 
   revalidatePath("/sleep");
   revalidatePath("/api/sleep");
 
-  return Response.json(interval, { status: existing ? 200 : 201 });
+  return Response.json(interval, { status: 200 });
 }

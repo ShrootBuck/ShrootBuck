@@ -7,6 +7,7 @@ import {
   serializeMergedSleepIntervals,
   addDaysUtc,
   endOfSleepDayUtc,
+  nowUtcWallClock,
   startOfSleepDayUtc,
 } from "~/lib/sleep";
 import SleepChart from "./sleep-chart";
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 async function getRecentIntervals() {
-  const now = new Date();
+  const now = nowUtcWallClock();
   // Don't bother mapping to UTC local here because we fetch extra anyway
   const currentSleepDayStart = startOfSleepDayUtc(now);
   // Fetch a bit wider range on the server to account for timezone offset differences
@@ -48,6 +49,7 @@ export default async function SleepPage() {
     error = true;
   }
 
+  const serverNow = nowUtcWallClock();
   const intervalsForClient = serializeMergedSleepIntervals(intervals);
 
   return (
@@ -67,7 +69,7 @@ export default async function SleepPage() {
           {error ? (
             <p className="text-red-500">Failed to load sleep data.</p>
           ) : (
-            <SleepChart intervalsRaw={intervalsForClient} />
+            <SleepChart intervalsRaw={intervalsForClient} serverNow={serverNow.toISOString()} />
           )}
         </section>
 
@@ -76,7 +78,7 @@ export default async function SleepPage() {
           {error ? (
             <p className="text-red-500">Failed to load sleep intervals.</p>
           ) : (
-            <SleepIntervalsList intervalsRaw={intervalsForClient} />
+            <SleepIntervalsList intervalsRaw={intervalsForClient} serverNow={serverNow.toISOString()} />
           )}
         </section>
       </main>
