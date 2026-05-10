@@ -213,7 +213,8 @@ class SleepTracker: ObservableObject {
     }
 
     private func forceUTCZString(from date: Date) -> String {
-        let calendar = Calendar.current
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(identifier: "UTC")!
         let components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
         let year = components.year ?? 0
         let month = String(format: "%02d", components.month ?? 0)

@@ -3,10 +3,10 @@
 import { useMemo } from "react";
 import {
   addDaysUtc,
+  computeDynamicSleepDayOffset,
   endOfSleepDayUtc,
   formatDuration,
   formatTimeUtc,
-  formatDateShortUtc,
   startOfSleepDayUtc,
 } from "~/lib/sleep";
 
@@ -17,21 +17,24 @@ export default function SleepIntervalsList({
   intervalsRaw: { id: string; startedAt: string; endedAt: string }[];
   serverNow: string;
 }) {
-  const listIntervals = useMemo(() => {
+  const { listIntervals, sleepDayOffsetHrs } = useMemo(() => {
     const intervals = intervalsRaw.map((i) => ({
       id: i.id,
       startedAt: new Date(i.startedAt),
       endedAt: new Date(i.endedAt),
     }));
 
+    const offset = computeDynamicSleepDayOffset(intervals);
     const now = new Date(serverNow);
-    const currentSleepDayStart = startOfSleepDayUtc(now);
+    const currentSleepDayStart = startOfSleepDayUtc(now, offset);
     const listFrom = addDaysUtc(currentSleepDayStart, -6);
-    const listTo = endOfSleepDayUtc(now);
+    const listTo = endOfSleepDayUtc(now, offset);
 
-    return intervals.filter(
+    const filtered = intervals.filter(
       (i) => i.endedAt >= listFrom && i.startedAt <= listTo,
     );
+
+    return { listIntervals: filtered, sleepDayOffsetHrs: offset };
   }, [intervalsRaw, serverNow]);
 
   if (listIntervals.length === 0) {
@@ -55,7 +58,12 @@ export default function SleepIntervalsList({
               </span>
             </span>
             <span className="shrink-0 text-sm text-[var(--text-secondary)]">
-              {formatDateShortUtc(int.startedAt)}
+              {new Intl.DateTimeFormat("en-US", {
+                weekday: "long",
+                month: "short",
+                day: "numeric",
+                timeZone: "UTC",
+              }).format(startOfSleepDayUtc(int.startedAt, sleepDayOffsetHrs))}
             </span>
           </div>
         );

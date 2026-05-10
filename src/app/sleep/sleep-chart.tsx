@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import {
   addDaysUtc,
+  computeDynamicSleepDayOffset,
   formatDuration,
   formatTimeUtc,
   startOfSleepDayUtc,
@@ -20,85 +21,6 @@ type Segment = {
 };
 
 const DAY_MS = 86_400_000;
-const HOUR_MS = 3_600_000;
-const MINUTES_PER_DAY = 1_440;
-const MIN_SLEEP_MS = 2 * HOUR_MS;
-const FALLBACK_SLEEP_DAY_OFFSET_HRS = 18; // 6pm -> 6pm when data is sparse/weird
-const TICK_STEP_HRS = 3;
-
-function minutesOfDay(d: Date) {
-  return d.getUTCHours() * 60 + d.getUTCMinutes();
-}
-
-function roundToNearestTickHour(minutes: number) {
-  const tickMinutes = TICK_STEP_HRS * 60;
-  const rounded = Math.round(minutes / tickMinutes) * tickMinutes;
-  return Math.floor((rounded % MINUTES_PER_DAY) / 60);
-}
-
-function computeDynamicSleepDayOffset(intervals: { startedAt: Date; endedAt: Date }[]) {
-  const ranges: { start: number; end: number }[] = [];
-
-  for (const interval of intervals) {
-    const duration = interval.endedAt.getTime() - interval.startedAt.getTime();
-    if (duration < MIN_SLEEP_MS || duration >= DAY_MS) continue;
-
-    const start = minutesOfDay(interval.startedAt);
-    const end = minutesOfDay(interval.endedAt);
-
-    if (start === end) continue;
-    if (start < end) {
-      ranges.push({ start, end });
-    } else {
-      ranges.push({ start, end: MINUTES_PER_DAY }, { start: 0, end });
-    }
-  }
-
-  if (ranges.length === 0) return FALLBACK_SLEEP_DAY_OFFSET_HRS;
-
-  ranges.sort((a, b) => a.start - b.start || a.end - b.end);
-
-  const merged: { start: number; end: number }[] = [];
-  for (const range of ranges) {
-    const last = merged.at(-1);
-    if (!last || range.start > last.end) {
-      merged.push({ ...range });
-    } else {
-      last.end = Math.max(last.end, range.end);
-    }
-  }
-
-  if (merged.length === 0) return FALLBACK_SLEEP_DAY_OFFSET_HRS;
-
-  const firstRange = merged[0];
-  const lastRange = merged[merged.length - 1];
-  if (!firstRange || !lastRange) return FALLBACK_SLEEP_DAY_OFFSET_HRS;
-
-  let bestGapStart = lastRange.end;
-  let bestGapEnd = firstRange.start + MINUTES_PER_DAY;
-  let bestGapSize = bestGapEnd - bestGapStart;
-
-  for (let i = 0; i < merged.length - 1; i++) {
-    const currentRange = merged[i];
-    const nextRange = merged[i + 1];
-    if (!currentRange || !nextRange) continue;
-
-    const gapStart = currentRange.end;
-    const gapEnd = nextRange.start;
-    const gapSize = gapEnd - gapStart;
-    if (gapSize > bestGapSize) {
-      bestGapStart = gapStart;
-      bestGapEnd = gapEnd;
-      bestGapSize = gapSize;
-    }
-  }
-
-  // If sleep covers nearly everything, don't let naps/all-nighters make the axis go feral.
-  if (bestGapSize < TICK_STEP_HRS * 60) return FALLBACK_SLEEP_DAY_OFFSET_HRS;
-
-  const midpoint = (bestGapStart + bestGapEnd) / 2;
-  return roundToNearestTickHour(midpoint % MINUTES_PER_DAY);
-}
 
 function formatDayLabel(dayStart: Date) {
   const weekday = new Intl.DateTimeFormat("en-US", { weekday: "long", timeZone: "UTC" }).format(
