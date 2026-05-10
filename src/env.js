@@ -6,22 +6,18 @@ export const env = createEnv({
     NODE_ENV: z.enum(["development", "test", "production"]),
     SECRET: z.string(),
     DATABASE_URL: z.string(),
+    DIRECT_URL: z.string(),
   },
 
   client: {
-    NEXT_PUBLIC_POSTHOG_KEY: z.string(),
-    NEXT_PUBLIC_POSTHOG_HOST: z
-      .string()
-      .optional()
-      .default("https://us.i.posthog.com"),
+    // Add client-side environment variables here
   },
 
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
     SECRET: process.env.SECRET,
     DATABASE_URL: process.env.DATABASE_URL,
-    NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
-    NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    DIRECT_URL: process.env.DIRECT_URL,
   },
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,
   emptyStringAsUndefined: true,

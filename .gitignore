@@ -24,6 +24,7 @@ next-env.d.ts
 # misc
 .DS_Store
 *.pem
+.claude/
 
 # debug
 npm-debug.log*
@@ -45,3 +46,40 @@ yarn-error.log*
 # idea files
 .idea
 .env.local
+
+# Xcode
+#
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+
+## User settings
+xcuserdata/
+
+## Xcode 8 and later
+## Build generated
+build/
+DerivedData/
+
+## Checks if the user has opted into sharing schemes
+!default.xcscheme
+!*.xcscheme
+
+## Common for many Apple projects
+*.moved-aside
+*.xcuserstate
+
+## Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Swift Package Manager
+#
+# Add this line if you want to avoid sharing your package lookup info and cached packages
+# .build/
+
+# Carthage
+#
+# Add this line if you want to avoid checking in your Carthage dependencies
+# Carthage/Build/
+
+# AccuRev
+.accurev.session

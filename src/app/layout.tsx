@@ -1,8 +1,6 @@
 import "~/styles/globals.css";
 import { type Metadata } from "next";
 import { Footer } from "~/components/ui/footer";
-import { PostHogProvider } from "./providers";
-import PostHogPageView from "./posthog-pageview";
 
 const nerdFavicon = "https://fav.farm/🤓";
 
@@ -29,11 +27,8 @@ export default function RootLayout({
         <meta name="description" content="Student, Programmer, Builder" />
       </head>
       <body>
-        <PostHogProvider>
-          <PostHogPageView />
-          {children}
-          <Footer />
-        </PostHogProvider>
+        {children}
+        <Footer />
       </body>
     </html>
   );
