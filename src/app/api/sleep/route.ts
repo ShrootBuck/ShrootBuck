@@ -3,25 +3,12 @@ import { revalidatePath } from "next/cache";
 import { env } from "~/env";
 
 import { prisma } from "~/lib/utils";
-import { serializeMergedSleepIntervals } from "~/lib/sleep";
-
-function startOfDay(d: Date) {
-  const result = new Date(d);
-  result.setHours(0, 0, 0, 0);
-  return result;
-}
-
-function endOfDay(d: Date) {
-  const result = new Date(d);
-  result.setHours(23, 59, 59, 999);
-  return result;
-}
-
-function addDays(d: Date, days: number) {
-  const result = new Date(d);
-  result.setDate(result.getDate() + days);
-  return result;
-}
+import {
+  serializeMergedSleepIntervals,
+  startOfUtcDay,
+  endOfUtcDay,
+  addDaysUtc,
+} from "~/lib/sleep";
 
 export async function GET(request: NextRequest) {
   try {
@@ -31,9 +18,9 @@ export async function GET(request: NextRequest) {
 
     if (!from || !to) {
       const now = new Date();
-      const sevenDaysAgo = addDays(now, -6);
-      from = startOfDay(sevenDaysAgo).toISOString();
-      to = endOfDay(now).toISOString();
+      const sevenDaysAgo = addDaysUtc(now, -6);
+      from = startOfUtcDay(sevenDaysAgo).toISOString();
+      to = endOfUtcDay(now).toISOString();
     }
 
     const fromDate = new Date(from);
@@ -61,18 +48,21 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const formData = await request.formData();
+  let payload: { startedAt?: string; endedAt?: string; secret?: string } = {};
 
-  const secret = formData.get("secret");
+  try {
+    payload = await request.json();
+  } catch {
+    return new NextResponse("Invalid JSON body", { status: 400 });
+  }
 
-  if ((secret as string) !== env.SECRET) {
+  const { secret, startedAt, endedAt } = payload;
+
+  if (secret !== env.SECRET) {
     return new NextResponse(`Nope!`, {
       status: 401,
     });
   }
-
-  const startedAt = formData.get("startedAt") as string | null;
-  const endedAt = formData.get("endedAt") as string | null;
 
   if (!startedAt || !endedAt) {
     return new NextResponse("Missing required fields: startedAt, endedAt", {
@@ -85,6 +75,10 @@ export async function POST(request: NextRequest) {
 
   if (isNaN(parsedStart.getTime()) || isNaN(parsedEnd.getTime())) {
     return new NextResponse("Invalid date format", { status: 400 });
+  }
+
+  if (parsedEnd <= parsedStart) {
+    return new NextResponse("endedAt must be after startedAt", { status: 400 });
   }
 
   const existing = await prisma.sleepInterval.findUnique({

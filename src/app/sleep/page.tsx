@@ -3,7 +3,12 @@ import type { SleepInterval } from "@prisma/client";
 import { Moon } from "lucide-react";
 import BackToHomeLink from "~/components/back-to-home-link";
 import { prisma } from "~/lib/utils";
-import { serializeMergedSleepIntervals } from "~/lib/sleep";
+import {
+  serializeMergedSleepIntervals,
+  addDaysUtc,
+  endOfSleepDayUtc,
+  startOfSleepDayUtc,
+} from "~/lib/sleep";
 import SleepChart from "./sleep-chart";
 import SleepIntervalsList from "./sleep-intervals-list";
 
@@ -13,38 +18,15 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-function addDays(d: Date, days: number) {
-  const result = new Date(d);
-  result.setUTCDate(result.getUTCDate() + days);
-  return result;
-}
-
-/** The chart can shift dynamically client-side; server fetch uses the 6pm fallback
- *  appears as one continuous bar instead of being split across midnight. */
-function startOfSleepDay(d: Date) {
-  const result = new Date(d);
-  if (result.getUTCHours() >= 18) {
-    result.setUTCHours(18, 0, 0, 0);
-  } else {
-    result.setUTCHours(18, 0, 0, 0);
-    result.setUTCDate(result.getUTCDate() - 1);
-  }
-  return result;
-}
-
-function endOfSleepDay(d: Date) {
-  return addDays(startOfSleepDay(d), 1);
-}
-
 async function getRecentIntervals() {
   const now = new Date();
   // Don't bother mapping to UTC local here because we fetch extra anyway
-  const currentSleepDayStart = startOfSleepDay(now);
+  const currentSleepDayStart = startOfSleepDayUtc(now);
   // Fetch a bit wider range on the server to account for timezone offset differences
-  const oldestSleepDayStart = addDays(currentSleepDayStart, -14);
+  const oldestSleepDayStart = addDaysUtc(currentSleepDayStart, -14);
 
   const from = oldestSleepDayStart;
-  const to = addDays(endOfSleepDay(now), 1);
+  const to = addDaysUtc(endOfSleepDayUtc(now), 1);
 
   return await prisma.sleepInterval.findMany({
       where: {

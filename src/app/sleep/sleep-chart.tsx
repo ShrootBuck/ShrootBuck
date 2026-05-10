@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { addDaysUtc, formatDuration, formatTimeUtc, startOfSleepDayUtc } from "~/lib/sleep";
 
 type Interval = { id: string; startedAt: string; endedAt: string };
 
@@ -19,23 +20,6 @@ const MINUTES_PER_DAY = 1_440;
 const MIN_SLEEP_MS = 2 * HOUR_MS;
 const FALLBACK_SLEEP_DAY_OFFSET_HRS = 18; // 6pm -> 6pm when data is sparse/weird
 const TICK_STEP_HRS = 3;
-
-function addDays(d: Date, days: number) {
-  const r = new Date(d);
-  r.setUTCDate(r.getUTCDate() + days);
-  return r;
-}
-
-function startOfSleepDay(d: Date, offsetHrs: number) {
-  const r = new Date(d);
-  if (r.getUTCHours() >= offsetHrs) {
-    r.setUTCHours(offsetHrs, 0, 0, 0);
-  } else {
-    r.setUTCHours(offsetHrs, 0, 0, 0);
-    r.setUTCDate(r.getUTCDate() - 1);
-  }
-  return r;
-}
 
 function minutesOfDay(d: Date) {
   return d.getUTCHours() * 60 + d.getUTCMinutes();
@@ -111,24 +95,6 @@ function computeDynamicSleepDayOffset(intervals: { startedAt: Date; endedAt: Dat
   return roundToNearestTickHour(midpoint % MINUTES_PER_DAY);
 }
 
-function formatTime(d: Date) {
-  return new Intl.DateTimeFormat("en-US", {
-    hour: "numeric",
-    minute: "2-digit",
-    hour12: true,
-    timeZone: "UTC",
-  }).format(d);
-}
-
-function formatDuration(ms: number) {
-  const totalMin = Math.round(ms / 60000);
-  const h = Math.floor(totalMin / 60);
-  const m = totalMin % 60;
-  if (h === 0) return `${m}m`;
-  if (m === 0) return `${h}h`;
-  return `${h}h ${m}m`;
-}
-
 function formatDayLabel(dayStart: Date) {
   const weekday = new Intl.DateTimeFormat("en-US", { weekday: "long", timeZone: "UTC" }).format(
     dayStart,
@@ -155,7 +121,7 @@ function buildRows(
   intervals: { id: string; startedAt: Date; endedAt: Date }[],
 ) {
   return days.map((dayStart) => {
-    const dayEnd = addDays(dayStart, 1);
+    const dayEnd = addDaysUtc(dayStart, 1);
     const dayStartMs = dayStart.getTime();
     const dayEndMs = dayEnd.getTime();
 
@@ -215,30 +181,20 @@ export default function SleepChart({
   );
 
   const currentSleepDayStart = useMemo(() => {
-    const nowLocal = new Date();
-    const now = new Date(
-      Date.UTC(
-        nowLocal.getFullYear(),
-        nowLocal.getMonth(),
-        nowLocal.getDate(),
-        nowLocal.getHours(),
-        nowLocal.getMinutes(),
-        nowLocal.getSeconds(),
-      ),
-    );
-    return startOfSleepDay(now, sleepDayOffsetHrs);
+    const now = new Date();
+    return startOfSleepDayUtc(now, sleepDayOffsetHrs);
   }, [sleepDayOffsetHrs]);
 
   const days = useMemo(() => {
     const out: Date[] = [];
-    for (let i = 6; i >= 0; i--) out.push(addDays(currentSleepDayStart, -i));
+    for (let i = 6; i >= 0; i--) out.push(addDaysUtc(currentSleepDayStart, -i));
     return out;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSleepDayStart.getTime()]);
 
   const prevDays = useMemo(() => {
     const out: Date[] = [];
-    for (let i = 13; i >= 7; i--) out.push(addDays(currentSleepDayStart, -i));
+    for (let i = 13; i >= 7; i--) out.push(addDaysUtc(currentSleepDayStart, -i));
     return out;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSleepDayStart.getTime()]);
@@ -365,7 +321,7 @@ export default function SleepChart({
                           width: `${width}%`,
                           boxShadow: "0 0 8px var(--accent-glow)",
                         }}
-                        title={`${formatTime(seg.intervalStart)} → ${formatTime(seg.intervalEnd)} · ${formatDuration(seg.durationMs)}`}
+                        title={`${formatTimeUtc(seg.intervalStart)} → ${formatTimeUtc(seg.intervalEnd)} · ${formatDuration(seg.durationMs)}`}
                       />
                     );
                   })}
@@ -384,8 +340,8 @@ export default function SleepChart({
           {hovered ? (
             <span>
               <span className="text-[var(--accent)]">●</span>{" "}
-              {formatTime(hovered.intervalStart)} →{" "}
-              {formatTime(hovered.intervalEnd)}
+               {formatTimeUtc(hovered.intervalStart)} →{" "}
+               {formatTimeUtc(hovered.intervalEnd)}
               <span className="mx-2 opacity-40">|</span>
               <strong className="text-[var(--text-primary)]">
                 {formatDuration(hovered.durationMs)}
