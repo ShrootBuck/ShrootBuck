@@ -12,6 +12,26 @@ import {
   nowUtcWallClock,
 } from "~/lib/sleep";
 
+function parseFloatingDateTime(value: string) {
+  const match = /^(\d{4})-(\d{2})-(\d{2})[T ](\d{2}):(\d{2}):(\d{2})(?:\.\d+)?(?:Z|[+-]\d{2}:?\d{2})?$/.exec(
+    value,
+  );
+
+  if (!match) return new Date(NaN);
+
+  const [, year, month, day, hour, minute, second] = match;
+  return new Date(
+    Date.UTC(
+      Number(year),
+      Number(month) - 1,
+      Number(day),
+      Number(hour),
+      Number(minute),
+      Number(second),
+    ),
+  );
+}
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
@@ -55,7 +75,11 @@ export async function POST(request: NextRequest) {
   let payload: { startedAt?: string; endedAt?: string; secret?: string } = {};
 
   try {
-    payload = await request.json();
+    const rawPayload: unknown = await request.json();
+    if (!rawPayload || typeof rawPayload !== "object") {
+      return new NextResponse("Invalid JSON body", { status: 400 });
+    }
+    payload = rawPayload as typeof payload;
   } catch {
     return new NextResponse("Invalid JSON body", { status: 400 });
   }
@@ -74,8 +98,8 @@ export async function POST(request: NextRequest) {
     });
   }
 
-  const parsedStart = new Date(startedAt);
-  const parsedEnd = new Date(endedAt);
+  const parsedStart = parseFloatingDateTime(startedAt);
+  const parsedEnd = parseFloatingDateTime(endedAt);
 
   if (isNaN(parsedStart.getTime()) || isNaN(parsedEnd.getTime())) {
     return new NextResponse("Invalid date format", { status: 400 });
@@ -105,7 +129,7 @@ export async function POST(request: NextRequest) {
     const mergedStart = new Date(Math.min(...allStarts.map((d) => d.getTime())));
     const mergedEnd = new Date(Math.max(...allEnds.map((d) => d.getTime())));
 
-    const [deleted, created] = await prisma.$transaction([
+    const [, created] = await prisma.$transaction([
       prisma.sleepInterval.deleteMany({
         where: { id: { in: overlapping.map((i) => i.id) } },
       }),

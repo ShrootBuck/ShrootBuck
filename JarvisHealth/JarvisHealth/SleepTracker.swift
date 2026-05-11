@@ -212,9 +212,8 @@ class SleepTracker: ObservableObject {
         return formatter.string(from: date)
     }
 
-    private func forceUTCZString(from date: Date) -> String {
-        var calendar = Calendar.current
-        calendar.timeZone = TimeZone(identifier: "UTC")!
+    private func localWallClockString(from date: Date) -> String {
+        let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
         let year = components.year ?? 0
         let month = String(format: "%02d", components.month ?? 0)
@@ -222,7 +221,7 @@ class SleepTracker: ObservableObject {
         let hour = String(format: "%02d", components.hour ?? 0)
         let minute = String(format: "%02d", components.minute ?? 0)
         let second = String(format: "%02d", components.second ?? 0)
-        return "\(year)-\(month)-\(day)T\(hour):\(minute):\(second).000Z"
+        return "\(year)-\(month)-\(day)T\(hour):\(minute):\(second).000"
     }
     
     private func sendServerInterval(startDate: Date, endDate: Date, completion: @escaping (Bool) -> Void) {
@@ -234,8 +233,8 @@ class SleepTracker: ObservableObject {
             return
         }
 
-        let startedAt = forceUTCZString(from: startDate)
-        let endedAt = forceUTCZString(from: endDate)
+        let startedAt = localWallClockString(from: startDate)
+        let endedAt = localWallClockString(from: endDate)
 
         var request = URLRequest(url: serverURL)
         request.httpMethod = "POST"
