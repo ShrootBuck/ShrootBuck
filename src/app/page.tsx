@@ -76,8 +76,7 @@ export default async function Home() {
             problem-solving. Beyond academics, I train for{" "}
             <a href="/cp" target="_blank" rel="noopener">
               competitive programming
-            </a>{" "}
-            and the AMC 12/AIME. I enjoy building my own software projects
+            </a>. I enjoy building my own software projects
             whenever I get the chance (see my{" "}
             <a href="/github" target="_blank" rel="noopener">
               GitHub
