@@ -76,8 +76,9 @@ export default async function Home() {
             problem-solving. Beyond academics, I train for{" "}
             <a href="/cp" target="_blank" rel="noopener">
               competitive programming
-            </a>. I enjoy building my own software projects
-            whenever I get the chance (see my{" "}
+            </a>
+            . I enjoy building my own software projects whenever I get the
+            chance (see my{" "}
             <a href="/github" target="_blank" rel="noopener">
               GitHub
             </a>
@@ -109,7 +110,7 @@ export default async function Home() {
             </li>
             <li>
               <strong>Standardized Tests:</strong> 1500 SAT, 1480 PSAT, 34 ACT
-              (Math: 36, Science: 35)
+              (Math: 36, Science: 36)
             </li>
             <li>
               <strong>Competitions:</strong> Actively competing in USACO (Silver
