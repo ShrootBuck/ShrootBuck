@@ -61,8 +61,6 @@ export default async function Home() {
           <Link href="/research">Research</Link>
           <span className="nav-separator">/</span>
           <Link href="/photos">Photos</Link>
-          <span className="nav-separator">/</span>
-          <Link href="/sleep">Sleep</Link>
         </nav>
       </header>
 
