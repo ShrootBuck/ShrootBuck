@@ -20,18 +20,6 @@ const config = {
   async redirects() {
     return [
       {
-        source: "/resume",
-        destination:
-          "https://nctnabncanovcjnyqiid.supabase.co/storage/v1/object/public/PublicStorage/master-resume.pdf",
-        permanent: true,
-      },
-      {
-        source: "/irr",
-        destination:
-          "https://nctnabncanovcjnyqiid.supabase.co/storage/v1/object/public/PublicStorage/irr.pdf",
-        permanent: true,
-      },
-      {
         source: "/spcs",
         destination:
           "https://github.com/ShrootBuck/stanford-predictive-maintenance",
@@ -60,16 +48,6 @@ const config = {
       {
         source: "/twitter",
         destination: "https://x.com/ShrootBuck",
-        permanent: true,
-      },
-      {
-        source: "/blog",
-        destination: "https://tenbyte.org",
-        permanent: true,
-      },
-      {
-        source: "/email",
-        destination: "mailto:contact@zaydkrunz.com",
         permanent: true,
       },
     ];

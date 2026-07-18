@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 const posters = [
   {
     imageUrl:
-      "https://nctnabncanovcjnyqiid.supabase.co/storage/v1/object/public/PublicStorage/Sharma_Krunz_Weakly_Supervised_RFI_Poster.png",
+      "/Weakly_Supervised_RFI.png",
     alt: "Weakly Supervised RFI Poster",
   },
   {

@@ -5,6 +5,7 @@ import { Footer } from "~/components/ui/footer";
 const nerdFavicon = "https://fav.farm/🤓";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://zaydkrunz.com"),
   title: {
     default: "Zayd Krunz",
     template: "%s // Zayd Krunz",

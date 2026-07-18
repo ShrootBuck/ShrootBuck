@@ -47,7 +47,7 @@ export default function LocationPage() {
             </a>
             . The shortcut file can be downloaded{" "}
             <a
-              href="https://nctnabncanovcjnyqiid.supabase.co/storage/v1/object/public/PublicStorage/Upload%20Location%20To%20Server.shortcut"
+              href="UploadLocationToServer.shortcut"
               target="_blank"
               rel="noopener noreferrer"
             >

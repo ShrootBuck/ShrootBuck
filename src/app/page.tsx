@@ -1,4 +1,4 @@
-import { LucideMapPin, ExternalLink } from "lucide-react";
+import { ArrowUpRight, LucideMapPin, ExternalLink } from "lucide-react";
 import Link from "next/link";
 
 import { prisma } from "~/lib/utils";
@@ -97,14 +97,40 @@ export default async function Home() {
           </p>
         </section>
 
+        <section id="work">
+          <h3>Consulting Work</h3>
+          <Link href="/projects/tiger-mountain" className="featured-work-card">
+            <span className="featured-work-meta">
+              ASU EPICS <span aria-hidden="true">{"//"}</span> June 2026
+            </span>
+            <span className="featured-work-title">
+              Tiger Mountain Container Farm
+            </span>
+            <span className="featured-work-description">
+              Turned an infeasible sub-$100 desert-farming brief into a measured
+              pilot and a credible commercial procurement path.
+            </span>
+            <span className="featured-work-link">
+              Read the case study <ArrowUpRight size={16} aria-hidden="true" />
+            </span>
+          </Link>
+        </section>
+
         <section id="achievements">
           <h3>Achievements & Skills</h3>
           <ul>
-            <li>
-              <strong>Academic Excellence:</strong> 5s on AP exams (Chemistry,
-              Calculus AB, European History, Literature), currently taking AP
-              Seminar, AP Calc BC, AP Lang, APUSH, AP French, AP Physics 1, and
-              AP Computer Science A
+            <li className="ap-scores-item">
+              <strong>AP Scores</strong>
+              <span className="ap-score-line">
+                <strong className="ap-score-value">5</strong> in Chemistry,
+                Calculus AB, Calculus BC, European History, English Literature,
+                English Language, U.S. History, Seminar, Physics 1, and Computer
+                Science A
+              </span>
+              <span className="ap-score-line">
+                <strong className="ap-score-value">4</strong> in French and U.S.
+                Government
+              </span>
             </li>
             <li>
               <strong>Standardized Tests:</strong> 1500 SAT, 1480 PSAT, 34 ACT
@@ -136,7 +162,7 @@ export default async function Home() {
           </p>
           <p>
             <a
-              href="https://nctnabncanovcjnyqiid.supabase.co/storage/v1/object/public/PublicStorage/master-resume.pdf"
+              href="resume.pdf"
               target="_blank"
               rel="noopener"
               id="resume-link"
