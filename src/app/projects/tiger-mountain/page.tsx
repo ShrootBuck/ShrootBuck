@@ -10,7 +10,7 @@ import BackToHomeLink from "~/components/back-to-home-link";
 export const metadata: Metadata = {
   title: "Tiger Mountain Container Farm",
   description:
-    "How a three-person ASU EPICS team turned an infeasible desert container-farm brief into a measurable pilot plan and credible commercial procurement path.",
+    "How I turned an infeasible desert container-farm brief into a measurable pilot plan and credible commercial procurement path for Tiger Mountain Foundation.",
   openGraph: {
     type: "article",
     locale: "en_US",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     siteName: "Zayd Krunz",
     title: "Tiger Mountain Container Farm // Zayd Krunz",
     description:
-      "A sub-$100-per-unit target met 115°F heat. We redesigned the path forward.",
+      "A sub-$100-per-unit target met 115°F heat. I redesigned the path forward.",
     images: [
       {
         url: "/tiger-mountain/og.png",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Tiger Mountain Container Farm // Zayd Krunz",
     description:
-      "A sub-$100-per-unit target met 115°F heat. We redesigned the path forward.",
+      "A sub-$100-per-unit target met 115°F heat. I redesigned the path forward.",
     images: [
       {
         url: "/tiger-mountain/og.png",
@@ -59,16 +59,25 @@ export default function TigerMountainCaseStudy() {
             ASU EPICS // TIGER MOUNTAIN FOUNDATION // JUNE 2026
           </p>
           <h1>
-            A sub-$100-per-unit target met 115°F heat. We redesigned the path
+            A sub-$100-per-unit target met 115°F heat. I redesigned the path
             forward.
           </h1>
           <p className="case-study-lede">
-            Tiger Mountain Foundation needed year-round greens and herbs from a
-            solar-supported container farm in Phoenix. The budget could fund a
-            useful experiment but not commercial climate control, so our
-            three-person team designed a measurable pilot plan alongside a
-            separately funded procurement path.
+            Working within a three-person ASU EPICS team, I independently
+            developed the project&apos;s research, system concept, technical
+            analysis, and final deliverables. When Tiger Mountain
+            Foundation&apos;s budget proved insufficient for commercial climate
+            control, I split the recommendation into a measurable pilot plan
+            and a separately funded procurement path.
           </p>
+
+          <div className="case-study-role">
+            <span>MY ROLE</span>
+            <p>
+              Project lead; independently completed all research, system design,
+              technical analysis, report, and presentation development.
+            </p>
+          </div>
 
           <div className="case-study-actions" aria-label="Project documents">
             <a
@@ -153,7 +162,7 @@ export default function TigerMountainCaseStudy() {
             <div>
               <h2>Separate cheap learning from full-scale production.</h2>
               <p>
-                We reframed the work as two connected tracks: one to reduce
+                I reframed the work as two connected tracks: one to reduce
                 uncertainty on site, and one to fund and procure the system the
                 original brief actually described.
               </p>
@@ -224,8 +233,8 @@ export default function TigerMountainCaseStudy() {
               priority
             />
             <figcaption>
-              Concept architecture from the final design package. Each layer can
-              be piloted and upgraded independently.
+              The concept architecture I developed for the final design package.
+              Each layer can be piloted and upgraded independently.
             </figcaption>
           </figure>
 
@@ -256,11 +265,13 @@ export default function TigerMountainCaseStudy() {
             <div>
               <h2>Enough detail to act without fake precision.</h2>
               <p>
-                The team delivered a 12-page concept package and a seven-slide
-                recommendation deck covering thermal controls, crop modules,
-                solar load logic, procurement gates, phasing, and risk. Both are
-                explicitly concept-level: useful for pilot planning and
-                stakeholder review, not construction.
+                I authored the 12-page concept package and seven-slide
+                recommendation deck, covering thermal controls, crop modules,
+                solar-load logic, procurement gates, phasing, and risk. The
+                three-person EPICS team presented the materials to Tiger
+                Mountain Foundation. Both documents are explicitly
+                concept-level: useful for pilot planning and stakeholder review,
+                not construction.
               </p>
             </div>
           </div>
