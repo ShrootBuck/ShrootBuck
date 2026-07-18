@@ -106,7 +106,7 @@ export default async function Home() {
               Tiger Mountain Container Farm
             </span>
             <span className="featured-work-description">
-              I turned an infeasible sub-$100 brief into a measurable pilot plan
+              I turned an infeasible sub-$100-per-unit brief into a measurable pilot plan
               and credible commercial procurement path.
             </span>
             <span className="featured-work-link">
