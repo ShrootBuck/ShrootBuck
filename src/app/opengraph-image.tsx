@@ -81,20 +81,12 @@ export default function OpenGraphImage() {
             letterSpacing: 1,
           }}
         >
-          STUDENT&nbsp;&nbsp;//&nbsp;&nbsp;PROGRAMMER&nbsp;&nbsp;//&nbsp;&nbsp;BUILDER
+          STUDENT
+          <span style={{ color: "#4a4d53" }}>&nbsp;&nbsp;//&nbsp;&nbsp;</span>
+          PROGRAMMER
+          <span style={{ color: "#4a4d53" }}>&nbsp;&nbsp;//&nbsp;&nbsp;</span>
+          BUILDER
         </div>
-      </div>
-      <div
-        style={{
-          bottom: 30,
-          color: "#4a90e2",
-          display: "flex",
-          fontSize: 20,
-          position: "absolute",
-          right: 48,
-        }}
-      >
-        + / +
       </div>
     </div>,
     size,

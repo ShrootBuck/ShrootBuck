@@ -147,7 +147,7 @@ export default async function Home() {
               TypeScript, Lua, PHP
             </li>
             <li>
-              <strong>Frameworks & Tools:</strong> Pytorch, Pandas, NumPy,
+              <strong>Frameworks & Tools:</strong> PyTorch, Pandas, NumPy,
               SciPy, PostgreSQL, Next.js, React
             </li>
           </ul>
