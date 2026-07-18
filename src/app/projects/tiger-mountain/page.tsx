@@ -63,19 +63,20 @@ export default function TigerMountainCaseStudy() {
             forward.
           </h1>
           <p className="case-study-lede">
-            Working within a three-person ASU EPICS team, I independently
-            developed the project&apos;s research, system concept, technical
-            analysis, and final deliverables. When Tiger Mountain
-            Foundation&apos;s budget proved insufficient for commercial climate
-            control, I split the recommendation into a measurable pilot plan
-            and a separately funded procurement path.
+            Working within a three-person ASU EPICS team, I developed the
+            project&apos;s research, system architecture, technical analysis, and
+            final deliverables. When Tiger Mountain Foundation&apos;s budget proved
+            insufficient for commercial climate control, I split the
+            recommendation into a measurable pilot plan and a separately funded
+            procurement path.
           </p>
 
           <div className="case-study-role">
             <span>MY ROLE</span>
             <p>
-              Project lead; independently completed all research, system design,
-              technical analysis, report, and presentation development.
+              Project lead and sole technical contributor responsible for the
+              research, system architecture, technical analysis, and written
+              deliverables.
             </p>
           </div>
 
