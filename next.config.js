@@ -1,17 +1,25 @@
+import { readdirSync } from "node:fs";
+import path from "node:path";
+
 /**
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
  * for Docker builds.
  */
 await import("./src/env.js");
 
+const photoDirectory = path.join(process.cwd(), "public/photos");
+const photos = readdirSync(photoDirectory)
+  .filter((file) => /\.(avif|jpe?g|png|webp)$/i.test(file))
+  .sort((a, b) => b.localeCompare(a, undefined, { numeric: true }));
+
 /** @type {import("next").NextConfig} */
 const config = {
+  env: {
+    NEXT_PUBLIC_PHOTOS: JSON.stringify(photos),
+  },
   images: {
     minimumCacheTTL: 31536000, // 1 year (365 days * 24 hours * 60 minutes * 60 seconds)
     remotePatterns: [
-      {
-        hostname: "nctnabncanovcjnyqiid.supabase.co",
-      },
       {
         hostname: "raw.githubusercontent.com",
       },
