@@ -11,6 +11,19 @@ export const metadata: Metadata = {
     template: "%s // Zayd Krunz",
   },
   description: "Student, Programmer, Builder",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "/",
+    siteName: "Zayd Krunz",
+    title: "Zayd Krunz",
+    description: "Student, Programmer, Builder",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Zayd Krunz",
+    description: "Student, Programmer, Builder",
+  },
   icons: {
     icon: nerdFavicon,
     apple: nerdFavicon,
@@ -23,10 +36,6 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Student, Programmer, Builder" />
-      </head>
       <body>
         {children}
         <Footer />

@@ -4,6 +4,34 @@ import BackToHomeLink from "~/components/back-to-home-link";
 
 export const metadata: Metadata = {
   title: "Research",
+  description: "Research posters and papers by Zayd Krunz.",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "/research",
+    siteName: "Zayd Krunz",
+    title: "Research // Zayd Krunz",
+    description: "Research posters and papers by Zayd Krunz.",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Zayd Krunz — Student, Programmer, Builder",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Research // Zayd Krunz",
+    description: "Research posters and papers by Zayd Krunz.",
+    images: [
+      {
+        url: "/opengraph-image",
+        alt: "Zayd Krunz — Student, Programmer, Builder",
+      },
+    ],
+  },
 };
 
 const posters = [

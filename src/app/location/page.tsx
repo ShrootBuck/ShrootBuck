@@ -4,6 +4,34 @@ import BackToHomeLink from "~/components/back-to-home-link";
 
 export const metadata: Metadata = {
   title: "Location",
+  description: "How Zayd's live location and local-time tracker works.",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "/location",
+    siteName: "Zayd Krunz",
+    title: "Location // Zayd Krunz",
+    description: "How Zayd's live location and local-time tracker works.",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Zayd Krunz — Student, Programmer, Builder",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Location // Zayd Krunz",
+    description: "How Zayd's live location and local-time tracker works.",
+    images: [
+      {
+        url: "/opengraph-image",
+        alt: "Zayd Krunz — Student, Programmer, Builder",
+      },
+    ],
+  },
 };
 
 export default function LocationPage() {

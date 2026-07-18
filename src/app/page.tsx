@@ -68,8 +68,7 @@ export default async function Home() {
         <section id="about">
           <h3>About Me</h3>
           <p>
-            I&apos;m a junior at BASIS Tucson North currently taking seven AP
-            classes while pursuing my passion for programming. I&apos;m always
+            I&apos;m a senior at BASIS Tucson North pursuing my passion for programming. I&apos;m always
             pushing myself to excel in mathematics, computer science, and
             problem-solving. Beyond academics, I train for{" "}
             <a href="/cp" target="_blank" rel="noopener">
@@ -107,8 +106,8 @@ export default async function Home() {
               Tiger Mountain Container Farm
             </span>
             <span className="featured-work-description">
-              Turned an infeasible sub-$100 desert-farming brief into a measured
-              pilot and a credible commercial procurement path.
+              Turned an infeasible sub-$100 brief into a measurable pilot plan
+              and credible commercial procurement path.
             </span>
             <span className="featured-work-link">
               Read the case study <ArrowUpRight size={16} aria-hidden="true" />

@@ -10,11 +10,15 @@ import BackToHomeLink from "~/components/back-to-home-link";
 export const metadata: Metadata = {
   title: "Tiger Mountain Container Farm",
   description:
-    "How a three-person ASU EPICS team turned an infeasible desert container-farm brief into a measured pilot and a credible commercial procurement path.",
+    "How a three-person ASU EPICS team turned an infeasible desert container-farm brief into a measurable pilot plan and credible commercial procurement path.",
   openGraph: {
+    type: "article",
+    locale: "en_US",
+    url: "/projects/tiger-mountain",
+    siteName: "Zayd Krunz",
     title: "Tiger Mountain Container Farm // Zayd Krunz",
     description:
-      "A sub-$100 target met 115°F heat. We redesigned the path forward.",
+      "A sub-$100-per-unit target met 115°F heat. We redesigned the path forward.",
     images: [
       {
         url: "/tiger-mountain/og.png",
@@ -26,7 +30,15 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/tiger-mountain/og.png"],
+    title: "Tiger Mountain Container Farm // Zayd Krunz",
+    description:
+      "A sub-$100-per-unit target met 115°F heat. We redesigned the path forward.",
+    images: [
+      {
+        url: "/tiger-mountain/og.png",
+        alt: "Tiger Mountain Container Farm case study",
+      },
+    ],
   },
 };
 
@@ -47,13 +59,14 @@ export default function TigerMountainCaseStudy() {
             ASU EPICS // TIGER MOUNTAIN FOUNDATION // JUNE 2026
           </p>
           <h1>
-            A sub-$100 target met 115°F heat. We redesigned the path forward.
+            A sub-$100-per-unit target met 115°F heat. We redesigned the path
+            forward.
           </h1>
           <p className="case-study-lede">
             Tiger Mountain Foundation needed year-round greens and herbs from a
             solar-supported container farm in Phoenix. The budget could fund a
             useful experiment but not commercial climate control, so our
-            three-person team split the work into a measured pilot and a
+            three-person team designed a measurable pilot plan alongside a
             separately funded procurement path.
           </p>
 
@@ -151,9 +164,9 @@ export default function TigerMountainCaseStudy() {
             <div className="track-card">
               <div className="track-card-topline">
                 <span>TRACK A</span>
-                <span>BUILD NOW</span>
+                <span>PILOT PLAN</span>
               </div>
-              <h3>Measured passive pilot</h3>
+              <h3>Measurable passive pilot</h3>
               <p>
                 Shade the water path, purge hot standing water, buffer the
                 reservoir, and log root-zone temperature, pH, EC, power, and
@@ -181,8 +194,8 @@ export default function TigerMountainCaseStudy() {
 
           <blockquote className="case-study-quote">
             <span>THE REFRAME</span>
-            The pilot&apos;s job was to reduce uncertainty, not impersonate the
-            finished farm.
+            The pilot plan&apos;s job was to reduce uncertainty, not impersonate
+            the finished farm.
           </blockquote>
         </section>
 
