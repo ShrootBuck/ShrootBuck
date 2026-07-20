@@ -82,7 +82,16 @@ export default async function Home() {
             ).
           </p>
           <p>
-            My latest project,{" "}
+            I&apos;m currently working on{" "}
+            <a href="https://tenbyte.org" target="_blank" rel="noopener">
+              TenByte
+            </a>
+            , an AI grading platform that turns assignment files and student
+            work into consistent grades and feedback while keeping teachers in
+            control.
+          </p>
+          <p>
+            I also built{" "}
             <a
               href="https://nudge.zaydkrunz.com"
               target="_blank"
@@ -90,9 +99,9 @@ export default async function Home() {
             >
               Nudge
             </a>
-            , helps competitive programmers learn from Codeforces problems
-            through progressive hints, encouraging real problem-solving instead
-            of jumping straight to editorials.
+            , which helps competitive programmers learn from Codeforces
+            problems through progressive hints. It&apos;s mostly finished, so
+            these days I&apos;m keeping it running and having fun with it.
           </p>
         </section>
 
