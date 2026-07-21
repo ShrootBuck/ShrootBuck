@@ -100,8 +100,11 @@ export default async function Home() {
               Nudge
             </a>
             , which helps competitive programmers learn from Codeforces
-            problems through progressive hints. It&apos;s mostly finished, so
-            these days I&apos;m keeping it running and having fun with it.
+            problems through progressive hints. Nudge came before TenByte and
+            served as its proving ground for sandboxed LLM agents, autonomous
+            grading and generation, and agent orchestration. It&apos;s mostly
+            finished, so these days I&apos;m keeping it running and having fun with
+            it.
           </p>
         </section>
 
