@@ -49,6 +49,18 @@ const config = {
         permanent: true,
       },
       {
+        source: "/irr",
+        destination:
+          "https://raw.githubusercontent.com/ShrootBuck/Seminar-IRR/main/IRR.pdf",
+        permanent: true,
+      },
+      {
+        source: "/iwa",
+        destination:
+          "https://raw.githubusercontent.com/ShrootBuck/Seminar-IWA/main/IWA.pdf",
+        permanent: true,
+      },
+      {
         source: "/x",
         destination: "https://x.com/ShrootBuck",
         permanent: true,
