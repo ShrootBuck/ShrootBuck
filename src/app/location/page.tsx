@@ -4,14 +4,16 @@ import BackToHomeLink from "~/components/back-to-home-link";
 
 export const metadata: Metadata = {
   title: "Location",
-  description: "How Zayd's live location and local-time tracker works.",
+  description: "How Zayd's approximate location and local-time tracker works.",
+  alternates: { canonical: "/location" },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "/location",
     siteName: "Zayd Krunz",
     title: "Location // Zayd Krunz",
-    description: "How Zayd's live location and local-time tracker works.",
+    description:
+      "How Zayd's approximate location and local-time tracker works.",
     images: [
       {
         url: "/opengraph-image",
@@ -24,7 +26,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Location // Zayd Krunz",
-    description: "How Zayd's live location and local-time tracker works.",
+    description:
+      "How Zayd's approximate location and local-time tracker works.",
     images: [
       {
         url: "/opengraph-image",
@@ -52,15 +55,14 @@ export default function LocationPage() {
           <h3>The System</h3>
           <p>
             It&apos;s pretty simple. At sunrise and sunset, an iOS Shortcut
-            sends my iPhone&apos;s current location to the{" "}
+            sends my iPhone&apos;s approximate current location to the{" "}
             <code>/api/location</code> route in a POST request. The server then
             stores the data in a database and serves it to visitors.
           </p>
           <p>
-            This gives you a real-time view of where I am in the world as well
-            as the current local time, updated automatically throughout the day.
-            It&apos;s useful for friends and family, and honestly just a fun
-            project.
+            This gives you a rough snapshot of where I am in the world, not a
+            live GPS feed, plus the current local time. It&apos;s useful for
+            friends and family, and honestly just a fun project.
           </p>
 
           <p>
@@ -74,11 +76,7 @@ export default function LocationPage() {
               GitHub
             </a>
             . The shortcut file can be downloaded{" "}
-            <a
-              href="UploadLocationToServer.shortcut"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="/UploadLocationToServer.shortcut" download>
               here
             </a>
             .

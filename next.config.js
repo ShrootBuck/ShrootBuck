@@ -14,6 +14,7 @@ const photos = readdirSync(photoDirectory)
 
 /** @type {import("next").NextConfig} */
 const config = {
+  poweredByHeader: false,
   env: {
     NEXT_PUBLIC_PHOTOS: JSON.stringify(photos),
   },
@@ -24,6 +25,25 @@ const config = {
         hostname: "raw.githubusercontent.com",
       },
     ],
+  },
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
+          },
+        ],
+      },
+    ];
   },
   async redirects() {
     return [
@@ -50,14 +70,12 @@ const config = {
       },
       {
         source: "/irr",
-        destination:
-          "https://raw.githubusercontent.com/ShrootBuck/Seminar-IRR/main/IRR.pdf",
+        destination: "/irr.pdf",
         permanent: true,
       },
       {
         source: "/iwa",
-        destination:
-          "https://raw.githubusercontent.com/ShrootBuck/Seminar-IWA/main/IWA.pdf",
+        destination: "/iwa.pdf",
         permanent: true,
       },
       {

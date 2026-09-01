@@ -1,16 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import {
-  ArrowUpRight,
-  FileText,
-  Presentation,
-} from "lucide-react";
+import { ArrowUpRight, FileText, Presentation } from "lucide-react";
 import BackToHomeLink from "~/components/back-to-home-link";
 
 export const metadata: Metadata = {
   title: "Tiger Mountain Container Farm",
   description:
     "How I turned an infeasible desert container-farm brief into a measurable pilot plan and credible commercial procurement path for Tiger Mountain Foundation.",
+  alternates: { canonical: "/projects/tiger-mountain" },
   openGraph: {
     type: "article",
     locale: "en_US",
@@ -64,9 +61,9 @@ export default function TigerMountainCaseStudy() {
           </h1>
           <p className="case-study-lede">
             Working within a three-person ASU EPICS team, I developed the
-            project&apos;s research, system architecture, technical analysis, and
-            final deliverables. When Tiger Mountain Foundation&apos;s budget proved
-            insufficient for commercial climate control, I split the
+            project&apos;s research, system architecture, technical analysis,
+            and final deliverables. When Tiger Mountain Foundation&apos;s budget
+            proved insufficient for commercial climate control, I split the
             recommendation into a measurable pilot plan and a separately funded
             procurement path.
           </p>

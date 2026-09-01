@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import BackToHomeLink from "~/components/back-to-home-link";
 
 export const metadata: Metadata = {
   title: "Calculator",
   description: "A browser-based NumWorks calculator simulator.",
+  alternates: { canonical: "/calculator" },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -38,14 +38,20 @@ export default function CalculatorPage() {
   return (
     <div className="container">
       <BackToHomeLink />
-      <div className="flex justify-center">
+      <header>
+        <h1>Calculator</h1>
+        <h2>A NumWorks simulator that runs entirely in your browser.</h2>
+      </header>
+      <section className="calculator-shell" aria-label="Calculator simulator">
         <iframe
           src="https://www.numworks.com/simulator/embed/"
-          width="368px"
-          height="720px"
+          title="Interactive NumWorks calculator simulator"
+          width="368"
+          height="720"
+          loading="lazy"
+          className="calculator-frame"
         />
-      </div>
-      <Script src="https://www.numworks.com/simulator/embed.js" />
+      </section>
     </div>
   );
 }

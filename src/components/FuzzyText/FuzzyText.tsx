@@ -26,9 +26,16 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
   hoverIntensity = 0.5,
 }) => {
   const canvasRef = useRef<FuzzyTextCanvas>(null);
+  const text = React.Children.toArray(children)
+    .map((child) =>
+      typeof child === "string" || typeof child === "number"
+        ? String(child)
+        : "",
+    )
+    .join("");
 
   useEffect(() => {
-    let animationFrameId: number;
+    let animationFrameId = 0;
     let isCancelled = false;
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -60,14 +67,6 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
         numericFontSize = parseFloat(computedSize);
         document.body.removeChild(temp);
       }
-
-      const text = React.Children.toArray(children)
-        .map((child) =>
-          typeof child === "string" || typeof child === "number"
-            ? String(child)
-            : "",
-        )
-        .join("");
 
       const offscreen = document.createElement("canvas");
       const offCtx = offscreen.getContext("2d");
@@ -112,7 +111,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
       let isHovering = false;
       const fuzzRange = 30;
 
-      const run = () => {
+      const draw = () => {
         if (isCancelled) return;
         ctx.clearRect(
           -fuzzRange,
@@ -135,10 +134,22 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
             1,
           );
         }
+      };
+
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      const run = () => {
+        draw();
         animationFrameId = window.requestAnimationFrame(run);
       };
 
-      run();
+      if (prefersReducedMotion) {
+        ctx.drawImage(offscreen, 0, 0);
+      } else {
+        run();
+      }
 
       const isInsideTextArea = (x: number, y: number) =>
         x >= interactiveLeft &&
@@ -205,7 +216,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
       }
     };
   }, [
-    children,
+    text,
     fontSize,
     fontWeight,
     fontFamily,
@@ -215,7 +226,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
     hoverIntensity,
   ]);
 
-  return <canvas ref={canvasRef} />;
+  return <canvas ref={canvasRef} aria-hidden="true" />;
 };
 
 export default FuzzyText;

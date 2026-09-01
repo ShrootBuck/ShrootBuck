@@ -2,19 +2,11 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Clock } from "lucide-react";
+import { formatCurrentTime } from "~/lib/time";
 
 interface LiveTimeProps {
   timezone: string;
   initialTime: string;
-}
-
-function formatCurrentTime(timezone: string) {
-  return new Intl.DateTimeFormat("en-US", {
-    hour: "numeric",
-    minute: "2-digit",
-    hour12: true,
-    timeZone: timezone,
-  }).format(new Date());
 }
 
 export function LiveTime({ timezone, initialTime }: LiveTimeProps) {
@@ -45,7 +37,7 @@ export function LiveTime({ timezone, initialTime }: LiveTimeProps) {
 
   return (
     <div className="header-meta">
-      <Clock size={16} className="icon" />
+      <Clock size={16} className="icon" aria-hidden="true" />
       <span>
         <strong>Time for me:</strong> {time}
       </span>

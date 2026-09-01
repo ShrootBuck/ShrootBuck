@@ -2,15 +2,26 @@ import next from "eslint-config-next";
 import tseslint from "typescript-eslint";
 
 const tsconfigRootDir = new URL(".", import.meta.url).pathname;
+const typeScriptConfigs = [
+  ...tseslint.configs.recommendedTypeChecked,
+  ...tseslint.configs.stylisticTypeChecked,
+].map((config) => {
+  if ("plugins" in config) {
+    const { plugins: _plugins, ...configWithoutPlugins } = config;
+    return { ...configWithoutPlugins, files: ["**/*.{ts,tsx}"] };
+  }
+
+  return { ...config, files: ["**/*.{ts,tsx}"] };
+});
 
 export default [
   {
     ignores: ["eslint.config.js"],
   },
   ...next,
-  ...tseslint.configs.recommendedTypeChecked,
-  ...tseslint.configs.stylisticTypeChecked,
+  ...typeScriptConfigs,
   {
+    files: ["**/*.{ts,tsx}"],
     languageOptions: {
       parserOptions: {
         projectService: true,

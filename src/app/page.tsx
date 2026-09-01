@@ -1,21 +1,17 @@
-import { ArrowUpRight, LucideMapPin, ExternalLink } from "lucide-react";
+import { ExternalLink, MapPin } from "lucide-react";
 import Link from "next/link";
 
 import { prisma } from "~/lib/utils";
 import { LiveTime } from "~/components/live-time";
+import {
+  FALLBACK_TIME_ZONE,
+  formatCurrentTime,
+  isValidTimeZone,
+} from "~/lib/time";
 
 interface LocationResponse {
   location: string;
   timezone: string;
-}
-
-function formatCurrentTime(timezone: string) {
-  return new Intl.DateTimeFormat("en-US", {
-    hour: "numeric",
-    minute: "2-digit",
-    hour12: true,
-    timeZone: timezone,
-  }).format(new Date());
 }
 
 async function getLocation(): Promise<LocationResponse> {
@@ -25,10 +21,13 @@ async function getLocation(): Promise<LocationResponse> {
     });
     return {
       location: currentLocation?.value ?? "Tucson, AZ",
-      timezone: currentLocation?.timezone ?? "America/Phoenix",
+      timezone:
+        currentLocation?.timezone && isValidTimeZone(currentLocation.timezone)
+          ? currentLocation.timezone
+          : FALLBACK_TIME_ZONE,
     };
   } catch {
-    return { location: "Tucson, AZ", timezone: "America/Phoenix" };
+    return { location: "Tucson, AZ", timezone: FALLBACK_TIME_ZONE };
   }
 }
 
@@ -38,7 +37,7 @@ export default async function Home() {
 
   return (
     <div className="container">
-      <header>
+      <header className="home-hero">
         <h1>Zayd Krunz</h1>
         <h2>
           Student
@@ -49,17 +48,23 @@ export default async function Home() {
         </h2>
 
         <div className="header-meta">
-          <LucideMapPin size={16} className="icon" />
+          <MapPin size={16} className="icon" aria-hidden="true" />
           <Link href="/location">
-            <strong>Currently:</strong> {currentLocation ?? "Tucson, AZ"}
+            <strong>Currently:</strong> {currentLocation}
           </Link>
         </div>
 
         <LiveTime timezone={timezone} initialTime={initialTime} />
 
-        <nav className="header-nav">
+        <nav className="header-nav" aria-label="Primary navigation">
+          <Link href="/projects">Projects</Link>
+          <span className="nav-separator" aria-hidden="true">
+            /
+          </span>
           <Link href="/research">Research</Link>
-          <span className="nav-separator">/</span>
+          <span className="nav-separator" aria-hidden="true">
+            /
+          </span>
           <Link href="/photos">Photos</Link>
         </nav>
       </header>
@@ -68,70 +73,34 @@ export default async function Home() {
         <section id="about">
           <h3>About Me</h3>
           <p>
-            I&apos;m a senior at BASIS Tucson North pursuing my passion for programming. I&apos;m always
-            pushing myself to excel in mathematics, computer science, and
-            problem-solving. Beyond academics, I train for{" "}
-            <a href="/cp" target="_blank" rel="noopener">
+            I&apos;m a senior at BASIS Tucson North who likes hard problems and
+            shipping useful software. I spend most of my time on mathematics,
+            computer science, AI systems, and{" "}
+            <a href="/cp" target="_blank" rel="noopener noreferrer">
               competitive programming
             </a>
-            . I enjoy building my own software projects whenever I get the
-            chance (see my{" "}
-            <a href="/github" target="_blank" rel="noopener">
+            .
+          </p>
+          <p>
+            I learn by building, usually somewhere between a research question
+            and a product. The code, experiments, and questionable commit
+            messages live on my{" "}
+            <a href="/github" target="_blank" rel="noopener noreferrer">
               GitHub
             </a>
-            ).
+            .
           </p>
-          <p>
-            I&apos;m currently working on{" "}
-            <a href="https://tenbyte.org" target="_blank" rel="noopener">
-              TenByte
-            </a>
-            , an AI grading platform that turns assignment files and student
-            work into consistent grades and feedback while keeping teachers in
-            control.
-          </p>
-          <p>
-            I also built{" "}
-            <a
-              href="https://nudge.zaydkrunz.com"
-              target="_blank"
-              rel="noopener"
-            >
-              Nudge
-            </a>
-            , which helps competitive programmers learn from Codeforces
-            problems through progressive hints. Nudge came before TenByte and
-            served as its proving ground for sandboxed LLM agents, autonomous
-            grading and generation, and agent orchestration. It&apos;s mostly
-            finished, so these days I&apos;m keeping it running and having fun with
-            it.
-          </p>
-        </section>
-
-        <section id="work">
-          <h3>Consulting Work</h3>
-          <Link href="/projects/tiger-mountain" className="featured-work-card">
-            <span className="featured-work-meta">
-              ASU EPICS <span aria-hidden="true">{"//"}</span> June 2026
-            </span>
-            <span className="featured-work-title">
-              Tiger Mountain Container Farm
-            </span>
-            <span className="featured-work-description">
-              I turned an infeasible sub-$100-per-unit brief into a measurable pilot plan
-              and credible commercial procurement path.
-            </span>
-            <span className="featured-work-link">
-              Read the case study <ArrowUpRight size={16} aria-hidden="true" />
-            </span>
-          </Link>
         </section>
 
         <section id="achievements">
           <h3>Achievements & Skills</h3>
           <ul>
+            <li>
+              <strong>National Merit:</strong> 2027 National Merit Scholarship
+              Semifinalist
+            </li>
             <li className="ap-scores-item">
-              <strong>AP Scores</strong>
+              <strong>AP Scores:</strong>
               <span className="ap-score-line">
                 <strong className="ap-score-value">5</strong> in Chemistry,
                 Calculus AB, Calculus BC, European History, English Literature,
@@ -150,7 +119,7 @@ export default async function Home() {
             <li>
               <strong>Competitions:</strong> Actively competing in USACO (Silver
               division) and{" "}
-              <a href="/codeforces" target="_blank">
+              <a href="/codeforces" target="_blank" rel="noopener noreferrer">
                 Codeforces
               </a>
             </li>
@@ -173,14 +142,14 @@ export default async function Home() {
           </p>
           <p>
             <a
-              href="resume.pdf"
+              href="/resume.pdf"
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
               id="resume-link"
               aria-label="View Resume (opens in a new tab)"
             >
               View Resume
-              <ExternalLink size={16} />
+              <ExternalLink size={16} aria-hidden="true" />
             </a>
           </p>
         </section>
@@ -191,15 +160,15 @@ export default async function Home() {
             The best way to reach me is via{" "}
             <a href="mailto:contact@zaydkrunz.com">email</a>. You can also find
             me on{" "}
-            <a href="/github" target="_blank" rel="noopener">
+            <a href="/github" target="_blank" rel="noopener noreferrer">
               GitHub
             </a>
             ,{" "}
-            <a href="/x" target="_blank" rel="noopener">
+            <a href="/x" target="_blank" rel="noopener noreferrer">
               Twitter
             </a>
             , and{" "}
-            <a href="/codeforces" target="_blank" rel="noopener">
+            <a href="/codeforces" target="_blank" rel="noopener noreferrer">
               Codeforces
             </a>
             . I&apos;m always open to collaborating, so feel free to reach out!

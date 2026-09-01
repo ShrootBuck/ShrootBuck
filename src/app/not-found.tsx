@@ -5,13 +5,15 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div className="relative flex min-h-screen flex-col">
+    <main className="relative flex min-h-[75dvh] flex-col">
+      <h1 className="sr-only">404: Page not found</h1>
       <div className="flex justify-start p-5">
         <Link
           id="not-found-back"
           href="/"
           className="inline-block w-fit max-w-full"
         >
+          <span className="sr-only">Back to home</span>
           <FuzzyText
             baseIntensity={0.1}
             hoverIntensity={0.25}
@@ -35,7 +37,6 @@ export default function NotFound() {
             404
           </FuzzyText>
         </div>
-        <div className="mt-2"></div>
         <div className="max-w-full overflow-hidden">
           <FuzzyText
             baseIntensity={0.1}
@@ -48,6 +49,6 @@ export default function NotFound() {
           </FuzzyText>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
