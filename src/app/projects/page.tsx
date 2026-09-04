@@ -48,22 +48,6 @@ const projects = [
   },
   {
     number: "02",
-    title: "Jackbot",
-    href: "https://github.com/ShrootBuck/jackbot",
-    description:
-      "A Jackaroo bot trained through self-play, with a fast Rust game engine and a Python/PyTorch training stack.",
-    external: true,
-  },
-  {
-    number: "03",
-    title: "Sonora",
-    href: "https://sonora.party/",
-    description:
-      "A browser tool that animates a photo, cuts audio, and exports a 1080 × 1920 video at 60 FPS without uploading your media.",
-    external: true,
-  },
-  {
-    number: "04",
     title: "Nudge",
     href: "https://nudge.zaydkrunz.com",
     description:
@@ -71,7 +55,31 @@ const projects = [
     external: true,
   },
   {
+    number: "03",
+    title: "Pickle Balls",
+    href: "https://pickle-balls.com",
+    description:
+      "A private schoolwork accountability app with daily photo-proofed tasks verified by friends before the Phoenix midnight deadline.",
+    external: true,
+  },
+  {
+    number: "04",
+    title: "Sonora",
+    href: "https://sonora.party/",
+    description:
+      "A browser tool that animates a photo, cuts audio, and exports a 1080 × 1920 video at 60 FPS without uploading your media.",
+    external: true,
+  },
+  {
     number: "05",
+    title: "Jackbot",
+    href: "https://github.com/ShrootBuck/jackbot",
+    description:
+      "A Jackaroo bot trained through self-play, with a fast Rust game engine and a Python/PyTorch training stack.",
+    external: true,
+  },
+  {
+    number: "06",
     title: "Tiger Mountain Container Farm",
     href: "/projects/tiger-mountain",
     description:
