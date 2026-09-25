@@ -113,7 +113,7 @@ export default async function Home() {
               </span>
             </li>
             <li>
-              <strong>Standardized Tests:</strong> 1500 SAT, 1480 PSAT, 34 ACT
+              <strong>Standardized Tests:</strong> 1570 SAT, 1480 PSAT, 34 ACT
               (Math: 36, Science: 36)
             </li>
             <li>
