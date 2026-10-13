@@ -254,6 +254,86 @@ h3::after {
   transform: translate(2px, -2px);
 }
 
+.presentations-page {
+  width: 100%;
+}
+
+.presentations-page header::before {
+  max-width: 100%;
+}
+
+.presentation-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.presentation-card {
+  overflow: hidden;
+  border: 1px solid var(--border-bright);
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  transition: border-color 0.2s ease;
+}
+
+.presentation-card:hover,
+.presentation-card:focus-within {
+  border-color: var(--accent);
+}
+
+.presentation-main {
+  display: block;
+  padding: 0;
+}
+
+.presentation-main::after {
+  display: none;
+}
+
+.presentation-main:focus-visible {
+  outline-offset: -3px;
+}
+
+.presentation-preview {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid var(--border-bright);
+}
+
+.presentation-copy {
+  padding: clamp(1.2rem, 4vw, 1.8rem);
+}
+
+.presentation-copy h3 {
+  display: block;
+  margin: 0 0 0.65rem;
+  color: var(--text-primary);
+  font-size: clamp(1.05rem, 3vw, 1.3rem);
+  line-height: 1.45;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.presentation-copy h3::after {
+  display: none;
+}
+
+.presentation-copy p {
+  margin: 0;
+  font-size: 0.84rem;
+}
+
+.presentation-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+}
+
+.presentation-action {
+  margin-top: 1.2rem;
+}
+
 .calculator-shell {
   display: flex;
   justify-content: center;

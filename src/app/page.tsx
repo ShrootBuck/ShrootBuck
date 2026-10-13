@@ -65,6 +65,10 @@ export default async function Home() {
           <span className="nav-separator" aria-hidden="true">
             /
           </span>
+          <Link href="/presentations">Presentations</Link>
+          <span className="nav-separator" aria-hidden="true">
+            /
+          </span>
           <Link href="/photos">Photos</Link>
         </nav>
       </header>
