@@ -72,6 +72,14 @@ const projects = [
   },
   {
     number: "05",
+    title: "Aux",
+    href: "https://github.com/ShrootBuck/aux",
+    description:
+      "A native macOS menu bar app that shares Apple Music playback on Discord, built with SwiftUI and AppKit.",
+    external: true,
+  },
+  {
+    number: "06",
     title: "Jackbot",
     href: "https://github.com/ShrootBuck/jackbot",
     description:
@@ -79,7 +87,7 @@ const projects = [
     external: true,
   },
   {
-    number: "06",
+    number: "07",
     title: "Tiger Mountain Container Farm",
     href: "/projects/tiger-mountain",
     description:
