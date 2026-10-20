@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { prisma } from "~/lib/utils";
 import { LiveTime } from "~/components/live-time";
+import { ContactEmail } from "~/components/contact-email";
 import {
   FALLBACK_TIME_ZONE,
   formatCurrentTime,
@@ -162,8 +163,7 @@ export default async function Home() {
           <h3>Contact</h3>
           <p>
             The best way to reach me is via{" "}
-            <a href="mailto:contact@zaydkrunz.com">email</a>. You can also find
-            me on{" "}
+            <ContactEmail /> (randomized address). You can also find me on{" "}
             <a href="/github" target="_blank" rel="noopener noreferrer">
               GitHub
             </a>
