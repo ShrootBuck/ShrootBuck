@@ -1,4 +1,4 @@
-const STORAGE_KEY = "contact-dish-alias";
+const STORAGE_KEY = "contact-email-alias";
 
 export const FALLBACK_CONTACT_EMAIL = "contact@zaydkrunz.com";
 
@@ -7,27 +7,16 @@ let emailPromise: Promise<string> | undefined;
 async function loadContactEmail(): Promise<string> {
   try {
     const savedAlias = window.localStorage.getItem(STORAGE_KEY);
-    if (
-      savedAlias &&
-      savedAlias.length <= 64 &&
-      /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(savedAlias)
-    ) {
+    if (savedAlias && /^[a-z0-9]{16}$/.test(savedAlias)) {
       return `${savedAlias}@zaydkrunz.com`;
     }
   } catch {
     // A browser can block storage while still allowing the email link to work.
   }
 
-  const { faker } = await import("@faker-js/faker/locale/en");
-  const alias = faker.food
-    .dish()
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/'/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .slice(0, 64)
-    .replace(/^-+|-+$/g, "");
+  const { customAlphabet } = await import("nanoid");
+  const generateAlias = customAlphabet("abcdefghijklmnopqrstuvwxyz0123456789", 16);
+  const alias = generateAlias();
 
   try {
     window.localStorage.setItem(STORAGE_KEY, alias);

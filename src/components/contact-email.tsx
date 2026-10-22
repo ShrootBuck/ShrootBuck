@@ -15,7 +15,7 @@ export function ContactEmail() {
         if (active) setEmail(address);
       })
       .catch(() => {
-        // Preserve the working fallback if the Faker chunk cannot be loaded.
+        // Preserve the working fallback if address generation fails.
       });
 
     return () => {
