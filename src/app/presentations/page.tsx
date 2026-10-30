@@ -5,7 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import BackToHomeLink from "~/components/back-to-home-link";
 import navierStokesPreview from "../../../public/presentations/navier-stokes.png";
 import extropicPreview from "../../../public/presentations/extropic.png";
-import proofsPreview from "../../../public/presentations/proofs.jpg";
+import proofsPreview from "../../../public/presentations/proofs.png";
 
 const description =
   "Interactive presentations on mathematics, physics, and computing by Zayd Krunz.";
