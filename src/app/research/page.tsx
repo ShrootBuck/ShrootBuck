@@ -51,6 +51,12 @@ const posters = [
 
 const papers = [
   {
+    type: "CAPSTONE LAW // CASE STUDY",
+    title:
+      "Turkish Airlines Flight 981: Causation, Liability, Damages, and Ethical Responsibility",
+    href: "/turkish-airlines.pdf",
+  },
+  {
     type: "AP SEMINAR // INDIVIDUAL WRITTEN ARGUMENT",
     title: "How AI Sycophancy Exacerbates the Crisis of Loneliness",
     href: "/iwa.pdf",
