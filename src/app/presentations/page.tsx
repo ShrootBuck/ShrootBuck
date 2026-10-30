@@ -3,6 +3,9 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
 import BackToHomeLink from "~/components/back-to-home-link";
+import navierStokesPreview from "../../../public/presentations/navier-stokes.png";
+import extropicPreview from "../../../public/presentations/extropic.png";
+import proofsPreview from "../../../public/presentations/proofs.jpg";
 
 const description =
   "Interactive presentations on mathematics, physics, and computing by Zayd Krunz.";
@@ -35,6 +38,7 @@ const presentations = [
     description:
       "The Navier-Stokes problem, what it means for a fluid equation to break down, and the role of AI in mathematical discovery.",
     href: "https://navier-stokes.zaydkrunz.com/presenter",
+    preview: navierStokesPreview,
   },
   {
     slug: "extropic",
@@ -42,12 +46,21 @@ const presentations = [
     description:
       "A look at Extropic and thermodynamic computing: what happens when a chip computes with thermal noise?",
     href: "https://extropic.zaydkrunz.com/presenter",
+    preview: extropicPreview,
+  },
+  {
+    slug: "proofs",
+    title: "Prove It",
+    description:
+      "An introduction to mathematical proof, from counterexamples and logic to induction, contradiction, and a live Proof or Bluff game.",
+    href: "https://proofs.zaydkrunz.com/#/presenter/1",
+    preview: proofsPreview,
   },
 ] as const;
 
 export default function PresentationsPage() {
   return (
-    <div className="container presentations-page">
+    <div className="presentations-page container">
       <BackToHomeLink />
       <header>
         <h1>Presentations</h1>
@@ -66,10 +79,8 @@ export default function PresentationsPage() {
                   aria-label={`View slides: ${presentation.title} (opens in a new tab)`}
                 >
                   <Image
-                    src={`/presentations/${presentation.slug}.png`}
+                    src={presentation.preview}
                     alt=""
-                    width={1280}
-                    height={640}
                     loading={index === 0 ? "eager" : "lazy"}
                     sizes="(max-width: 768px) calc(100vw - 3rem), 772px"
                     className="presentation-preview"
