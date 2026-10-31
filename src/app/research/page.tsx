@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import BackToHomeLink from "~/components/back-to-home-link";
+import Link from "next/link";
+import styles from "./research.module.css";
 
 export const metadata: Metadata = {
   title: "Research",
-  description: "Research posters and papers by Zayd Krunz.",
+  description: "Research papers and posters by Zayd Krunz.",
   alternates: { canonical: "/research" },
   openGraph: {
     type: "website",
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
     url: "/research",
     siteName: "Zayd Krunz",
     title: "Research // Zayd Krunz",
-    description: "Research posters and papers by Zayd Krunz.",
+    description: "Research papers and posters by Zayd Krunz.",
     images: [
       {
         url: "/opengraph-image",
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Research // Zayd Krunz",
-    description: "Research posters and papers by Zayd Krunz.",
+    description: "Research papers and posters by Zayd Krunz.",
     images: [
       {
         url: "/opengraph-image",
@@ -38,10 +39,15 @@ export const metadata: Metadata = {
 
 const posters = [
   {
+    title:
+      "Weakly Supervised Machine Learning for Enhancing RFI Detection in Passive/Active Coexistence Scenarios",
+    context: "University of Arizona",
     imageUrl: "/Weakly_Supervised_RFI.png",
     alt: "Research poster on weakly supervised radio-frequency interference detection",
   },
   {
+    title: "Forecasting Equipment Failure using Machine Learning",
+    context: "Stanford Pre-Collegiate Summer Institutes",
     imageUrl:
       "https://raw.githubusercontent.com/ShrootBuck/stanford-predictive-maintenance/refs/heads/main/Poster.png",
     webUrl: "/spcs",
@@ -71,74 +77,104 @@ const papers = [
 
 export default function ResearchPage() {
   return (
-    <div className="container">
-      <BackToHomeLink />
+    <div className={styles.page}>
+      <Link href="/" className={styles.backLink}>
+        &larr; Back to Home
+      </Link>
 
-      <header>
+      <header className={styles.header}>
         <h1>Research</h1>
-        <h2>
-          Posters
-          <span className="nav-separator">{" // "}</span>
-          Papers
-        </h2>
+        <nav aria-label="Research sections" className={styles.nav}>
+          <a href="#papers">
+            Papers <span>{papers.length}</span>
+          </a>
+          <a href="#posters">
+            Posters <span>{posters.length}</span>
+          </a>
+        </nav>
       </header>
 
       <main>
-        <section id="posters">
-          <h3>Posters</h3>
-
-          <div className="poster-grid">
-            {posters.map((poster) => (
-              <div key={poster.imageUrl}>
-                <Image
-                  src={poster.imageUrl}
-                  alt={poster.alt}
-                  width={3840}
-                  height={2880}
-                  sizes="(max-width: 768px) calc(100vw - 3rem), 600px"
-                  className="h-auto w-full rounded-lg"
-                />
-                <div className="mt-2 flex gap-4 text-sm">
-                  <a
-                    href={poster.imageUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Fullscreen
-                  </a>
-                  {poster.webUrl && (
-                    <a
-                      href={poster.webUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      More details
-                    </a>
-                  )}
-                </div>
-              </div>
+        <section
+          id="papers"
+          aria-labelledby="papers-heading"
+          className={styles.section}
+        >
+          <div className={styles.sectionHeading}>
+            <h2 id="papers-heading">Papers</h2>
+            <span>{papers.length} papers</span>
+          </div>
+          <div className={styles.papers}>
+            {papers.map((paper) => (
+              <article key={paper.href}>
+                <a
+                  href={paper.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.paper}
+                  aria-label={`Read paper: ${paper.title} (PDF, opens in a new tab)`}
+                >
+                  <div className={styles.paperCopy}>
+                    <p className={styles.paperType}>{paper.type}</p>
+                    <h3>{paper.title}</h3>
+                  </div>
+                  <span className={styles.paperAction}>
+                    Read PDF <ArrowUpRight size={17} aria-hidden="true" />
+                  </span>
+                </a>
+              </article>
             ))}
           </div>
         </section>
 
-        <section id="papers">
-          <h3>Papers</h3>
-          <div className="paper-grid">
-            {papers.map((paper) => (
-              <a
-                key={paper.href}
-                href={paper.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="paper-card"
-              >
-                <span>{paper.type}</span>
-                <strong>{paper.title}</strong>
-                <span className="paper-link">
-                  Read paper
-                  <ArrowUpRight size={16} aria-hidden="true" />
-                </span>
-              </a>
+        <section
+          id="posters"
+          aria-labelledby="posters-heading"
+          className={styles.section}
+        >
+          <div className={styles.sectionHeading}>
+            <h2 id="posters-heading">Posters</h2>
+            <span>{posters.length} posters</span>
+          </div>
+          <div className={styles.posters}>
+            {posters.map((poster) => (
+              <article key={poster.imageUrl} className={styles.poster}>
+                <a
+                  href={poster.imageUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.posterMain}
+                  aria-label={`View full-size poster: ${poster.title} (opens in a new tab)`}
+                >
+                  <div className={styles.posterPreview}>
+                    <Image
+                      src={poster.imageUrl}
+                      alt={poster.alt}
+                      width={3840}
+                      height={2880}
+                      sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 960px) calc((100vw - 112px) / 2), 424px"
+                    />
+                  </div>
+                  <div className={styles.posterCopy}>
+                    <p>{poster.context}</p>
+                    <h3>{poster.title}</h3>
+                    <span className={styles.posterAction}>
+                      View poster <ArrowUpRight size={15} aria-hidden="true" />
+                    </span>
+                  </div>
+                </a>
+                {poster.webUrl && (
+                  <a
+                    href={poster.webUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.details}
+                  >
+                    Project details{" "}
+                    <ArrowUpRight size={14} aria-hidden="true" />
+                  </a>
+                )}
+              </article>
             ))}
           </div>
         </section>
