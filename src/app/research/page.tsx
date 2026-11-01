@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
+import BackToHomeLink from "~/components/back-to-home-link";
 import styles from "./research.module.css";
 
 export const metadata: Metadata = {
@@ -77,21 +77,11 @@ const papers = [
 
 export default function ResearchPage() {
   return (
-    <div className={styles.page}>
-      <Link href="/" className={styles.backLink}>
-        &larr; Back to Home
-      </Link>
+    <div className={`${styles.page} container`}>
+      <BackToHomeLink />
 
       <header className={styles.header}>
         <h1>Research</h1>
-        <nav aria-label="Research sections" className={styles.nav}>
-          <a href="#papers">
-            Papers <span>{papers.length}</span>
-          </a>
-          <a href="#posters">
-            Posters <span>{posters.length}</span>
-          </a>
-        </nav>
       </header>
 
       <main>
@@ -155,25 +145,33 @@ export default function ResearchPage() {
                       sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 960px) calc((100vw - 112px) / 2), 424px"
                     />
                   </div>
-                  <div className={styles.posterCopy}>
-                    <p>{poster.context}</p>
-                    <h3>{poster.title}</h3>
-                    <span className={styles.posterAction}>
-                      View poster <ArrowUpRight size={15} aria-hidden="true" />
-                    </span>
-                  </div>
                 </a>
-                {poster.webUrl && (
+                <div className={styles.posterCopy}>
+                  <p>{poster.context}</p>
+                  <h3>{poster.title}</h3>
+                </div>
+                <div className={styles.posterActions}>
                   <a
-                    href={poster.webUrl}
+                    href={poster.imageUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={styles.details}
+                    className={styles.posterAction}
+                    aria-label={`View full-size poster: ${poster.title} (opens in a new tab)`}
                   >
-                    Project details{" "}
-                    <ArrowUpRight size={14} aria-hidden="true" />
+                    View poster <ArrowUpRight size={15} aria-hidden="true" />
                   </a>
-                )}
+                  {poster.webUrl && (
+                    <a
+                      href={poster.webUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.posterAction}
+                    >
+                      Project details{" "}
+                      <ArrowUpRight size={15} aria-hidden="true" />
+                    </a>
+                  )}
+                </div>
               </article>
             ))}
           </div>
