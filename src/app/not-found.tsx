@@ -25,7 +25,7 @@ export default function NotFound() {
           </FuzzyText>
         </Link>
       </div>
-      <div className="flex flex-grow flex-col items-center justify-center p-4 text-center">
+      <div className="flex grow flex-col items-center justify-center p-4 text-center">
         <div className="mt-[-2rem] max-w-full overflow-hidden">
           <FuzzyText
             baseIntensity={0.2}

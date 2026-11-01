@@ -16,7 +16,7 @@ const typeScriptConfigs = [
 
 export default [
   {
-    ignores: ["eslint.config.js"],
+    ignores: ["eslint.config.js", "src/generated/**"],
   },
   ...next,
   ...typeScriptConfigs,
